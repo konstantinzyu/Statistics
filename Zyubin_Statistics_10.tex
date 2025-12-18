@@ -1,0 +1,329 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{nicefrac, xfrac}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	%	\tableofcontents
+	
+	%\section{Дз 2}
+	
+	
+	
+	\begin{problem}[Задача 1а]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, 1) $ и $ \theta \sim \mathcal{N}(\mu, 1) $.
+		Вычислим апостериорную плотность $ \theta $.
+		Имеем
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{\frac{1}{\sqrt{2\pi}}e^{-\frac{(t - \mu)^2}{2}}\prod\limits_{i = 1}^{n} 
+		\tfrac{1}{\sqrt{2\pi}}e^{-\frac{(x_i - t)^2}{2}}}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)} = $$
+		$$ = C(x_1, \ldots, x_n, \mu)e^{-\frac{t^2 - 2t\mu}{2}-\frac{\sum\limits_{i = 1}^{n}(x_i - t)^2}{2}} 
+		= C(x_1, \ldots, x_n, \mu)
+		e^{-\tfrac{1}{2}\left((n + 1)t^2 - 2t\sum\limits_{i = 1}^{n} x_i - 2t\mu + \sum\limits_{i = 1}^{n} x_i^2\right)} = $$ 
+		$$ = \tilde{C}(x_1, \ldots, x_n, \mu)e^{-\tfrac{n + 1}{2}\left(t - \frac{1}{n + 1}\sum\limits_{i = 1}^{n} x_i - \frac{\mu}{n + 1}\right)^2}.$$
+		Тогда $ \pi_{\theta \mid X_1, \ldots, X_n} $ --- плотность случайной величины $ \hat{\theta} $ с распределением
+		$$ \mathcal{N}\left(\tfrac{n\overline{X} + \mu}{n + 1}, \tfrac{1}{n + 1}\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б]{inprocessing}
+		
+		Вычислим байесовскую оценка для абсолютного риска.
+		Имеем 
+		$$ \tfrac{1}{2} = F_{\hat{\theta}}(q) = \Phi_{\tfrac{n\overline{X} + \mu}{n + 1}, \tfrac{1}{n + 1}}(q). $$
+		Отсюда $ q - \tfrac{n\overline{X} + \mu}{n + 1} = 0 $
+		и $ q = \tfrac{n\overline{X} + \mu}{n + 1} $.
+		
+		Вычислим байесовскую оценку для среднеквадратичного риска:
+		$$ S = \expect \hat{\theta} = \tfrac{n\overline{X} + \mu}{n + 1}. $$
+		
+		Вычислим байесовский доверительный интервал.
+		В условиях задачи имеем 
+		$$ q_{\alpha} = \tfrac{z_{\alpha}}{\sqrt{n + 1}} + \tfrac{n\overline{X} + \mu}{n + 1}. $$
+		Тогда доверительный интервал $ (q_{\frac{\alpha}{2}}, q_{1 - \frac{\alpha}{2}}) $ равен
+		$$ \left(\tfrac{z_{\frac{\alpha}{2}}}{\sqrt{n + 1}} + \tfrac{n\overline{X} + \mu}{n + 1},
+		\tfrac{z_{1 - \frac{\alpha}{2}}}{\sqrt{n + 1}} + \tfrac{n\overline{X} + \mu}{n + 1} \right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(0, \tfrac{1}{\theta}) $ и $ \theta \sim \mathrm{\Gamma}(2, \beta) $.
+		Вычислим апостериорную плотность $ \theta $.
+		Имеем
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{\frac{t}{\beta^2}e^{-\tfrac{t}{\beta}}I(t > 0)\prod\limits_{i = 1}^{n} 
+			\tfrac{\sqrt{t}}{\sqrt{2\pi}}e^{-\frac{x_i^2t}{2}}}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)} = $$
+		$$ = C(x_1, \ldots, x_n, \beta)t^{1 + \tfrac{n}{2}}e^{-\frac{t}{2}(\frac{2}{\beta} + \sum\limits_{i = 1}^{n} x_i^2)}.$$
+		Тогда $ \pi_{\theta \mid X_1, \ldots, X_n} $ --- плотность случайной величины $ \hat{\theta} $ с распределением
+		$$ \mathrm{\Gamma}\left(2 + \tfrac{n}{2}, \left(\tfrac{1}{\beta} + \tfrac{1}{2}S_n^2 \right)^{-1}\right), $$
+		где $ S_n^2 = \sum\limits_{i = 1}^{n} X_i^2 $.
+		
+		Вычислим байесовскую оценку для среднеквадратичного риска:
+		$$ S = \expect \hat{\theta} = \tfrac{2 + \tfrac{n}{2}}{\tfrac{1}{\beta} + \tfrac{1}{2}S_n^2}. $$
+		
+	\end{problem}
+
+
+	\begin{problem}[Задача 3аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathrm{R}[0, \theta] $ и $ \theta \sim \mathrm{B}(\alpha, 1) $.
+		Вычислим апостериорную плотность $ \theta $.
+		Имеем
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{\frac{1}{B(\alpha, 1)}t^{\alpha - 1}I(0 < t < 1)\prod\limits_{i = 1}^{n} \tfrac{1}{t}I(0 < x_i < t)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)} = $$
+		$$ = C(x_1, \ldots, x_n, \alpha)t^{\alpha - n - 1}I(\max\limits_{i = 1\ldots n} x_i < t < 1).$$
+		Тогда $ \pi_{\theta \mid X_1, \ldots, X_n} 
+		= C(X_1, \ldots, X_n, \alpha)t^{\alpha - n - 1}I(X_{(n)} < t < 1) $ --- плотность случайной величины $ \hat{\theta} $.
+		Для $ C(X_1, \ldots, X_n) $ имеем выражение:
+		$$ C(X_1, \ldots, X_n) 
+		= \int\limits_{-\infty}^{+\infty} t^{\alpha - n - 1}I(X_{(n)} < t < 1)dt
+		= \int\limits_{X_{(n)}}^{1} t^{\alpha - n - 1}dt
+		= \left.t^{\alpha - n}\right|_{X_{(n)}}^{1} = 1 - X_{(n)}^{\alpha - n}. $$
+		Таким образом, $$ \pi_{\theta \mid X_1, \ldots, X_n} 
+		= \tfrac{t^{\alpha - n - 1}I(X_{(n)} < t < 1)}{1 - X_{(n)}^{\alpha - n}}. $$
+		
+		Вычислим квантили этого распределения.
+		Имеем
+		$$ \beta = \int\limits_{-\infty}^{q_\beta} \tfrac{t^{\alpha - n - 1}I(X_{(n)} < t < 1)}{1 - X_{(n)}^{\alpha - n}}dt
+		= \int\limits_{X_{(n)}}^{q_\beta} \tfrac{t^{\alpha - n - 1}}{1 - X_{(n)}^{\alpha - n}}dt
+		= \tfrac{q_\beta^{\alpha - n} - X_{(n)}^{\alpha - n}}{1 - X_{(n)}^{\alpha - n}}. $$
+		Отсюда
+		$$ q_\beta = \left(\beta(1 - X_{(n)}^{\alpha - n}) + X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}}
+		= \left(\beta + (1 - \beta)X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}}. $$
+		
+		Тогда байесовский доверительный интервал для $ 1 - \beta $ есть
+		$$ \left(\left(\tfrac{\beta}{2} + (1 - \tfrac{\beta}{2})X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}},
+		\left(1 - \tfrac{\beta}{2} + \tfrac{\beta}{2}X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}} \right). $$
+		Байесовская оценка для абсолютного риска равна
+		$$ q = \left(\tfrac{1}{2} + \tfrac{1}{2}X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}}. $$
+		
+		
+	\end{problem}	
+
+	
+	\begin{problem}[Задача 4аб]{inprocessing}
+		
+		Пусть $ T $ --- достаточная статистика. По критерию факторизации имеется разложение
+		$$ L(t, x_1, \ldots, x_n) = g(t, T(x_1, \ldots, x_n))h(x_1, \ldots, x_n) $$
+		для некоторых $ g $ и $ h $.
+		Тогда апостериорная плотность равна
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{g(t, T)h(x_1, \ldots, x_n)}
+		{\int\limits_{\Theta} g(t, T)h(x_1, \ldots, x_n)dt}
+		= \tfrac{h(x_1, \ldots, x_n)}{\int\limits_{\Theta} g(t, T)h(x_1, \ldots, x_n)dt} \cdot g(t, T)
+		= \tfrac{g(t, T)}{\int\limits_{\Theta} g(t, T)dt}. $$
+		Таким образом, параметры апостериорного распределения выражаются через достаточную статистику $ T $.
+		
+		В задаче $ 1 $ в качестве такой статистики выступает $ \overline{X} $.
+		В задаче $ 2 $ в качестве такой статистики выступает $ S_n^2 = \sum\limits X_i^2 $. 
+		В задаче $ 3 $ в качестве такой статистики выступает $ X_{(n)} $.
+		Все эти оценки возникают как оценки максимального правдоподобия или пропорциональные им (задача 2) и были посчитаны в 3-й домашней работе
+		(такие оценки являются достаточными).
+		
+		
+	\end{problem}
+	
+\end{document}

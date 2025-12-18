@@ -1,0 +1,510 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+%	\tableofcontents
+	
+%\section{Дз 2}
+
+%\begin{proposition}
+%	Пусть случайные величины $ X_1, \ldots, X_n $ независимы относительно распределения вероятностей $ \prob_\theta $,
+%	где $ \theta \in \Theta $ --- параметр.
+%	Предположим, что функция $ L(X_1, \ldots, X_n, \theta) $ удовлетворяет равенству
+%	$$ L(X_1, \ldots, X_n, \theta) = \prod\limits_{i = 1}^{n} L(X_i, \theta) $$
+%	и, кроме того, для любой функции $ g $, обладающей матожиданием и производной по  выполнено 
+%	$$ \tfrac{\partial}{\partial \theta} \expect_\theta g
+%	= \expect_\theta \tfrac{\partial g}{\partial \theta}. $$
+%	Тогда функция $ I(X_1, \ldots, X_n, \theta) := \expect_\theta\left(\tfrac{\partial}{\partial \theta} \ln L(X_1, \ldots, X_n, \theta) \right)^2 $
+%	удовлетворяет равенству
+%	$$ I(X_1, \ldots, X_n, \theta) = \sum\limits_{i = 1}^{n} I(X_i, \theta). $$
+	
+%\end{proposition}
+
+%\begin{proof}
+	
+%	Имеем
+%	$$ I(X_1, \ldots, X_n, \theta) = \expect_\theta\left(\tfrac{\partial}{\partial \theta} L(X_1, \ldots, X_n, \theta) \right)^2
+%	= \expect_\theta\left(\tfrac{\partial}{\partial \theta} \ln \prod\limits_{i = 1}^{n} L(X_i, \theta) \right)^2 = $$
+%	$$ = \expect_\theta\left(\sum\limits_{i = 1}^{n} \tfrac{\partial}{\partial \theta} \ln L(X_i, \theta) \right)^2 $$
+	
+%\end{proof}
+
+\begin{problem}[Задача 1 (<<нулёвка>>)]{inprocessing}
+	
+	Пусть случайные величины $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, 1) $ независимы и одинаково распределены.
+	Вычислим информация Фишера.
+	Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\sqrt{2\pi}} e^{-\tfrac{(x - \theta)^2}{2}} $.
+	Тогда
+	$$ L(x_1, \ldots, x_n, \theta) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= (2\pi)^{\tfrac{-n}{2}} \cdot e^{-\tfrac{1}{2}\sum\limits_{j = 1}^{n} (x_j - \theta)^2}. $$
+	Далее,
+	$$ \left.\tfrac{\partial}{\partial \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+	= -\tfrac{1}{2} \cdot 2 \cdot \sum\limits_{i = 1}^{n}(\theta - x_j)
+	= -n\theta + \sum\limits_{i = 1}^{n} x_j. $$
+	Окончательно,
+	$$ \expect_{\theta}\left(-n\theta + \sum\limits_{i = 1}^{n} X_j\right)^2
+	= n^2\theta^2 - 2n\theta \cdot \expect_\theta\left(\sum\limits_{i = 1}^{n} X_j\right)
+	+ \expect_\theta\left(\sum\limits_{i = 1}^{n} X_j\right)^2 = $$ 
+	$$ = n^2\theta^2 - 2n\theta \cdot n\theta
+	+ n^2\theta^2 + n = n. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 2 ($ \mathcal{N}(\theta, \theta^2) $)]{inprocessing}
+	
+	Вычислим информацию Фишера для независимых одинаково распределённых случайных величин
+	$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta^2) $.
+	Из вычислений выше имеем 
+	$$ \left.\tfrac{\partial}{\partial \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+	= -\tfrac{n}{\theta} - \tfrac{x_1 + \ldots + x_n}{\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}. $$
+	Тогда
+	$$ \left.\tfrac{\partial^2}{\partial^2 \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+	= \tfrac{n}{\theta^2} + 2 \cdot \tfrac{x_1 + \ldots + x_n}{\theta^3} - 3\cdot \tfrac{x_1^2 + \ldots + x_n^2}{\theta^4}. $$
+	Отсюда
+	$$ \expect_\theta\left(\left.\tfrac{\partial}{\partial \theta} 
+	\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)^2
+	= \expect_\theta\left(-\left.\tfrac{\partial^2}{\partial^2 \theta} 
+	\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)
+	= \expect_\theta(-\tfrac{n}{\theta^2} - 2 \cdot \tfrac{X_1 + \ldots + X_n}{\theta^3} + 3\cdot \tfrac{X_1^2 + \ldots + X_n^2}{\theta^4}) = $$
+	$$ = -\tfrac{n}{\theta^2} - \tfrac{2n\theta}{\theta^3} + \tfrac{3n(\theta^2 + \theta^2)}{\theta^4}
+	= \tfrac{3n}{\theta^2}. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 2 ($ \mathcal{N}(0, \theta) $)]{inprocessing}
+	
+	Вычислим информацию Фишера для независимых одинаково распределённых случайных величин
+	$ X_1, \ldots, X_n \sim \mathcal{N}(0, \theta) $.
+	Из вычислений выше имеем 
+	$$ \left.\tfrac{\partial}{\partial \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+	= -\tfrac{n}{2\theta} + \tfrac{x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+	Тогда
+	$$ \left.\tfrac{\partial^2}{\partial^2 \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+	= \tfrac{n}{2\theta^2} - \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}. $$
+	Отсюда
+	$$ \expect_\theta\left(\left.\tfrac{\partial}{\partial \theta} 
+	\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)^2
+	= \expect_\theta\left(-\left.\tfrac{\partial^2}{\partial^2 \theta} 
+	\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)
+	= \expect_\theta(-АПф\tfrac{n}{2\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}) = $$
+	$$ = -\tfrac{n}{2\theta^2} + \tfrac{n\theta}{\theta^3}
+	= \tfrac{n}{2\theta^2}. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 2 ($ \mathcal{N}(\theta, \theta) $)]{inprocessing}
+	
+	Вычислим информацию Фишера для независимых одинаково распределённых случайных величин
+	$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta) $.
+	Из вычислений выше имеем 
+	$$ \left.\tfrac{\partial}{\partial \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+	= \tfrac{-n}{2}
+	+ \tfrac{-n}{2\theta}
+	+ \tfrac{x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+	Тогда
+	$$ \left.\tfrac{\partial^2}{\partial^2 \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+	= \tfrac{n}{2\theta^2} - \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}. $$
+	Отсюда
+	$$ \expect_\theta\left(\left.\tfrac{\partial}{\partial \theta} 
+	\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)^2
+	= \expect_\theta\left(-\left.\tfrac{\partial^2}{\partial^2 \theta} 
+	\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)
+	= \expect_\theta(-\tfrac{n}{2\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}) = $$
+	$$ = -\tfrac{n}{2\theta^2} + \tfrac{n\theta}{\theta^3}
+	= \tfrac{n}{2\theta^2}. $$
+	
+\end{problem}
+	
+\begin{problem}[Задача 3]{inprocessing}	
+	
+	Пусть случайные величины $ X_1, \ldots, X_n \sim \mathrm{Cauchy}(\theta) $ независимы и имеют распределение Коши.
+	Плотность имеет вид $ f_{\theta}(x) = \tfrac{1}{\pi((x - \theta)^2 + 1)} $.
+	Вычислим информацию Фишера.
+	Имеем
+	$$ L(x_1, \ldots, x_n, \theta) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= \tfrac{1}{\pi^n} \cdot \tfrac{1}{\prod_{j = 1}^{n} ((x_j - \theta)^2 + 1)}. $$
+	Далее,
+	$$ \left.\tfrac{\partial}{\partial \theta} \ln L(x_1, \ldots, x_n, \theta)\right|_{\theta}
+	= \left.\tfrac{\partial}{\partial \theta} \left(-n\ln \pi 
+	- \sum\limits_{j = 1}^{n} \ln ((x_j - \theta)^2 + 1) \right) \right|_{\theta}
+	= \sum\limits_{j = 1}^{n} \tfrac{2(x_j - \theta)}{(x_j - \theta)^2 + 1}. $$
+	Имеем
+	$$ \expect_\theta \tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1} 
+	= \int\limits_{-\infty}^{+\infty} \tfrac{2(x_j - \theta)dx_j}{\pi((x_j - \theta)^2 + 1)^2} = 0, $$
+	поскольку подынтегральная функция после сдвига на $ \theta $ становится нечётной.
+	Из независимости для $ j \neq k $ получаем
+	$$ \expect_\theta \tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1} \cdot \tfrac{2(X_k - \theta)}{(X_k - \theta)^2 + 1}
+ 	= \expect_\theta \tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1} 
+ 	\cdot \expect_\theta \tfrac{2(X_k - \theta)}{(X_k - \theta)^2 + 1}
+ 	= 0 \cdot 0 = 0. $$
+	Также получаем
+	$$ \expect_\theta \left(\tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1}\right)^2
+	= \int\limits_{-\infty}^{+\infty} \tfrac{4(x_j - \theta)^2dx_j}{\pi((x_j - \theta)^2 + 1)^3}
+	= \int\limits_{-\infty}^{+\infty} \tfrac{4x_j^2dx_j}{\pi(x_j^2 + 1)^3}
+	= \tfrac{8}{\pi} \int\limits_{0}^{+\infty} \tfrac{x_j^2dx_j}{(x_j^2 + 1)^3}
+	= $$
+	$$ = \{x_j = \tg \varphi\}
+	= \tfrac{8}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \sin^2 \varphi \cos^{-2+6-2} \varphi\ d\varphi
+	= \tfrac{8}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \sin^2 \varphi \cos^{2} \varphi\ d\varphi
+	= \tfrac{2}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \sin^2 (2\varphi)\ d\varphi = $$
+	$$ = \tfrac{2}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \tfrac{1 - \cos (4\pi)}{2} d\varphi = 
+	\tfrac{2}{\pi} \cdot \tfrac{\pi}{4} = \tfrac{1}{2}. $$
+	Введём обозначение $ g(x, \theta) = \tfrac{2(x - \theta)}{(x - \theta)^2 + 1} $. Тогда
+	$$ \expect_\theta \left(\sum\limits_{j = 1}^{n} g(X_j, \theta)\right)^2
+	= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+	= \tfrac{n}{2} + 0 = \tfrac{n}{2}. $$
+	
+\end{problem}
+
+
+\begin{problem}[Задача 4а]{inprocessing}
+	
+	Рассмотрим случайные величины с распределением $ \mathrm{E}(\tfrac{1}{\theta}) $,
+	где $ \theta > 0 $.
+	Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\theta} e^{-\tfrac{x}{\theta}} I(x \geqslant 0) $.
+	Тогда
+	$$ L(\theta, x_1, \ldots, x_n) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= \tfrac{1}{\theta^n} \cdot e^{-\tfrac{\sum\limits_{j = 1}^{n} x_j}{\theta}} $$
+	при $ x_1, \ldots, x_n \geqslant 0 $,
+	и $ f_{\theta}(x_1, \ldots, x_n) = 0 $, если хотя бы одна из координат отрицательна.
+	
+	Вычислим информацию Фишера.
+	Имеем
+	$$ \left.\tfrac{\partial}{\partial \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+	= \left.\tfrac{\partial}{\partial \theta} 
+	\left(-n\ln \theta -\tfrac{1}{\theta}\sum\limits_{j = 1}^{n} x_j\right) \right|_{\theta}
+	= -\tfrac{n}{\theta} + \tfrac{1}{\theta^2}\sum\limits_{j = 1}^{n} x_j = \sum\limits_{j = 1}^{n} \tfrac{x_j - \theta}{\theta^2}. $$
+	Обозначим через $ g(x, \theta) = \tfrac{x - \theta}{\theta^2} $.
+	Тогда (в последней формуле при $ j \neq k $)
+	$$ \expect_\theta g(X_j, \theta)^2 
+	= \expect_\theta \left(\tfrac{X_j^2}{\theta^4} - \tfrac{2X_j}{\theta^3} + \tfrac{1}{\theta^2}\right)
+	= \tfrac{\theta^2 + \theta^2}{\theta^4} - \tfrac{2\theta}{\theta^3} + \tfrac{1}{\theta^2} = \tfrac{1}{\theta^2}; $$
+	$$ \expect_\theta g(X_j, \theta) = \expect_\theta \tfrac{X_j - \theta}{\theta^2} = \tfrac{\theta - \theta}{\theta^2} = 0; $$
+	$$ \expect_\theta \left(g(X_j, \theta)g(X_k, \theta)\right) = \expect_\theta g(X_j, \theta)\expect_\theta g(X_k, \theta)
+	= 0 \cdot 0 = 0. $$
+	Далее,
+	$$ \expect_\theta\left(\sum\limits_{j = 1}^{n} \tfrac{x_j - \theta}{\theta^2}\right)^2
+	= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+	= \tfrac{n}{\theta^2} + 0 = \tfrac{n}{\theta^2}. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 4б]{inprocessing}
+	
+	Рассмотрим случайные величины с распределением $ \mathrm{Geom}(\theta) $,
+	где $ \theta \in (0, 1) $.
+	Имеем
+	$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+	= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+	= \theta^n(1 - \theta)^{x_1 + \ldots + x_n - n}. $$
+	Вычислим информацию Фишера.
+	Имеем
+	$$ \left.\tfrac{\partial}{\partial \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+	= \left.\tfrac{\partial}{\partial \theta} 
+	\left(n\ln \theta + (- n + \sum\limits_{j = 1}^{n} x_j)\ln (1 - \theta)\right) \right|_{\theta}
+	= \tfrac{n}{\theta} - \tfrac{- n + \sum\limits_{j = 1}^{n} x_j}{1 - \theta}
+	= \tfrac{n}{\theta(1 - \theta)} - \sum\limits_{j = 1}^{n} \tfrac{x_j}{1 - \theta}. $$
+	Обозначим через $ g(x, \theta) = \tfrac{1 - x\theta}{\theta(1 - \theta)} $.
+	Тогда (в последней формуле при $ j \neq k $)
+	$$ \expect_\theta g(X_j, \theta)^2 
+	= \expect_\theta \tfrac{1 - 2X_j\theta + X_j^2\theta^2}{\theta^2(1 - \theta)^2}
+	= \tfrac{1 - 2\tfrac{\theta}{\theta} + \tfrac{\theta^2(2 - \theta)}{\theta^2}}{\theta^2(1 - \theta)^2} 
+	= \tfrac{1 - \theta}{\theta^2(1 - \theta)^2} = \tfrac{1}{\theta^2(1 - \theta)}; $$
+	$$ \expect_\theta g(X_j, \theta) = \expect_\theta \tfrac{1 - X_j\theta}{\theta(1 - \theta)} 
+	= \tfrac{1 - \tfrac{\theta}{\theta}}{\theta^2(1 - \theta)^2} = 0; $$
+	$$ \expect_\theta \left(g(X_j, \theta)g(X_k, \theta)\right) = \expect_\theta g(X_j, \theta)\expect_\theta g(X_k, \theta)
+	= 0 \cdot 0 = 0. $$
+	Далее,
+	$$ \expect_\theta\left(\sum\limits_{j = 1}^{n} \tfrac{x_j - \theta}{\theta^2}\right)^2
+	= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+	= \tfrac{n}{\theta^2(1 - \theta)} + 0 = \tfrac{n}{\theta^2(1 - \theta)}. $$
+	
+\end{problem}
+
+
+\begin{problem}[Задача 4в]{inprocessing}
+	
+	Рассмотрим случайные величины с распределением $ \mathrm{\Gamma}(\alpha, \tfrac{1}{\theta}) $,
+	где $ \theta > 0, \alpha \leqslant 1 $.
+	Имеем формулу для плотности $ f_{\theta}(x) 
+	= \tfrac{x^{\alpha - 1}}{\Gamma(\alpha)\theta^{\alpha}} e^{-\tfrac{x}{\theta}} I(x \geqslant 0) $.
+	Тогда
+	$$ L(\theta, x_1, \ldots, x_n) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= \tfrac{(x_1\ldots x_n)^{\alpha - 1}}{\Gamma(\alpha)^n\theta^n} 
+	\cdot e^{-\tfrac{\sum\limits_{j = 1}^{n\alpha} x_j}{\theta}}. $$
+	Вычислим информацию Фишера и оценку максимального правдоподобия.
+	Имеем
+	$$ \left.\tfrac{\partial}{\partial \theta} 
+	\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+	= \left.\tfrac{\partial}{\partial \theta} 
+	\left((\alpha - 1)\sum\limits_{j = 1}^{n} (\ln x_j) - n\ln \Gamma(\alpha) - n\alpha\ln \theta 
+	+ -\tfrac{1}{\theta}\sum\limits_{j = 1}^{n} x_j\right) \right|_{\theta} = $$ 
+	$$ = - \tfrac{n\alpha}{\theta} + \tfrac{1}{\theta^2}\sum\limits_{j = 1}^{n} x_j
+	= \tfrac{1}{\theta^2}\left(-n\alpha\theta + \sum\limits_{j = 1}^{n} x_j\right)
+	= \sum\limits_{j = 1}^{n} \tfrac{x_j - \alpha\theta}{\theta^2}. $$
+	
+	При $ \theta = \overline{X} $ производная обращается в 0, при меньших значениях положительна,
+	а при больших --- отрицательна. Следовательно, в точке $ \overline{X} $ достигается максимум
+	 и $ \overline{X} $ --- оценка максимального правдоподобия.
+	  
+	Вычислим матожидание и дисперсию случайной величины $ X_j $.
+	$$ \expect_\theta X_j = \int\limits_{0}^{+\infty} \tfrac{u^\alpha}{\Gamma(\alpha)\theta^{\alpha}} e^{-\tfrac{u}{\theta}}du
+	= \tfrac{\theta}{\Gamma(\alpha)} \int\limits_{0}^{+\infty} s^\alpha e^{-s}ds
+	= \tfrac{\Gamma(\alpha + 1)}{\Gamma(\alpha)} \cdot \theta = \alpha \theta, $$
+	$$ \expect_\theta X_j^2 = \int\limits_{0}^{+\infty} \tfrac{u^{\alpha + 1}}
+	{\Gamma(\alpha)\theta^{\alpha}} e^{-\tfrac{u}{\theta}}du
+	= \tfrac{\theta^2}{\Gamma(\alpha)} \int\limits_{0}^{+\infty} s^{\alpha + 1} e^{-s}ds
+	= \tfrac{\Gamma(\alpha + 2)}{\Gamma(\alpha)} \cdot \theta^2 = \alpha(\alpha + 1) \theta^2. $$
+	
+	  
+	Обозначим через $ g(x, \theta) = \tfrac{x_j - \alpha\theta}{\theta^2} $.
+	Тогда (в последней формуле при $ j \neq k $)
+	$$ \expect_\theta g(X_j, \theta)^2 
+	= \expect_\theta \tfrac{X_j^2 - 2X_j\alpha\theta + \alpha^2\theta^2}{\theta^4}
+	= \tfrac{\alpha(\alpha + 1)\theta^2 - 2\alpha^2\theta^2 + \alpha^2\theta^2}{\theta^4} 
+	= \tfrac{\alpha}{\theta^2}; $$
+	$$ \expect_\theta g(X_j, \theta) = \expect_\theta \tfrac{X_j - \alpha\theta}{\theta^2} 
+	= \tfrac{\alpha\theta - \alpha\theta}{\theta^2} = 0; $$
+	$$ \expect_\theta \left(g(X_j, \theta)g(X_k, \theta)\right) = \expect_\theta g(X_j, \theta)\expect_\theta g(X_k, \theta)
+	= 0 \cdot 0 = 0. $$
+	Далее,
+	$$ \expect_\theta\left(\sum\limits_{j = 1}^{n} \tfrac{x_j - \alpha\theta}{\theta^2}\right)^2
+	= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+	= \tfrac{n\alpha}{\theta^2} + 0 = \tfrac{n\alpha}{\theta^2}. $$
+	
+\end{problem}
+
+
+\begin{problem}[Задача 5]{inprocessing}
+	
+	Пусть случайные вектора 
+	$ \left(\begin{matrix}
+		X_1 \\
+		Y_1
+	\end{matrix}\right), 
+	\ldots, 
+	\left(\begin{matrix}
+		X_n \\
+		Y_n
+	\end{matrix}\right) $ независимы и таковы, что их компоненты $ X_i, Y_i $ независимы и распределены по закону 
+	$ \mathrm{E}(\tfrac{1}{\theta_1}) $ и $ \mathrm{E}(\tfrac{1}{\theta_2}) $, соответственно.
+	Вычислим информационную матрицу.
+	Поскольку плотности случайных $ X_i $ не зависят от $ \theta_2 $,
+	а плотности $ Y_i $ --- от $ \theta_1 $,
+	то в информационная матрица будет диагональной,
+	а на диагонали будут стоять информации Фишера для соответствующих компонент.
+	Таким образом, матрица имеет вид
+	$$ \left(
+	\begin{matrix}
+		\tfrac{n}{\theta_1^2} & 0 \\
+		0 & \tfrac{n}{\theta_2^2}
+	\end{matrix}
+	\right). $$ 
+	
+\end{problem}
+
+\end{document}

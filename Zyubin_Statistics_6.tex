@@ -1,0 +1,581 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	%	\tableofcontents
+	
+	%\section{Дз 2}
+	
+	\begin{problem}[Задача 1а]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathrm{Geom}(\theta) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \prob_\theta(X_i = x_i)
+		= \prod\limits_{i = 1}^{n} \theta(1 - \theta)^{x_i - 1}I(x_i \in \mathbb{Z}_{\geqslant 1}) = $$ 
+		$$ = \theta^n(1 - \theta)^{\sum\limits_{i = 1}^{n} x_i - n} \cdot I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 1}). $$
+		Положим $ g(\theta, T) = \theta^n(1 - \theta)^{T - n} $
+		и $ h(X_1, \ldots, X_n) = I(X_1, \ldots, X_n \in \mathbb{Z}_{\geqslant 1}) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathrm{E}(\tfrac{1}{\theta}) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta} e^{-\tfrac{x_i}{\theta}}I(x_i > 0) = $$ 
+		$$ = \theta^{-n}e^{-\tfrac{1}{\theta}\sum\limits_{i = 1}^{n} x_i} \cdot I(x_1, \ldots, x_n > 0). $$
+		Положим $ g(\theta, T) = \theta^{-n}e^{-\tfrac{T}{\theta}} $
+		и $ h(X_1, \ldots, X_n) = I(X_1, \ldots, X_n > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1в]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathcal{N}(\theta, \theta) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi\theta}} e^{-\tfrac{(x_i - \theta)^2}{2\theta}} = $$ 
+		$$ = \theta^{-\tfrac{n}{2}}e^{-\tfrac{1}{2\theta}\sum\limits_{i = 1}^{n} {x_i^2}}e^{-\tfrac{n\theta}{2}}
+		  (2\pi)^{-\tfrac{n}{2}}e^{\sum\limits_{i = 1}^{n} x_i}. $$
+		Положим $ g(\theta, T) = \theta^{-\tfrac{n}{2}}e^{-\tfrac{T}{2\theta}}e^{-\tfrac{n\theta}{2}} $
+		и $ h(X_1, \ldots, X_n) = (2\pi)^{-\tfrac{n}{2}}e^{\sum\limits_{i = 1}^{n} x_i} $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1^2 + \ldots + x_n^2)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n^2 = X_1^2 + \ldots + X_n^2 $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1г]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathcal{N}(\theta, 1) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}} e^{-\tfrac{(x_i - \theta)^2}{2}} = $$ 
+		$$ = e^{\theta\sum\limits_{i = 1}^{n} x_i} e^{-\tfrac{n\theta^2}{2}}
+		(2\pi)^{-\tfrac{n}{2}}e^{-\tfrac{1}{2}\sum\limits_{i = 1}^{n} x_i^2}. $$
+		Положим $ g(\theta, T) = e^{\theta T} e^{-\tfrac{n\theta^2}{2}} $
+		и $ h(X_1, \ldots, X_n) = (2\pi)^{-\tfrac{n}{2}}e^{-\tfrac{1}{2}\sum\limits_{i = 1}^{n} x_i^2} $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1д]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathrm{R}[0, \theta] $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta}I(0 < x_i < \theta) = $$ 
+		$$ = \tfrac{1}{\theta^n}I(X_{(n)} < \theta)I(X_{(1)} > 0). $$
+		Положим $ g(\theta, T) = \tfrac{1}{\theta^n}I(T < \theta) $
+		и $ h(X_1, \ldots, X_n) = I(X_{(1)} > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, \max(x_1, \ldots, x_n))h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ X_{(1)} = \max(X_1, \ldots, X_n) $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2]{inprocessing}
+		
+		Пусть $ T $ --- достаточная статистика.
+		По критерию факторизации имеем $ L(\theta, x_1, \ldots, x_n) = g(\theta, T(x_1, \ldots, x_n)) \cdot h(x_1, \ldots, x_n) $.
+		Тогда 
+		$$ \tfrac{\partial}{\partial\theta} \left(\ln L(\theta, x_1, \ldots, x_n) \right)
+		= \tfrac{\tfrac{\partial}{\partial \theta} g(\theta, T(x_1, \ldots, x_n))}{g(\theta, T(x_1, \ldots, x_n))}. $$
+		По теореме о неявной функции в окрестности всякого $ \theta_0 $, при котором вторая частная производная по $ \theta $
+		не равна 0, можно выразить значения $ \theta $, удовлетворяющие условию
+		$ \tfrac{\partial}{\partial \theta} g(\theta, T(x_1, \ldots, x_n)) = 0 $,
+		как функцию от $ T(x_1, \ldots, x_n) $.
+		Таким образом, оценка максимального правдоподобия выражается через достаточную статистику.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3а]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{Poiss}(\theta) $.
+		Для начала найдём полную и достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \prob_\theta(X_i = x_i)
+		= \prod\limits_{i = 1}^{n} e^{-\theta} \tfrac{\theta^{x_i}}{x_i!}I(x_i \in \mathbb{Z}_{\geqslant 0}) = $$ 
+		$$ = e^{-n\theta} \tfrac{\theta^{\sum\limits_{i = 1}^{n} x_i}}{\prod\limits_{i = 1}^{n} x_i!}
+		I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 0}). $$
+		Положим $ g(\theta, T) = e^{-n\theta}\theta^{T} $
+		и $ h(X_1, \ldots, X_n) = \tfrac{I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 0})}{\prod\limits_{i = 1}^{n} x_i!} $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ T = X_1 + \ldots + X_n $ достаточна.
+		
+		Проверим, что статистика $ X_1 + \ldots + X_n $ полна.
+		Пусть $ \expect_\theta f(X_1 + \ldots + X_n) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \sum\limits_{m = 0}^{+\infty} \left(f(m)\sum\limits_{x_1 + \ldots + x_n = m}L(\theta, x_1, \ldots, x_n) \right)
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^me^{-n\theta} }{m!}\theta^{m}. $$
+		После домножения на $ e^{-n\theta} $ воспользуемся равенством коэффициентов разложения в ряд Тейлора.
+		Тогда $ f(m) = 0 $ для всех целых $ m $ и, следовательно, $ f $ почти наверное равна 0 
+		(относительно распределения $ \mathrm{Poiss}(\theta) $).
+		
+		Теперь для каждой функции $ a(\theta) $ достаточно подобрать функцию $ f $
+		такую, что $ \expect_\theta(f(T)) = a(\theta) $. Тогда полученная статистика будет иметь наименьшую дисперсию.
+		Значения $ f $ можно определить из разложения в ряд Тейлора, приведённого выше.
+		
+		Пусть $ a(\theta) = e^{-\theta} $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^m }{m!}\theta^{m} = e^{(n - 1)\theta} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(n - 1)^m}{m!}\theta^{m}. $$
+		Отсюда $ f(m) = \left(\tfrac{n - 1}{n}\right)^m $
+		и $ f(X_1 + \ldots + X_n) = \left(\tfrac{n - 1}{n}\right)^{X_1 + \ldots + X_n} $.
+		
+		Пусть $ a(\theta) = e^{-\theta}\tfrac{\theta^n}{n!} $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^m }{m!}\theta^{m} = e^{(n - 1)\theta}\cdot\tfrac{\theta^n}{n!} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(n - 1)^m}{m!n!}\theta^{m+n}
+		= \sum\limits_{m = n}^{+\infty} \tfrac{(n - 1)^{m - n}}{(m - n)!n!}\theta^{m}. $$
+		Отсюда $ f(m) = C_{m}^{n} \left( \tfrac{1}{n} \right)^n \left( \tfrac{n - 1}{n} \right)^{m - n}I(m \geqslant n) $
+		и $$ f(X_1 + \ldots + X_n) 
+		= C_{X_1 + \ldots + X_n}^{n} \left( \tfrac{1}{n} \right)^n \left( \tfrac{n - 1}{n} \right)^{X_1 + \ldots + X_n - n}I(X_1 + \ldots + X_n \geqslant n). $$
+		
+		Пусть $ a(\theta) = \theta^3 $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^m }{m!}\theta^{m} = e^{n\theta}\theta^3 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{n^m}{m!}\theta^{m+3}
+		= \sum\limits_{m = 3}^{+\infty} \tfrac{n^{m - 3}}{(m - 3)!}\theta^{m}. $$
+		Отсюда $ f(m) = \tfrac{m(m-1)(m-2)}{n^3} $
+		и $$ f(X_1 + \ldots + X_n) 
+		= \tfrac{(X_1 + \ldots + X_n)(X_1 + \ldots + X_n-1)(X_1 + \ldots + X_n-2)}{n^3}. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 3б]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{Geom}(\theta) $.
+		Для начала найдём полную и достаточную статистику.
+		
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \prob_\theta(X_i = x_i)
+		= \prod\limits_{i = 1}^{n} \theta(1 - \theta)^{x_i - 1}I(x_i \in \mathbb{Z}_{\geqslant 1}) = $$ 
+		$$ = \theta^n(1 - \theta)^{\sum\limits_{i = 1}^{n} x_i - n}
+		I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 1}). $$
+		Положим $ g(\theta, T) = \theta^n(1- \theta)^{T - n} $
+		и $ h(X_1, \ldots, X_n) = I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 1}) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ T = X_1 + \ldots + X_n $ достаточна.
+		
+		Проверим, что статистика $ X_1 + \ldots + X_n $ полна.
+		Пусть $ \expect_\theta f(X_1 + \ldots + X_n) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \sum\limits_{m = 0}^{+\infty} \left(f(m)\sum\limits_{x_1 + \ldots + x_n = m}L(\theta, x_1, \ldots, x_n) \right)
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!} \theta^n(1 - \theta)^{m - n}. $$
+		После деления на $ \theta^n(1 - \theta)^{-n} $ воспользуемся равенством коэффициентов разложения в ряд Тейлора в точке 1.
+		Тогда $ f(m) = 0 $ для всех целых $ m $ и, следовательно, $ f $ почти наверное равна 0 
+		(относительно распределения $ \mathrm{Geom}(\theta) $).
+		
+		Теперь для каждой функции $ a(\theta) $ достаточно подобрать функцию $ f $
+		такую, что $ \expect_\theta(f(T)) = a(\theta) $. Тогда полученная статистика будет иметь наименьшую дисперсию.
+		Значения $ f $ можно определить из разложения в ряд Тейлора, приведённого выше.
+		
+		Пусть $ a(\theta) = \theta $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!}(1 - \theta)^{mщ} = \tfrac{(1 - \theta)^n}{\theta^{n - 1}} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(m + n - 2)!}{m!(n - 2)!}(1-\theta)^{m + n}
+		= \sum\limits_{m = n}^{+\infty} \tfrac{(m - 2)!}{(m - n)!(n - 2)!}(1-\theta)^{m}. $$
+		Отсюда $ f(m) = \tfrac{n - 1}{m - 1}I(m \geqslant n) $
+		и $ f(X_1 + \ldots + X_n) = \tfrac{n - 1}{X_1 + \ldots + X_n - 1}I(X_1 + \ldots + X_n \geqslant n) $.
+		
+		Пусть $ a(\theta) = \theta(1 - \theta) $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!}(1 - \theta)^{mщ} 
+		= \tfrac{(1 - \theta)^{n + 1}}{\theta^{n - 1}} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(m + n - 2)!}{m!(n - 2)!}(1-\theta)^{m + n + 1}
+		= \sum\limits_{m = n + 1}^{+\infty} \tfrac{(m - 3)!}{(m - n - 1)!(n - 2)!}(1-\theta)^{m}. $$
+		Отсюда $ f(m) = \tfrac{(m - n)(n - 1)}{(m - 1)(m - 2)}I(m \geqslant n + 1) $
+		и $$ f(X_1 + \ldots + X_n) = \tfrac{(X_1 + \ldots + X_n - n)(n - 1)}{(X_1 + \ldots + X_n - 1)(X_1 + \ldots + X_n - 2)}
+		I(X_1 + \ldots + X_n \geqslant n + 1). $$
+		
+		Пусть $ a(\theta) = \theta^2 $.
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!}(1 - \theta)^{mщ} = \tfrac{(1 - \theta)^n}{\theta^{n - 2}} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(m + n - 3)!}{m!(n - 3)!}(1-\theta)^{m + n}
+		= \sum\limits_{m = n}^{+\infty} \tfrac{(m - 3)!}{(m - n)!(n - 3)!}(1-\theta)^{m}. $$
+		Отсюда $ f(m) = \tfrac{((n - 1)(n - 2))}{(m - 1)(m - 2)}I(m \geqslant n) $
+		и $$ f(X_1 + \ldots + X_n) = \tfrac{((n - 1)(n - 2))}{(X_1 + \ldots + X_n - 1)(X_1 + \ldots + X_n - 2)}
+		I(X_1 + \ldots + X_n \geqslant n). $$
+		
+	\end{problem}
+
+	\begin{problem}[Задача 3в]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{R}[0, \theta] $.
+		Для начала найдём полную и достаточную статистику.
+		
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta}I(0 < x_i < \theta) = $$ 
+		$$ = \tfrac{1}{\theta^n}I(X_{(n)} < \theta)I(X_{(1)} > 0). $$
+		Положим $ g(\theta, T) = \tfrac{1}{\theta^n}I(T < \theta) $
+		и $ h(X_1, \ldots, X_n) = I(X_{(1)} > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, \max(x_1, \ldots, x_n))h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ X_{(1)} = \max(X_1, \ldots, X_n) $ достаточна (мы уже проверяли это в задаче 1д).
+		
+		Вычислим функцию распределения $ X_{(n)} $ и её плотность. Имеем
+		$$ F_{X_{(n)}, \theta}(x) = \prob_{\theta}(X_{(n)} \leqslant x) = \prod\limits_{i = 1}^{n} \prob(X_i \leqslant x)
+		= \tfrac{x^n}{\theta^n} I(0 < x < \theta) + I(x \geqslant \theta), $$
+		$$ f_{X_{(n)}, \theta} = \tfrac{nx^{n - 1}}{\theta^n}I(0 \leqslant x \leqslant \theta). $$
+		
+		Проверим, что статистика $ X_{(n)} $ полна.
+		Пусть $ \expect_\theta f(X_(n)) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \int\limits_{-\infty}^{+\infty} f(x)f_{\theta, X_{(1)}}dx
+		= \int\limits_{0}^{\theta} \tfrac{nf(x)x^{n - 1}dx}{\theta^n}. $$
+		Тогда 
+		$$ 0 = \int\limits_{0}^{\theta} f(x)x^{n - 1}dx $$
+		и после дифференцирования по $ \theta $ получаем $ f(\theta)\theta^{n - 1} $ = 0
+		и $ f(\theta) = 0 $. Таким образом, $ f $ почти наверное равна 0 (относительно распределения $ \mathrm{R}[0, \theta] $)
+		и $ X_{(n)} $ полна.
+		
+		Теперь для каждой функции $ a(\theta) $ достаточно подобрать функцию $ f $
+		такую, что $ \expect_\theta(f(T)) = a(\theta) $. Тогда полученная статистика будет иметь наименьшую дисперсию.
+		
+		Пусть $ a(\theta) = \tfrac{1}{\theta^2} $.
+		Имеем
+		$$ \int\limits_{0}^{\theta} f(x)x^{n - 1}dx = \tfrac{1}{n}\theta^{n - 2}. $$
+		Продифференцируем по $ \theta $.
+		Для $ n \geqslant 3 $ получаем $ f(\theta)\theta^{n - 1} = \tfrac{n - 2}{n}\theta^{n - 3} $
+		и $ f(\theta) = \tfrac{n - 2}{n}\theta^{-2} $.
+		Отсюда $ f(X_{(n)}) = \tfrac{n - 2}{n(X_{(n)})^2} $.
+		
+		Пусть $ a(\theta) = \ln \theta $.
+		Имеем
+		$$ \int\limits_{0}^{\theta} f(x)x^{n - 1}dx = \tfrac{1}{n}\theta^{n}\ln \theta. $$
+		Продифференцируем по $ \theta $.
+		Получаем $ f(\theta)\theta^{n - 1} = \theta^{n - 1}\ln \theta + \tfrac{1}{n}\theta^{n - 1} $
+		и $ f(\theta) = \ln \theta + \tfrac{1}{n} $.
+		Отсюда $ f(X_{(n)}) = \ln X_{(n)} + \tfrac{1}{n} $.
+		
+		Пусть $ a(\theta) = e^{\theta} $.
+		Имеем
+		$$ \int\limits_{0}^{\theta} f(x)x^{n - 1}dx = \tfrac{1}{n}\theta^{n}e^{\theta}. $$
+		Продифференцируем по $ \theta $.
+		Получаем $ f(\theta)\theta^{n - 1} = \theta^{n - 1}e^{\theta} + \tfrac{1}{n}\theta^{n}e^{\theta} $
+		и $ f(\theta) = e^{\theta}(1 + \tfrac{\theta}{n})$.
+		Отсюда $ f(X_{(n)}) = e^{X_{(n)}}(1 + \tfrac{X_{(n)}}{n}) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3г]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{E}(\tfrac{1}{\theta}) $.
+		Для начала найдём полную и достаточную статистику.
+		
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta} e^{-\tfrac{x_i}{\theta}}I(x_i > 0) = $$ 
+		$$ = \theta^{-n}e^{-\tfrac{1}{\theta}\sum\limits_{i = 1}^{n} x_i} \cdot I(x_1, \ldots, x_n > 0). $$
+		Положим $ g(\theta, T) = \theta^{-n}e^{-\tfrac{T}{\theta}} $
+		и $ h(X_1, \ldots, X_n) = I(X_{(1)} > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна (мы ранее проверяли это в задаче 1б).
+		
+		Случайная величина $ S_n $ имеет гамма-распределение $ \Gamma(n, \tfrac{1}{\theta}) $
+		и плотность $ f_{S_n, \theta}(x) = \tfrac{x^{n - 1}e^{-\tfrac{x}{\theta}}}{\Gamma(n)\theta^n}I(x > 0) $
+		
+		Проверим, что статистика $ S_n $ полна.
+		Пусть $ \expect_\theta f(S_n) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \int\limits_{-\infty}^{+\infty} f(x)f_{\theta, X_{(1)}}dx
+		= \int\limits_{0}^{+\infty} \tfrac{f(x)x^{n - 1}e^{-\tfrac{x}{\theta}}dx}{\Gamma(n)\theta^n}. $$
+		Тогда 
+		$$ 0 = \int\limits_{0}^{+\infty} f(x)x^{n - 1}e^{-\tfrac{x}{\theta}}dx. $$
+		В правой части равенства написано преобразование Лапласса от функции $ f(x)x^{n - 1} $
+		(или преобразование Меллина от функции $ f(x)e^{-\tfrac{x}{\theta}} $).
+		Из его инъективности (или инъективности преобразования Меллина) получаем $ f(x)x^{n - 1} = 0 $
+		и $ f(x) = 0 $ (почти наверное). Поэтому статистика $ S_n $ полна.
+		
+		Теперь для каждой функции $ a_k(\theta) = \theta^k $ подберём несмещённую статистику $ T_k $ для $ a_k $,
+		а после вычислим условное матожидание $ \expect_\theta(T_k \mid S_n) $.
+		Имеем $ \expect(X_1^k) = k!\theta^k $ и $ \expect(\tfrac{1}{k!}\overline{X^k}) = \theta^k $.
+		
+		Из симметричности и линейности
+		$$ \expect_\theta (\tfrac{1}{k!}\overline{X^k} \mid S_n)
+		= \tfrac{1}{k!}\expect_\theta(X_1^k \mid S_n)
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot f_{X_1 \mid S_n, \theta}(x \mid y)dx
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot \tfrac{f_{X_1, S_n, \theta}(x, y)}{f_{S_n, \theta}(y)}dx = $$
+		$$ = \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot 
+		\tfrac{f_{S_n \mid X_1, \theta}(y \mid x)f_{X_1,\theta}(x)}{f_{S_n, \theta}(y)}dx
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot 
+		\tfrac{f_{S_{n - 1}, \theta}(y - x)f_{X_1,\theta}(x)}{f_{S_n, \theta}(y)}dx = $$  $$
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot 
+		\tfrac{(y - x)^{n - 2}e^{-\tfrac{y - x}{\theta}}}{\Gamma(n - 1)\theta^{n - 1}}I(y - x > 0) \cdot 
+		\tfrac{e^{-\tfrac{x}{\theta}}}{\theta}I(x > 0) \cdot \tfrac{\Gamma(n)\theta^n}{y^{n - 1}e^{-\tfrac{y}{\theta}}}I(y > 0)dx = $$
+		$$ = \tfrac{n - 1}{k!}\int\limits_{-\infty}^{+\infty} 
+		\tfrac{x^k(y - x)^{n - 2}}{y^{n - 1}}I(y - x > 0) \cdot 
+		I(x > 0) \cdot I(y > 0)dx 
+		= \tfrac{n - 1}{k!}I(y > 0)\int\limits_{0}^{y} x^k(1 - \tfrac{x}{y})^{n - 2}d\tfrac{x}{y} = $$
+		$$ = \tfrac{(n - 1)y^{k}}{k!}I(y > 0)\int\limits_{0}^{1} t^k(1 - t)^{n - 2}dt
+		= \tfrac{(n - 1)y^{k}}{k!}I(y > 0)B(k + 1, n - 1) = $$  $$
+		= y^{k} \cdot \tfrac{(n - 1)k!(n - 2)!}{k!(n + k - 1)!}I(y > 0)
+		= y^{k} \tfrac{(n - 1)!}{(n + k - 1)!}I(y > 0). $$
+		Отсюда $ E_\theta(T_k \mid S_n) = (S_n)^k\tfrac{(n - 1)!}{(n + k - 1)!}I(S_n > 0) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4а]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n $ распределены по закону $ \mathrm{R}[\theta_1, \theta_2] $.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta_2 - \theta_1}I(\theta_1 < x_i < \theta_2) = $$ 
+		$$ = \tfrac{1}{(\theta_2 - \theta_1)^n}I(X_{(n)} < \theta_2)I(X_{(1)} > \theta_1). $$
+		Положим $ g(\theta, T) = \tfrac{1}{(\theta_2 - \theta_1)^n}I(T_2 < \theta_2)I(T_1 > \theta_1) $,
+		где $ T $ --- вектор,
+		и $ h(X_1, \ldots, X_n) = 1 $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, (\min(x_1, \ldots, x_n), \max(x_1, \ldots, x_n)))h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ (X_{(1)}, X_{(n)}) $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4б]{inprocessing}
+		
+		Докажем неполноту (? см. ниже) статистики из предыдущего пункта, построив ненулевые последовательности $ \{a_n\} $
+		и $ \{b_n\} $ такие, что $ \expect_\theta(a_nX_{(1)} + b_nX_{(n)}) = 0 $ для любого $ \theta = (\theta_1, \theta_2) $.
+		
+		Вычислим функции распределения и плотности величин $ X_{(1)} $ и $ X_{(n)} $.
+		$$ F_{X_{(n)}, \theta}(x) = \prob_{\theta}(X_{(n)} \leqslant x)
+		= \prob_\theta(X_1 \leqslant x, \ldots, X_n \leqslant x) = \prod\limits_{i = 1}^{n} \prob(X_i \leqslant x)
+		= $$
+		$$ = \left(\tfrac{x - \theta_1}{\theta_2 - \theta_1}\right)^nI(\theta_1 < x < \theta_2) + I(x \geqslant \theta_2), $$
+		$$ f_{X_{(n)}, \theta}(x) = \tfrac{n(x - \theta_1)^{n - 1}}{(\theta_2 - \theta_1)^n}I(\theta_1 < x < \theta_2). $$
+		$$ F_{X_{(1)}, \theta}(x) = \prob_{\theta}(X_{(1)} \leqslant x)
+		= 1 - \prob_{\theta}(X_{(1)} > x)
+		= 1 - \prob_\theta(X_1 > x, \ldots, X_n > x) 
+	    = $$  $$= 1 - \prod\limits_{i = 1}^{n} (1 -\prob(X_i \leqslant x))
+	    = 1 - \left(\tfrac{\theta_2 - x}{\theta_2 - \theta_1}\right)^nI(\theta_1 < x < \theta_2) + I(x \leqslant \theta_1), $$
+		$$ f_{X_{(n)}, \theta}(x) = \tfrac{n(\theta_2 - x)^{n - 1}}{(\theta_2 - \theta_1)^n}I(\theta_1 < x < \theta_2). $$
+		Теперь вычислим их матожидания:
+		$$ \expect_\theta(X_{(n)})
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\int\limits_{\theta_1}^{\theta_2} x(x - \theta_1)^{n - 1}dx
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\left(\int\limits_{\theta_1}^{\theta_2} (x - \theta_1)^{n}dx
+		+ \theta_1\int\limits_{\theta_1}^{\theta_2} (x - \theta_1)^{n - 1}dx\right) = $$
+		$$ = \tfrac{n}{(\theta_2 - \theta_1)^n}\left(\tfrac{(\theta_2 - \theta_1)^{n + 1}}{n + 1}
+		+ \tfrac{\theta_1(\theta_2 - \theta_1)^{n}}{n}\right)
+		= \tfrac{n}{n + 1}\theta_2 + \tfrac{1}{n + 1}\theta_1. $$
+		$$ \expect_\theta(X_{(1)})
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\int\limits_{\theta_1}^{\theta_2} x(\theta_2 - x)^{n - 1}dx
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\left(-\int\limits_{\theta_1}^{\theta_2} (\theta_2 - x)^{n}dx
+		+ \theta_2\int\limits_{\theta_1}^{\theta_2} (\theta_2 - x)^{n - 1}dx\right) = $$
+		$$ = \tfrac{n}{(\theta_2 - \theta_1)^n}\left(-\tfrac{(\theta_2 - \theta_1)^{n + 1}}{n + 1}
+		+ \tfrac{\theta_2(\theta_2 - \theta_1)^{n}}{n}\right)
+		= \tfrac{n}{n + 1}\theta_1 + \tfrac{1}{n + 1}\theta_2. $$
+		Теперь $ \expect_\theta(a_nX_{(1)} + b_nX_{(n)}) = 0 $ для любого $ \theta = (\theta_1, \theta_2) $
+		тогда и только тогда, когда $ a_nn + b_n = 0 $ и $ a_n + nb_n = 0 $.
+		Таким образом, при $ n = 1 $ получаем $ a_1 = -b_1 $ и при больших $ n $ выполнено $ a_n = b_n = 0 $ (вроде, хотели получить ненулевые $ a_k, b_k $?)
+		
+	\end{problem}
+	
+\end{document}

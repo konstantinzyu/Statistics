@@ -1,0 +1,471 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+\section{Дз 1}
+
+Приведём несколько стандартных утверждений.
+
+\begin{proposition}
+	Пусть $ X \sim \mathcal{N}(a, \sigma^2) $ --- нормально распределённая случайная величина.
+	Тогда $$ \expect X = a, \expect X^2 = \sigma^2 + a^2, \disp X = \sigma^2, \expect |X - a| = \sigma \cdot \sqrt{\tfrac{2}{\pi}}. $$
+\end{proposition}
+
+\begin{proof}
+	
+	Для матожиданий имеем
+	
+	$$ \expect X = \int\limits_{-\infty}^{+\infty} \tfrac{u}{\sqrt{2\pi}\sigma}e^{-\tfrac{(u - a)^2}{2\sigma^2}}du 
+	= \int\limits_{-\infty}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+	+ \int\limits_{-\infty}^{+\infty} \tfrac{a}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+	= 0 + \int\limits_{-\infty}^{+\infty} \tfrac{a}{\sqrt{2\pi}}e^{-\tfrac{s^2}{2}}ds = a \cdot 1 = a. $$
+	
+	$$ \expect X^2 = \int\limits_{-\infty}^{+\infty} \tfrac{u^2}{\sqrt{2\pi}\sigma}e^{-\tfrac{(u - a)^2}{2\sigma^2}}du
+	= \int\limits_{-\infty}^{+\infty} \tfrac{t^2}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+	+ \int\limits_{-\infty}^{+\infty} \tfrac{2at}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+	+ \int\limits_{-\infty}^{+\infty} \tfrac{a^2}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt = $$
+	$$ = \int\limits_{-\infty}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}d\tfrac{t^2}{2}
+	+ 0 + a^2 \cdot 1 
+	= \int\limits_{-\infty}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma} (-\sigma^2) de^{-\tfrac{t^2}{2\sigma^2}} + a^2 = $$ 
+	$$ = \left.-\tfrac{t\sigma}{\sqrt{2\pi}}e^{-\tfrac{t^2}{2\sigma^2}}\right|_{-\infty}^{+\infty} 
+	+ \int\limits_{-\infty}^{+\infty} \tfrac{\sigma}{\sqrt{2\pi}}e^{-\tfrac{t^2}{2\sigma^2}}dt + a^2
+	= 0 + \int\limits_{-\infty}^{+\infty} \tfrac{\sigma \cdot \sigma}{\sqrt{2\pi}}e^{-\tfrac{s^2}{2}}ds + a^2
+	= \sigma^2 + a^2. $$
+	
+	$$ \expect |X - a| = \int\limits_{-\infty}^{+\infty} \tfrac{|u - a|}{\sqrt{2\pi}\sigma}e^{-\tfrac{(u - a)^2}{2\sigma^2}}du
+	= \int\limits_{-\infty}^{+\infty} \tfrac{|t|}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+	= 2\int\limits_{0}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt = $$
+	$$ = 2\int\limits_{0}^{+\infty} \tfrac{1}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}d\tfrac{t^2}{2}
+	= 2\int\limits_{0}^{+\infty} \tfrac{1}{\sqrt{2\pi}\sigma} (-\sigma^2) de^{-\tfrac{t^2}{2\sigma^2}} =
+	\left.-\tfrac{2\sigma}{\sqrt{2\pi}}e^{-\tfrac{t^2}{2\sigma^2}}\right|_{0}^{+\infty}
+	= \tfrac{2\sigma}{\sqrt{2\pi}} = \sigma \cdot \sqrt{\tfrac{2}{\pi}}. $$
+	
+	Из формулы дисперсии получаем 
+	
+	$$ \disp X = \expect X^2 - (\expect X)^2 = (\sigma^2 + a^2) - a^2 = \sigma^2. $$
+	
+\end{proof}
+
+\begin{proposition}
+	Пусть $ X_1 \sim \mathcal{N}(a_1, \sigma_1^2),  X_2 \sim \mathcal{N}(a_2, \sigma_2^2) $ --- 
+	две нормально распределённые случайные величины.
+	Тогда их свёртка $ X_1 + X_2 \sim \mathcal{N}(a_1 + a_2, \sigma_1^2 + \sigma_2^2) $ 
+	имеет нормальное распределение.
+\end{proposition}
+
+\begin{problem}[Задача 1а]{inprocessing}
+	
+		Пусть даны независимые случайные величины $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \theta_2^2), \theta_2 > 0 $.
+		Проверим, что оценка $ \overline{X} = \tfrac{1}{n} \sum\limits_{i = 1}^{n} X_i $ несмещена относительно $ \theta_1 $.
+		Действительно, по линейности матожидания и так как $ \expect_{\theta_1, \theta_2} X_i = \theta_1 $ имеем 
+		$$ \expect_{\theta_1, \theta_2}\overline{X} = \tfrac{1}{n} \sum\limits_{i = 1}^{n} \expect_{\theta_1, \theta_2} X_i
+		= \tfrac{1}{n} \cdot n\theta_1 = \theta_1. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 1б]{inprocessing}
+	
+	Проверим, что оценка $$ S_n^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2
+	= \tfrac{1}{n} \sum\limits_{i = 1}^{n} (X_i^2 - 2X_i\overline{X} + (\overline{X})^2)
+	= \tfrac{1}{n} \sum\limits_{i = 1}^{n} X_i^2 - 2(\overline{X})^2 + (\overline{X})^2
+	= \tfrac{1}{n} \sum\limits_{i = 1}^{n} X_i^2 - (\overline{X})^2 = \overline{X^2} - \overline{X}^2 $$
+	смещена относительно $ \theta_2^2 $.
+	Имеем $$ \theta_2^2 = \disp_{\theta_1, \theta_2} X_i 
+	= \expect_{\theta_1, \theta_2} X_i^2 - (\expect_{\theta_1, \theta_2} X_i)^2 = \expect_{\theta_1, \theta_2} X_i^2 - \theta_1^2. $$
+	Кроме того, 
+	$$ \expect_{\theta_1, \theta_2} \overline{X}^2 
+	= \tfrac{1}{n^2} \left(\sum\limits_{i = 1}^{n} \expect_{\theta_1, \theta_2} X_i^2
+	+ \sum\limits_{i < j}^{n} \expect_{\theta_1, \theta_2} (2X_iX_j) \right) = $$
+	$$ = \tfrac{1}{n^2} \left(n(\theta_1^2 + \theta_2^2)
+	+ n(n - 1) \expect_{\theta_1, \theta_2} X_i \expect_{\theta_1, \theta_2} X_j\right)
+	= \tfrac{1}{n^2} \left(n(\theta_1^2 + \theta_2^2)
+	+ n(n - 1) \theta_1^2 \right) = $$
+	$$ = \tfrac{1}{n}\theta_2^2	+ \theta_1^2. $$
+	Отсюда
+	$$ \expect_{\theta_1, \theta_2} S_n^2 = \expect_{\theta_1, \theta_2} \overline{X^2} - \expect_{\theta_1, \theta_2} \overline{X}^2
+	= \tfrac{1}{n} \cdot n(\theta_1^2 + \theta_2^2) - (\tfrac{1}{n}\theta_2^2 + \theta_1^2)
+	= \tfrac{n - 1}{n}\theta_2^2 \neq \theta_2^2. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 1в]{inprocessing}
+	
+	В качестве чисел $ a_n $ (для $ n > 1 $) следует взять дроби $ \tfrac{n}{n - 1} $.
+	Тогда, по доказанному выше $$ \expect_{\theta_1, \theta_2} (\tfrac{n}{n - 1} \cdot S_n^2)
+	= \tfrac{n}{n - 1} \cdot \tfrac{n - 1}{n} \cdot \theta_2^2 = \theta_2^2. $$
+	
+	Положим $ T = \sum\limits_{i = 1}^{n - 1} |X_i - X_{i + 1}| $.
+	Случайная величина $ -X_{i + 1} $ имеет распределение $ \mathcal{N}(-\theta_1, \theta_2^2) $.
+	По формуле для свёртки нормально распределённых случайных величин случайная величина $ X_i - X_{i + 1} $
+	имеет распределение $ \mathcal{N}(0, 2\theta_2^2) $. Первый момент такой случайной величины равен $ \sqrt{2}\theta_2 \cdot \sqrt{\tfrac{2}{\pi}} = \tfrac{2 \theta_2}{\sqrt{\pi}} $.
+	Теперь мы можем вычислить матожидание $ T $:
+	$$ \expect_{\theta_1, \theta_2} T = (n - 1)\expect_{\theta_1, \theta_2} |X_1 - X_2|
+	= \tfrac{2(n - 1)}{\sqrt{\pi}} \cdot \theta_2. $$
+	
+	В качестве членов последовательности $ b_n $ следует взять числа $ \tfrac{\sqrt{\pi}}{2(n - 1)} $.
+	
+\end{problem}
+
+\begin{problem}[Задача 2а]{inprocessing}
+
+	Вычислим моменты случайной величины $  X \sim \mathrm{E}(\theta) $ 
+	с экспоненциальным распределением.
+	Имеем
+	$$ \expect X^k
+	= \int\limits_{0}^{+\infty} \theta x^k e^{-\theta x} d x
+	= -\int\limits_{0}^{+\infty} x^k d e^{-\theta x} = $$ 
+	$$ = \left.-x^ke^{-\theta x}\right|_{0}^{+\infty} 
+	+ \int\limits_{0}^{+\infty} e^{-\theta x}d x^k
+	= \int\limits_{0}^{+\infty} kx^{k - 1} e^{-\theta x}d x
+	= \tfrac{k}{\theta}\expect X^{k - 1}. $$
+	Согласно это формуле
+	$$ \expect X^k = \tfrac{k!}{\theta^k} \expect X^0 = \tfrac{k!}{\theta^k}. $$
+
+	Пусть теперь $ X_1, X_2, \ldots, X_n \sim \mathrm{E}(\tfrac{1}{\theta}) $ --- независимые одинаково распределённые случайные величины.
+	Тогда имеем
+	$$ \expect_\theta \overline{X^k} = \tfrac{1}{n} \cdot \sum\limits_{i = 1}^{n} \expect_\theta X_i^k
+	= \tfrac{1}{n} \cdot n \cdot \expect_\theta X_1^k = k! \cdot \theta^k. $$
+	Подходящей последовательностью чисел $ c_k $ будет последовательность $ \tfrac{1}{k!} $.
+	Действительно, $ \expect_\theta \overline{X^k} \cdot c_k = k! \cdot \theta^k \cdot \tfrac{1}{k!} = \theta^k $.
+ 
+\end{problem}
+
+\begin{problem}[Задача 2б]{inprocessing}
+	
+	Пусть $ P(\theta) = \sum\limits_{k = 0}^{n} a_k \theta^k $ --- многочлен.
+	Проверим, что оценка $ \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!}\overline{X^k} $ несмещена для $ P(\theta) $.
+	Имеем
+	$$ \expect_\theta \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!}\overline{X^k}	
+	= \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!} \cdot \expect_\theta \overline{X^k}
+	= \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!} \cdot k! \cdot \theta^k = P(\theta). $$
+		
+\end{problem}
+
+\begin{problem}[Задача 3а]{inprocessing}
+	
+	Вычислим матожидание случайной величины $ X \sim \mathrm{Geom}(\theta) $ ($ \prob(X = k) = \theta(1 - \theta)^{k - 1} $) с геометрическим распределением:
+	
+	$$ \expect X = \sum\limits_{k = 1}^{+\infty} k\theta(1 - \theta)^{k - 1}
+	= \theta \sum\limits_{k = 1}^{+\infty} k(1 - \theta)^{k - 1}
+	= \theta \left(-\sum\limits_{k = 1}^{+\infty} (1 - \theta)^{k}\right)' = $$ 
+	$$ = \theta \left(-\tfrac{1 - \theta}{1 - (1 - \theta)} - 1)\right)'
+	= \theta \left(\tfrac{-1}{\theta}\right)' = \theta \cdot \tfrac{1}{\theta^2} = \tfrac{1}{\theta}. $$
+	
+	Пусть независимые случайные величины $ X_1, \ldots, X_n \sim \mathrm{Geom}(\theta) $ имеют геометрическое распределение
+	($ \theta \in (0, 1) $).
+	
+	Пусть $ g(X_1) $ --- несмещённая оценка для функции $ f(\theta) $.
+	Тогда
+	$$ f(\theta) = \expect_\theta g(X_1) = \sum\limits_{k = 1}^{+\infty} g(k)\theta(1 - \theta)^{k - 1}
+	= \sum\limits_{k = 0}^{+\infty} g(k + 1)(-1)^{k}\theta(\theta - 1)^k. $$
+	или
+	$$ \tfrac{f(\theta)}{\theta} = \sum\limits_{k = 0}^{+\infty} g(k + 1)(-1)^k(\theta - 1)^k. $$
+	Далее будем рассматривать разложение в ряд Тейлора функции $ \tfrac{f(\theta)}{\theta} $ около точки 1.
+	Чтобы ряды сходились к одной и той же функции, их коэффициенты обязаны быть равными.
+	Таким образом, сопоставляя коэффициенты рядов, мы вычислим функцию $ g $.
+	
+	Для $ f(\theta) = \theta $ имеем $ \tfrac{f(\theta)}{\theta} = 1 = 1 + \sum\limits_{k = 1}^{+\infty} 0 \cdot (\theta - 1)^k $.
+	Тогда $ g(1) = 1 $ и $ g(k) = 0 $ для $ k \neq 1 $.
+	Имеем $ g(k) = I(k = 1) $ и $g(X_1) = I(X_1 = 1) $.
+	
+	Для $ f(\theta) = \tfrac{1 - \theta}{\theta} $
+	имеем
+	$$ \tfrac{f(\theta)}{\theta} = \tfrac{1 - \theta}{\theta^2} = \tfrac{1}{\theta^2} - \tfrac{1}{\theta}
+	= \sum\limits_{k = 0}^{+\infty} \tfrac{(-1)^k(k + 1)!}{k!}(\theta - 1)^k
+	- \sum\limits_{k = 0}^{+\infty} \tfrac{(-1)^k k!}{k!}(\theta - 1)^k
+	= \sum\limits_{k = 0}^{+\infty} (-1)^k(k + 1 - 1)(\theta - 1)^k. $$
+	Отсюда $ g(k + 1)(-1)^k = (-1)^k k $ и $ g(k) = k - 1 $.
+	
+	Для $ f(\theta) = \theta^2 $
+	имеем
+	$$ \tfrac{f(\theta)}{\theta} = \theta = 1 + (\theta - 1). $$
+	Отсюда $ g(1)(-1)^0 = 1, g(2)(-1)^{1} = 1 $ и $ g(k) = 0 $ при $ k \neq 1, 2 $.
+	Поэтому $$ g(k) = I(k = 1) - I(k = 2). $$
+	
+\end{problem}
+
+\begin{problem}[Задача 3б]{inprocessing}
+	
+	Рассмотрим функцию $ g(X_1, X_2) = I(X_1 = 1) \cdot I(X_2 = 1) $.
+	Поскольку $ X_1 $ и $ X_2 $ независимы, то независимы $ I(X_1 = 1) $ и $ I(X_2 = 1) $.
+	Поэтому $$ \expect_\theta g(X_1, X_2) = \expect_\theta I(X_1 = 1) \cdot \expect_\theta I(X_1 = 1)
+	= \theta \cdot \theta = \theta^2. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 3в]{inprocessing}
+	
+	Предположим, что $ g $ --- искомая оценка. Тогда, как было показано ранее, выполнено равенство
+	$$ \tfrac{1}{1 - \theta} = \sum\limits_{k = 1}^{+\infty} g(k)\theta(1 - \theta)^k. $$
+	Отсюда
+	$$ \tfrac{1}{\theta} = \sum\limits_{k = 1}^{+\infty} g(k)(-1)^k(\theta - 1)^k. $$
+	Разложим $ \tfrac{1}{\theta} $ в ряд Тейлора около точки $ 1 $:
+	$$ \tfrac{1}{\theta} = \tfrac{1}{1 + (\theta - 1)} = \sum\limits_{k = 0}^{+\infty} (-1)^k (\theta - 1)^k. $$
+	В разложении в ряд присутствует ненулевой свободный член, тогда как в сумме
+	$ \sum\limits_{k = 1}^{+\infty} g(k)(-1)^k(\theta - 1)^k $ он равен 0,
+	поэтому эти ряды не могут сходиться к одной и той же функции.
+	
+\end{problem}
+
+\begin{problem}[Задача 4а]{inprocessing}
+	
+	Пусть $ X \sim R[0, \theta] $ --- случайная величины. Вычислим её моменты:
+	$$ \expect_\theta\xi^k 	= \int\limits_{0}^{\theta} \tfrac{x^k}{\theta - 0} d x
+	= \tfrac{1}{\theta} \cdot \tfrac{\theta^{k + 1} - 0^{k + 1}}{k + 1}
+	= \tfrac{1}{k + 1} \cdot \tfrac{\theta^{k + 1}}{\theta} = \tfrac{\theta^k}{k + 1}. $$
+	Из вычисления выше следует, что оценка $ (k + 1)X^k $ несмещена для $ \theta^k $.
+	
+	Пусть теперь $ X_1, \ldots, X_n \sim R[0, \theta] $ --- независимые случайные величины.
+	Тогда $$ \expect_\theta (k + 1)\overline{X^k} = \tfrac{k + 1}{n} \cdot n \cdot \expect_\theta X_1^k = (k + 1) \cdot \tfrac{\theta^k}{k + 1} = \theta^k. $$
+	
+	Вычислим среднеквадратичный риск:
+	$$ \disp_\theta (k + 1)\overline{X^k} = (k + 1)^2 \cdot \tfrac{1}{n^2} \cdot \sum\limits_{m = 1}^{n} \disp X_m^k
+	= (k + 1)^2 \cdot \tfrac{n}{n^2} \disp X_1^k = $$  $$
+	= \tfrac{(k + 1)^2}{n} \cdot (\expect X_1^{2k} - (\expect X_1^k)^2)
+	= \tfrac{(k + 1)^2}{n} \cdot (\tfrac{\theta^{2k}}{2k + 1} - \tfrac{\theta^{2k}}{(k + 1)^2})
+	= \tfrac{\theta^{2k}}{n} \cdot \tfrac{k^2}{2k + 1}. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 4б]{inprocessing}
+	
+	Из определения функции распределения, независимости и одинаковой распределённости имеем:
+	$$ F_{X_{(n)}, \theta}(x) = \prob_\theta(\max(X_1, \ldots, X_n) \leqslant x) 
+	= \prob_\theta(X_1 \leqslant x \wedge \ldots \wedge X_n \leqslant x) = $$ 
+	 $$ = \prob_\theta(X_1 \leqslant x) \cdot \ldots \cdot \prob_\theta(X_n \leqslant x) 
+	 = F_{X_1, \theta}(x) \cdot \ldots \cdot F_{X_n, \theta}(x) = (\tfrac{x}{\theta})^n \cdot I(x \in [0, \theta])
+	 + I(x \in (\theta, + \infty)). $$
+	
+	Поскольку в точках непрерывности функции плотности, она совпадает с производной от функции распределения,
+	то $ f_{X_{(n)}, \theta}(x) = \tfrac{nx^{n - 1}}{\theta^n} \cdot I(x \in [0, \theta]) $.
+	
+\end{problem}
+
+\begin{problem}[Задача 4в]{inprocessing}
+	
+	Найдём несмещённую оценку для $ \tfrac{1}{\theta^3} $ от $ X_{(n)} $ (здесь $ n > 3 $).
+	Предположим, что $ g $ --- искомая оценка. Тогда мы имеем равенство
+	$$ \tfrac{1}{\theta^3} = \expect_\theta g(X_{(n)}) 
+	= \int\limits_{-\infty}^{+\infty} \tfrac{g(t) \cdot nt^{n - 1}}{\theta^n} \cdot I(t \in [0, \theta]) dt
+	= \int\limits_{0}^{\theta} \tfrac{g(t) \cdot nt^{n - 1}}{\theta^n} dt. $$
+	Отсюда
+	$$ \theta^{n - 3} = \int\limits_{0}^{\theta} g(t) \cdot nt^{n - 1} dt. $$
+	Дифференцируя по $ \theta $, получаем
+	$$ (n - 3)\theta^{n - 4} = ng(\theta)\theta^{n - 1} $$
+	и, наконец,
+	$$ g(\theta) = \tfrac{n - 3}{n\theta^3}, g(X_{(n)}) = \tfrac{n - 3}{nX_{(n)}^3}. $$
+	
+\end{problem}
+
+\begin{problem}[задача 4г]{inprocessing}
+	
+	Предположим, что существует оценка $ g $ такая, что $ \expect_\theta g(X_1) = \tfrac{1}{\theta^3} $.
+	Тогда выполнено равенство
+	$$ \tfrac{1}{\theta^3} = \int\limits_{0}^{\theta} \tfrac{g(t)}{\theta}dt. $$
+	Следовательно,
+	$$ \tfrac{1}{\theta^2} = \int\limits_{0}^{\theta} g(t)dt $$
+	и после дифференцирования по $ \theta $ получаем
+	$$ \tfrac{-2}{\theta^3} = g(\theta). $$
+	Однако, интеграл $ \int\limits_{0}^{\theta} \tfrac{-2}{t^3} dt $ расходится,
+	что противоречит предположению о существовании такой оценки $ g $.
+	
+\end{problem}
+
+\end{document}

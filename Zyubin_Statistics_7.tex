@@ -1,0 +1,379 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	%	\tableofcontents
+	
+	%\section{Дз 2}
+	
+	\begin{problem}[Задача 1 ($ \mathcal{N}(\theta, \theta) $)]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta) $
+		на основе оценки максимального правдоподобия $ T = \tfrac{-1 + \sqrt{1 + 4\overline{X^2}}}{2} $ (см. домашнюю работу 3).
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ 2\theta^2 $ (см. домашнюю работу 4).
+		Тогда оценка $ \tfrac{-1 + \sqrt{1 + 4\overline{X^2}}}{\sqrt{2}} $ состоятельна для $ \sqrt{2}\theta $.
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}\theta}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}T}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(T(1 - \tfrac{b\sqrt{2}}{\sqrt{n}}) \leqslant \theta
+		\leqslant T(1 - \tfrac{a\sqrt{2}}{\sqrt{n}})) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал $ (T(1 - \tfrac{z_{1 - \frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}), T(1 - \tfrac{z_{\frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}})) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1 ($ \mathcal{N}(\theta, \theta^2) $)]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta^2) $
+		на основе оценки максимального правдоподобия 
+		$ T = \tfrac{-\overline{X} \pm \sqrt{\overline{X}^2 + 4\overline{X^2}}}{2} $ (см. домашнюю работу 3).
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ \tfrac{\theta^2}{3} $ (см. домашнюю работу 4).
+		Тогда оценка $ \tfrac{T}{\sqrt{3}} $ состоятельна для $ \tfrac{\theta}{\sqrt{3}} $.
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{3n}(T - \theta)}{\theta}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{3n}(T - \theta)}{T}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(T(1 - \tfrac{b}{\sqrt{3n}}) \leqslant \theta
+		\leqslant T(1 - \tfrac{a}{\sqrt{3n}})) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал $ (T(1 - \tfrac{z_{1 - \frac{\alpha}{2}}}{\sqrt{3n}}), T(1 - \tfrac{z_{\frac{\alpha}{2}}}{\sqrt{3n}})) $.
+	\end{problem}
+	
+	\begin{problem}[Задача 1 ($ \mathcal{N}(0, \theta) $)]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathcal{N}(0, \theta) $
+		на основе оценки максимального правдоподобия 
+		$ T = \overline{X^2} $ (см. домашнюю работу 3).
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ 2\theta^2 $ (см. домашнюю работу 4).
+		Тогда оценка $ \sqrt{2}T $ состоятельна для $ \sqrt{2}\theta $.
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}\theta}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}T}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(T(1 - \tfrac{b\sqrt{2}}{\sqrt{n}}) \leqslant \theta
+		\leqslant T(1 - \tfrac{a\sqrt{2}}{\sqrt{n}})) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал $ (T(1 - \tfrac{z_{1 - \frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}), T(1 - \tfrac{z_{\frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}})) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathrm{Cauchy}(\theta) $
+		на основе оценки максимального правдоподобия 
+		$ \hat{\theta}_n $.
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ 2 $ (см. домашнюю работу 4).
+		Тогда
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(\hat{\theta}_n - \theta)}{\sqrt{2}}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(\hat{\theta}_n - \tfrac{b\sqrt{2}}{\sqrt{n}} \leqslant \theta
+		\leqslant \hat{\theta}_n - \tfrac{a\sqrt{2}}{\sqrt{n}}) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал 
+		$ (\hat{\theta}_n - \tfrac{z_{1 - \frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}, \hat{\theta}_n - \tfrac{z_{\frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}) $.
+	
+	\end{problem}
+	
+	\begin{problem}[Задача 3 (равномерное распределение)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathrm{R}[0, \theta] $.
+		Пусть $ Y_i = \tfrac{X_i}{\theta} \sim \mathrm{R}[0, 1] $.
+		Оценка максимального правдоподобия в модели есть $ X_{(n)} $ (см. домашнюю работу 3).
+		Тогда случайные величины $ \tfrac{X_{(n)}}{\theta} $ и $ Y_{(n)} $ имеют одинаковые распределения.
+		Имеем
+		$ F_{\frac{X_{(n)}}{\theta}, \theta}(x) = F_{Y_{(n)}}(x) = x^nI(0 < x < 1) + I(x > 1) $.
+		Тогда из равенства $ F_{\frac{X_{(n)}}{\theta}, \theta}(q_{\alpha}) = \alpha $
+		получаем $ q_\alpha = \sqrt[n]{\alpha} $.
+		
+		Пусть $ \prob_\theta(q_1 < \tfrac{X_{(n)}}{\theta} < q_2) = 1 - \alpha $.
+		Тогда $ \prob_\theta(\tfrac{X_{(n)}}{q_2} < \theta < \tfrac{X_{(n)}}{q_1}) = 1 - \alpha $
+		и $ q_2^n - q_1^n = 1 - \alpha $.
+		Функция $ l(q_2) = \tfrac{1}{\sqrt[n]{q_2^n - (1 - \alpha)}} - \tfrac{1}{q_2} $ имеет производную
+		$$ \tfrac{1}{q_2^2} - \tfrac{q_2^{n - 1}}{(q_2^n - (1 - \alpha))^{
+		\frac{n + 1}{n}}} = \tfrac{q_2^{n + 1} - (q_2^n - (1 - \alpha))^{
+		\frac{n + 1}{n}}}{q_2^2(q_2^n - (1 - \alpha))^{
+		\frac{n + 1}{n}}}. $$
+		Поскольку $ 1 - \alpha > 0 $, то производная всегда принимает положительные значения
+		и, следовательно, функция $ l $ принимает наименьшее значение при наибольшем допустимом значении $ q_2 $.
+		Поскольку $ 0 \leqslant q_2 \leqslant 1 $, то минимум достигается при $ q_2 = 1 $.
+		Тогда $ q_1 = \sqrt[n]{\alpha} $.
+		Следовательно, точный доверительный интервал имеет вид $ (X_{(n)}, \tfrac{X_{(n)}}{\sqrt[n]{\alpha}}) $.
+		
+			
+	\end{problem}
+	
+	\begin{problem}[Задача 3 ($ f_\theta(x) = e^{-(x - \theta)}I(x > \theta) $)]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ распределены
+		с плотностью $ f_\theta(x) = e^{-(x - \theta)}I(x > \theta) $.
+		Пусть $ Y_i = X_i - \theta \sim \mathrm{Exp}(1) $.
+		Оценка максимального правдоподобия в модели есть $ X_{(1)} $ (см. домашнюю работу 3).
+		Тогда случайные величины $ X_{(1)} - \theta $ и $ Y_{(1)} \sim \mathrm{Exp}(n) $ имеют одинаковые распределения.
+		
+		Пусть $ \prob_\theta(q_1 < X_{(1)} - \theta < q_2) = 1 - \alpha $.
+		Тогда $ \prob_\theta(X_{(1)} - q_2 < \theta < X_{(1)} - q_1) = 1 - \alpha $
+		и $ (1 - e^{-nq_2}) - (1 - e^{-nq_1}) = 1 - \alpha. $
+		Отсюда $ 1 - \alpha = e^{-nq_1} - e^{-nq_2} = e^{-nq_1}(1 - e^{-n(q_2 - q_1)}) $.
+		Тогда наименьшее значение разности $ q_2 - q_1 $ достигается при наименьшем возможном $ q_1 $,
+		то есть при $ q_1 = 0 $. В этом случае $ q_2 = -\tfrac{1}{n}\ln \alpha $ (поскольку $ \alpha < 0 $, то $ q_2 $ будет положительным).
+	
+		Точный доверительный интервал будет иметь вид 
+		$ (X_{(1)} + \tfrac{1}{n}\ln \alpha, X_{(1)}) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4 ($ \mathcal{N}(\theta, \theta) $)]{inprocessing}
+		
+		Построим точный доверительный интервал для $ \theta > 0 $ в случае 
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta) $ на основе $ \overline{X} $.
+		Имеем $ \tfrac{X_i - \theta}{\sqrt{\theta}} \sim \mathcal{N}(0, 1) $
+		и $ \tfrac{(\overline{X} - \theta)\sqrt{n}}{\sqrt{\theta}} \sim \mathcal{N}(0, 1) $.
+		
+		Имеем $$ \prob_{\theta}(-z_{1 - \frac{\alpha}{2}} < \tfrac{(\overline{X} - \theta)\sqrt{n}}{\sqrt{\theta}}
+		< z_{1 - \frac{\alpha}{2}}) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob_{\theta}(-\tfrac{\sqrt{\theta}}{\sqrt{n}}z_{1 - \frac{\alpha}{2}} < \overline{X} - \theta
+		< \tfrac{\sqrt{\theta}}{\sqrt{n}}z_{1 - \frac{\alpha}{2}}) = 1 - \alpha, $$
+		$$ \prob_{\theta}((\overline{X} - \theta)^2
+		< \tfrac{\theta}{n}z_{1 - \frac{\alpha}{2}}^2) = 1 - \alpha, $$
+		Корни уравнения $ (\overline{X} - \theta)^2 = \tfrac{\theta}{n}z_{1 - \frac{\alpha}{2}}^2 $
+		относительно $ \theta $ равны 
+		$$ \overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{2n} \pm 
+		\tfrac{1}{2}\sqrt{\left(2\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^2 - 4\overline{X}^2}. $$
+		Тогда точный доверительный интервал есть
+		$$ \left(
+		\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{2n} - 
+		\tfrac{1}{2}\sqrt{\left(2\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^2 - 4\overline{X}^2},
+		\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{2n} + 
+		\tfrac{1}{2}\sqrt{\left(2\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^2 - 4\overline{X}^2}
+		\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4 ($ \mathcal{N}(\theta, \theta^2) $)]{inprocessing}
+		
+		Построим точный доверительный интервал для $ \theta $ в случае 
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta^2) $ на основе $ \overline{X} $.
+		Имеем $ \tfrac{X_i - \theta}{\theta} \sim \mathcal{N}(0, 1) $
+		и $ \tfrac{(\overline{X} - \theta)\sqrt{n}}{\theta} \sim \mathcal{N}(0, 1) $.
+		
+		Имеем (для $ \theta > 0 $) $$ \prob_{\theta}(-z_{1 - \frac{\alpha}{2}} < \tfrac{(\overline{X} - \theta)\sqrt{n}}{\theta}
+		< z_{1 - \frac{\alpha}{2}}) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob_{\theta}(-\tfrac{\theta}{\sqrt{n}}z_{1 - \frac{\alpha}{2}} < \overline{X} - \theta
+		< \tfrac{\theta}{\sqrt{n}}z_{1 - \frac{\alpha}{2}}) = 1 - \alpha, $$
+		$$ \prob_{\theta}\left(\overline{X}\left(1 - \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1} < \theta
+		< \overline{X}\left(1 + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1} \right) = 1 - \alpha, $$
+		Тогда точный доверительный интервал есть
+		$$ \left(
+		\overline{X}\left(1 - \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1},
+		\overline{X}\left(1 + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1}
+		\right). $$
+		
+	\end{problem}
+	
+	
+\end{document}

@@ -1,0 +1,3170 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{nicefrac, xfrac}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\grad}{\operatorname{grad}}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+\newcommand{\spmatrix}[4]{
+	\left( \begin{smallmatrix}
+		#1 & #2 \\
+		#3 & #4
+	\end{smallmatrix} \right)
+}
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Семинарист и автор задач: Г.А. Бакай \\ Решения: К. Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{Несмещённые оценки}
+	
+	Приведём несколько стандартных утверждений.
+	
+	\begin{proposition}
+		Пусть $ X \sim \mathcal{N}(a, \sigma^2) $ --- нормально распределённая случайная величина.
+		Тогда $$ \expect X = a, \expect X^2 = \sigma^2 + a^2, \disp X = \sigma^2, \expect |X - a| = \sigma \cdot \sqrt{\tfrac{2}{\pi}}. $$
+	\end{proposition}
+	
+	\begin{proof}
+		
+		Для матожиданий имеем
+		
+		$$ \expect X = \int\limits_{-\infty}^{+\infty} \tfrac{u}{\sqrt{2\pi}\sigma}e^{-\tfrac{(u - a)^2}{2\sigma^2}}du 
+		= \int\limits_{-\infty}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+		+ \int\limits_{-\infty}^{+\infty} \tfrac{a}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+		= 0 + \int\limits_{-\infty}^{+\infty} \tfrac{a}{\sqrt{2\pi}}e^{-\tfrac{s^2}{2}}ds = a \cdot 1 = a. $$
+		
+		$$ \expect X^2 = \int\limits_{-\infty}^{+\infty} \tfrac{u^2}{\sqrt{2\pi}\sigma}e^{-\tfrac{(u - a)^2}{2\sigma^2}}du
+		= \int\limits_{-\infty}^{+\infty} \tfrac{t^2}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+		+ \int\limits_{-\infty}^{+\infty} \tfrac{2at}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+		+ \int\limits_{-\infty}^{+\infty} \tfrac{a^2}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt = $$
+		$$ = \int\limits_{-\infty}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}d\tfrac{t^2}{2}
+		+ 0 + a^2 \cdot 1 
+		= \int\limits_{-\infty}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma} (-\sigma^2) de^{-\tfrac{t^2}{2\sigma^2}} + a^2 = $$ 
+		$$ = \left.-\tfrac{t\sigma}{\sqrt{2\pi}}e^{-\tfrac{t^2}{2\sigma^2}}\right|_{-\infty}^{+\infty} 
+		+ \int\limits_{-\infty}^{+\infty} \tfrac{\sigma}{\sqrt{2\pi}}e^{-\tfrac{t^2}{2\sigma^2}}dt + a^2
+		= 0 + \int\limits_{-\infty}^{+\infty} \tfrac{\sigma \cdot \sigma}{\sqrt{2\pi}}e^{-\tfrac{s^2}{2}}ds + a^2
+		= \sigma^2 + a^2. $$
+		
+		$$ \expect |X - a| = \int\limits_{-\infty}^{+\infty} \tfrac{|u - a|}{\sqrt{2\pi}\sigma}e^{-\tfrac{(u - a)^2}{2\sigma^2}}du
+		= \int\limits_{-\infty}^{+\infty} \tfrac{|t|}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt
+		= 2\int\limits_{0}^{+\infty} \tfrac{t}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}dt = $$
+		$$ = 2\int\limits_{0}^{+\infty} \tfrac{1}{\sqrt{2\pi}\sigma}e^{-\tfrac{t^2}{2\sigma^2}}d\tfrac{t^2}{2}
+		= 2\int\limits_{0}^{+\infty} \tfrac{1}{\sqrt{2\pi}\sigma} (-\sigma^2) de^{-\tfrac{t^2}{2\sigma^2}} =
+		\left.-\tfrac{2\sigma}{\sqrt{2\pi}}e^{-\tfrac{t^2}{2\sigma^2}}\right|_{0}^{+\infty}
+		= \tfrac{2\sigma}{\sqrt{2\pi}} = \sigma \cdot \sqrt{\tfrac{2}{\pi}}. $$
+		
+		Из формулы дисперсии получаем 
+		
+		$$ \disp X = \expect X^2 - (\expect X)^2 = (\sigma^2 + a^2) - a^2 = \sigma^2. $$
+		
+	\end{proof}
+	
+	\begin{proposition}
+		Пусть $ X_1 \sim \mathcal{N}(a_1, \sigma_1^2),  X_2 \sim \mathcal{N}(a_2, \sigma_2^2) $ --- 
+		две нормально распределённые случайные величины.
+		Тогда их свёртка $ X_1 + X_2 \sim \mathcal{N}(a_1 + a_2, \sigma_1^2 + \sigma_2^2) $ 
+		имеет нормальное распределение.
+	\end{proposition}
+	
+	\begin{problem}[Задача 1а]{inprocessing}
+		
+		Пусть даны независимые случайные величины $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \theta_2^2), \theta_2 > 0 $.
+		Проверим, что оценка $ \overline{X} = \tfrac{1}{n} \sum\limits_{i = 1}^{n} X_i $ несмещена относительно $ \theta_1 $.
+		Действительно, по линейности матожидания и так как $ \expect_{\theta_1, \theta_2} X_i = \theta_1 $ имеем 
+		$$ \expect_{\theta_1, \theta_2}\overline{X} = \tfrac{1}{n} \sum\limits_{i = 1}^{n} \expect_{\theta_1, \theta_2} X_i
+		= \tfrac{1}{n} \cdot n\theta_1 = \theta_1. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б]{inprocessing}
+		
+		Проверим, что оценка $$ S_n^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2
+		= \tfrac{1}{n} \sum\limits_{i = 1}^{n} (X_i^2 - 2X_i\overline{X} + (\overline{X})^2)
+		= \tfrac{1}{n} \sum\limits_{i = 1}^{n} X_i^2 - 2(\overline{X})^2 + (\overline{X})^2
+		= \tfrac{1}{n} \sum\limits_{i = 1}^{n} X_i^2 - (\overline{X})^2 = \overline{X^2} - \overline{X}^2 $$
+		смещена относительно $ \theta_2^2 $.
+		Имеем $$ \theta_2^2 = \disp_{\theta_1, \theta_2} X_i 
+		= \expect_{\theta_1, \theta_2} X_i^2 - (\expect_{\theta_1, \theta_2} X_i)^2 = \expect_{\theta_1, \theta_2} X_i^2 - \theta_1^2. $$
+		Кроме того, 
+		$$ \expect_{\theta_1, \theta_2} \overline{X}^2 
+		= \tfrac{1}{n^2} \left(\sum\limits_{i = 1}^{n} \expect_{\theta_1, \theta_2} X_i^2
+		+ \sum\limits_{i < j}^{n} \expect_{\theta_1, \theta_2} (2X_iX_j) \right) = $$
+		$$ = \tfrac{1}{n^2} \left(n(\theta_1^2 + \theta_2^2)
+		+ n(n - 1) \expect_{\theta_1, \theta_2} X_i \expect_{\theta_1, \theta_2} X_j\right)
+		= \tfrac{1}{n^2} \left(n(\theta_1^2 + \theta_2^2)
+		+ n(n - 1) \theta_1^2 \right) = $$
+		$$ = \tfrac{1}{n}\theta_2^2	+ \theta_1^2. $$
+		Отсюда
+		$$ \expect_{\theta_1, \theta_2} S_n^2 = \expect_{\theta_1, \theta_2} \overline{X^2} - \expect_{\theta_1, \theta_2} \overline{X}^2
+		= \tfrac{1}{n} \cdot n(\theta_1^2 + \theta_2^2) - (\tfrac{1}{n}\theta_2^2 + \theta_1^2)
+		= \tfrac{n - 1}{n}\theta_2^2 \neq \theta_2^2. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1в]{inprocessing}
+		
+		В качестве чисел $ a_n $ (для $ n > 1 $) следует взять дроби $ \tfrac{n}{n - 1} $.
+		Тогда, по доказанному выше $$ \expect_{\theta_1, \theta_2} (\tfrac{n}{n - 1} \cdot S_n^2)
+		= \tfrac{n}{n - 1} \cdot \tfrac{n - 1}{n} \cdot \theta_2^2 = \theta_2^2. $$
+		
+		Положим $ T = \sum\limits_{i = 1}^{n - 1} |X_i - X_{i + 1}| $.
+		Случайная величина $ -X_{i + 1} $ имеет распределение $ \mathcal{N}(-\theta_1, \theta_2^2) $.
+		По формуле для свёртки нормально распределённых случайных величин случайная величина $ X_i - X_{i + 1} $
+		имеет распределение $ \mathcal{N}(0, 2\theta_2^2) $. Первый момент такой случайной величины равен $ \sqrt{2}\theta_2 \cdot \sqrt{\tfrac{2}{\pi}} = \tfrac{2 \theta_2}{\sqrt{\pi}} $.
+		Теперь мы можем вычислить матожидание $ T $:
+		$$ \expect_{\theta_1, \theta_2} T = (n - 1)\expect_{\theta_1, \theta_2} |X_1 - X_2|
+		= \tfrac{2(n - 1)}{\sqrt{\pi}} \cdot \theta_2. $$
+		
+		В качестве членов последовательности $ b_n $ следует взять числа $ \tfrac{\sqrt{\pi}}{2(n - 1)} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2а]{inprocessing}
+		
+		Вычислим моменты случайной величины $  X \sim \mathrm{E}(\theta) $ 
+		с экспоненциальным распределением.
+		Имеем
+		$$ \expect X^k
+		= \int\limits_{0}^{+\infty} \theta x^k e^{-\theta x} d x
+		= -\int\limits_{0}^{+\infty} x^k d e^{-\theta x} = $$ 
+		$$ = \left.-x^ke^{-\theta x}\right|_{0}^{+\infty} 
+		+ \int\limits_{0}^{+\infty} e^{-\theta x}d x^k
+		= \int\limits_{0}^{+\infty} kx^{k - 1} e^{-\theta x}d x
+		= \tfrac{k}{\theta}\expect X^{k - 1}. $$
+		Согласно это формуле
+		$$ \expect X^k = \tfrac{k!}{\theta^k} \expect X^0 = \tfrac{k!}{\theta^k}. $$
+		
+		Пусть теперь $ X_1, X_2, \ldots, X_n \sim \mathrm{E}(\tfrac{1}{\theta}) $ --- независимые одинаково распределённые случайные величины.
+		Тогда имеем
+		$$ \expect_\theta \overline{X^k} = \tfrac{1}{n} \cdot \sum\limits_{i = 1}^{n} \expect_\theta X_i^k
+		= \tfrac{1}{n} \cdot n \cdot \expect_\theta X_1^k = k! \cdot \theta^k. $$
+		Подходящей последовательностью чисел $ c_k $ будет последовательность $ \tfrac{1}{k!} $.
+		Действительно, $ \expect_\theta \overline{X^k} \cdot c_k = k! \cdot \theta^k \cdot \tfrac{1}{k!} = \theta^k $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2б]{inprocessing}
+		
+		Пусть $ P(\theta) = \sum\limits_{k = 0}^{n} a_k \theta^k $ --- многочлен.
+		Проверим, что оценка $ \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!}\overline{X^k} $ несмещена для $ P(\theta) $.
+		Имеем
+		$$ \expect_\theta \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!}\overline{X^k}	
+		= \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!} \cdot \expect_\theta \overline{X^k}
+		= \sum\limits_{k = 0}^{n} \tfrac{a_k}{k!} \cdot k! \cdot \theta^k = P(\theta). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3а]{inprocessing}
+		
+		Вычислим матожидание случайной величины $ X \sim \mathrm{Geom}(\theta) $ ($ \prob(X = k) = \theta(1 - \theta)^{k - 1} $) с геометрическим распределением:
+		
+		$$ \expect X = \sum\limits_{k = 1}^{+\infty} k\theta(1 - \theta)^{k - 1}
+		= \theta \sum\limits_{k = 1}^{+\infty} k(1 - \theta)^{k - 1}
+		= \theta \left(-\sum\limits_{k = 1}^{+\infty} (1 - \theta)^{k}\right)' = $$ 
+		$$ = \theta \left(-\tfrac{1 - \theta}{1 - (1 - \theta)} - 1)\right)'
+		= \theta \left(\tfrac{-1}{\theta}\right)' = \theta \cdot \tfrac{1}{\theta^2} = \tfrac{1}{\theta}. $$
+		
+		Пусть независимые случайные величины $ X_1, \ldots, X_n \sim \mathrm{Geom}(\theta) $ имеют геометрическое распределение
+		($ \theta \in (0, 1) $).
+		
+		Пусть $ g(X_1) $ --- несмещённая оценка для функции $ f(\theta) $.
+		Тогда
+		$$ f(\theta) = \expect_\theta g(X_1) = \sum\limits_{k = 1}^{+\infty} g(k)\theta(1 - \theta)^{k - 1}
+		= \sum\limits_{k = 0}^{+\infty} g(k + 1)(-1)^{k}\theta(\theta - 1)^k. $$
+		или
+		$$ \tfrac{f(\theta)}{\theta} = \sum\limits_{k = 0}^{+\infty} g(k + 1)(-1)^k(\theta - 1)^k. $$
+		Далее будем рассматривать разложение в ряд Тейлора функции $ \tfrac{f(\theta)}{\theta} $ около точки 1.
+		Чтобы ряды сходились к одной и той же функции, их коэффициенты обязаны быть равными.
+		Таким образом, сопоставляя коэффициенты рядов, мы вычислим функцию $ g $.
+		
+		Для $ f(\theta) = \theta $ имеем $ \tfrac{f(\theta)}{\theta} = 1 = 1 + \sum\limits_{k = 1}^{+\infty} 0 \cdot (\theta - 1)^k $.
+		Тогда $ g(1) = 1 $ и $ g(k) = 0 $ для $ k \neq 1 $.
+		Имеем $ g(k) = I(k = 1) $ и $g(X_1) = I(X_1 = 1) $.
+		
+		Для $ f(\theta) = \tfrac{1 - \theta}{\theta} $
+		имеем
+		$$ \tfrac{f(\theta)}{\theta} = \tfrac{1 - \theta}{\theta^2} = \tfrac{1}{\theta^2} - \tfrac{1}{\theta}
+		= \sum\limits_{k = 0}^{+\infty} \tfrac{(-1)^k(k + 1)!}{k!}(\theta - 1)^k
+		- \sum\limits_{k = 0}^{+\infty} \tfrac{(-1)^k k!}{k!}(\theta - 1)^k
+		= \sum\limits_{k = 0}^{+\infty} (-1)^k(k + 1 - 1)(\theta - 1)^k. $$
+		Отсюда $ g(k + 1)(-1)^k = (-1)^k k $ и $ g(k) = k - 1 $.
+		
+		Для $ f(\theta) = \theta^2 $
+		имеем
+		$$ \tfrac{f(\theta)}{\theta} = \theta = 1 + (\theta - 1). $$
+		Отсюда $ g(1)(-1)^0 = 1, g(2)(-1)^{1} = 1 $ и $ g(k) = 0 $ при $ k \neq 1, 2 $.
+		Поэтому $$ g(k) = I(k = 1) - I(k = 2). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3б]{inprocessing}
+		
+		Рассмотрим функцию $ g(X_1, X_2) = I(X_1 = 1) \cdot I(X_2 = 1) $.
+		Поскольку $ X_1 $ и $ X_2 $ независимы, то независимы $ I(X_1 = 1) $ и $ I(X_2 = 1) $.
+		Поэтому $$ \expect_\theta g(X_1, X_2) = \expect_\theta I(X_1 = 1) \cdot \expect_\theta I(X_1 = 1)
+		= \theta \cdot \theta = \theta^2. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3в]{inprocessing}
+		
+		Предположим, что $ g $ --- искомая оценка. Тогда, как было показано ранее, выполнено равенство
+		$$ \tfrac{1}{1 - \theta} = \sum\limits_{k = 1}^{+\infty} g(k)\theta(1 - \theta)^k. $$
+		Отсюда
+		$$ \tfrac{1}{\theta} = \sum\limits_{k = 1}^{+\infty} g(k)(-1)^k(\theta - 1)^k. $$
+		Разложим $ \tfrac{1}{\theta} $ в ряд Тейлора около точки $ 1 $:
+		$$ \tfrac{1}{\theta} = \tfrac{1}{1 + (\theta - 1)} = \sum\limits_{k = 0}^{+\infty} (-1)^k (\theta - 1)^k. $$
+		В разложении в ряд присутствует ненулевой свободный член, тогда как в сумме
+		$ \sum\limits_{k = 1}^{+\infty} g(k)(-1)^k(\theta - 1)^k $ он равен 0,
+		поэтому эти ряды не могут сходиться к одной и той же функции.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4а]{inprocessing}
+		
+		Пусть $ X \sim R[0, \theta] $ --- случайная величины. Вычислим её моменты:
+		$$ \expect_\theta\xi^k 	= \int\limits_{0}^{\theta} \tfrac{x^k}{\theta - 0} d x
+		= \tfrac{1}{\theta} \cdot \tfrac{\theta^{k + 1} - 0^{k + 1}}{k + 1}
+		= \tfrac{1}{k + 1} \cdot \tfrac{\theta^{k + 1}}{\theta} = \tfrac{\theta^k}{k + 1}. $$
+		Из вычисления выше следует, что оценка $ (k + 1)X^k $ несмещена для $ \theta^k $.
+		
+		Пусть теперь $ X_1, \ldots, X_n \sim R[0, \theta] $ --- независимые случайные величины.
+		Тогда $$ \expect_\theta (k + 1)\overline{X^k} = \tfrac{k + 1}{n} \cdot n \cdot \expect_\theta X_1^k = (k + 1) \cdot \tfrac{\theta^k}{k + 1} = \theta^k. $$
+		
+		Вычислим среднеквадратичный риск:
+		$$ \disp_\theta (k + 1)\overline{X^k} = (k + 1)^2 \cdot \tfrac{1}{n^2} \cdot \sum\limits_{m = 1}^{n} \disp X_m^k
+		= (k + 1)^2 \cdot \tfrac{n}{n^2} \disp X_1^k = $$  $$
+		= \tfrac{(k + 1)^2}{n} \cdot (\expect X_1^{2k} - (\expect X_1^k)^2)
+		= \tfrac{(k + 1)^2}{n} \cdot (\tfrac{\theta^{2k}}{2k + 1} - \tfrac{\theta^{2k}}{(k + 1)^2})
+		= \tfrac{\theta^{2k}}{n} \cdot \tfrac{k^2}{2k + 1}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4б]{inprocessing}
+		
+		Из определения функции распределения, независимости и одинаковой распределённости имеем:
+		$$ F_{X_{(n)}, \theta}(x) = \prob_\theta(\max(X_1, \ldots, X_n) \leqslant x) 
+		= \prob_\theta(X_1 \leqslant x \wedge \ldots \wedge X_n \leqslant x) = $$ 
+		$$ = \prob_\theta(X_1 \leqslant x) \cdot \ldots \cdot \prob_\theta(X_n \leqslant x) 
+		= F_{X_1, \theta}(x) \cdot \ldots \cdot F_{X_n, \theta}(x) = (\tfrac{x}{\theta})^n \cdot I(x \in [0, \theta])
+		+ I(x \in (\theta, + \infty)). $$
+		
+		Поскольку в точках непрерывности функции плотности, она совпадает с производной от функции распределения,
+		то $ f_{X_{(n)}, \theta}(x) = \tfrac{nx^{n - 1}}{\theta^n} \cdot I(x \in [0, \theta]) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4в]{inprocessing}
+		
+		Найдём несмещённую оценку для $ \tfrac{1}{\theta^3} $ от $ X_{(n)} $ (здесь $ n > 3 $).
+		Предположим, что $ g $ --- искомая оценка. Тогда мы имеем равенство
+		$$ \tfrac{1}{\theta^3} = \expect_\theta g(X_{(n)}) 
+		= \int\limits_{-\infty}^{+\infty} \tfrac{g(t) \cdot nt^{n - 1}}{\theta^n} \cdot I(t \in [0, \theta]) dt
+		= \int\limits_{0}^{\theta} \tfrac{g(t) \cdot nt^{n - 1}}{\theta^n} dt. $$
+		Отсюда
+		$$ \theta^{n - 3} = \int\limits_{0}^{\theta} g(t) \cdot nt^{n - 1} dt. $$
+		Дифференцируя по $ \theta $, получаем
+		$$ (n - 3)\theta^{n - 4} = ng(\theta)\theta^{n - 1} $$
+		и, наконец,
+		$$ g(\theta) = \tfrac{n - 3}{n\theta^3}, g(X_{(n)}) = \tfrac{n - 3}{nX_{(n)}^3}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[задача 4г]{inprocessing}
+		
+		Предположим, что существует оценка $ g $ такая, что $ \expect_\theta g(X_1) = \tfrac{1}{\theta^3} $.
+		Тогда выполнено равенство
+		$$ \tfrac{1}{\theta^3} = \int\limits_{0}^{\theta} \tfrac{g(t)}{\theta}dt. $$
+		Следовательно,
+		$$ \tfrac{1}{\theta^2} = \int\limits_{0}^{\theta} g(t)dt $$
+		и после дифференцирования по $ \theta $ получаем
+		$$ \tfrac{-2}{\theta^3} = g(\theta). $$
+		Однако, интеграл $ \int\limits_{0}^{\theta} \tfrac{-2}{t^3} dt $ расходится,
+		что противоречит предположению о существовании такой оценки $ g $.
+		
+	\end{problem}
+	
+	
+	\section{Асимптотические нормальные оценки}
+	
+	\begin{problem}[Задача 1аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{R}[0, \theta] $ --- независимые случайные величины.
+		Докажем, что оценки $ \sqrt[k]{(k + 1)\overline{X^k}} $ асимптотически нормальны для $ \theta $.
+		
+		Прежде проверим, что оценка (последовательность оценок) $ (k + 1)\overline{X^k} $ асимптотически нормальна для $ \theta $
+		и вычислим её асимптотическую дисперсию.
+		Согласно вычислениям в задаче 4 первой домашней работы $ \expect_\theta (k + 1)X_1^k = \theta^k $
+		и $ \disp_\theta (k + 1)X_1^k = \tfrac{\theta^{2k} k^2}{2k + 1} $.
+		Тогда по центральной предельной теореме
+		$$ \sqrt{n}\left(\tfrac{1}{n}\sum\limits_{i = 1}^{n} (k + 1)X_i^k - \theta^k\right) 
+		\overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N} (0, \tfrac{\theta^{2k} k^2}{2k + 1}). $$
+		
+		Пусть $ f(x) = \sqrt[k]{x} $. Тогда $ f'(x) = \tfrac{1}{k\sqrt[k]{x^{k - 1}}} $ не равно 0 при $ \theta > 0 $.
+		По лемме об асимптотической нормальности для функции $ f(x) $
+		получаем
+		$$ \sqrt{n}\left(\sqrt[k]{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (k + 1)X_i^k} - \theta\right) 
+		\overunderset{d}{n \to +\infty}{\to} \tilde{\eta}
+		\sim \mathcal{N} (0, \tfrac{\theta^{2k} k^2}{2k + 1} \cdot (\tfrac{1}{k\theta^{k - 1}})^2). $$
+		Асимптотическая дисперсия равна 
+		$$ \tfrac{\theta^{2k} k^2}{2k + 1} \cdot (\tfrac{1}{k\theta^{k - 1}})^2
+		= \tfrac{\theta^2}{2k + 1}. $$
+		Поскольку для $ m > k $ выполнено неравенство $ \tfrac{\theta^2}{2m + 1} < \tfrac{\theta^2}{2k + 1} $,
+		то среди оценок такого вида нет оценки с наименьшей (при фиксированном $ \theta $) асимптотической дисперсией.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2а]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{R}[0, \theta] $ --- независимые случайные величины.
+		Проверим, что оценка $ X_{(n)} = \max(X_1, \ldots, X_n) $ состоятельна для $ \theta $.
+		Согласно вычислениям, выполненным ранее, имеем формулу
+		$$ F_{X_{(n)}, \theta}(x) 
+		= \definefunthree
+		{0}{x < 0}
+		{\tfrac{x^n}{\theta^n}}{x \in [0, \theta]}
+		{1}{x > \theta} $$
+		Поэтому для малых $ \varepsilon > 0 $ имеем 
+		$$ \prob_\theta(|X_{(n)} - \theta| > \varepsilon)
+		= 1 - F_{X_{(n)}}(\theta + \varepsilon) + F_{X_{(n)}}(\theta - \varepsilon)
+		= 1 - 1 + \tfrac{(\theta - \varepsilon)^n}{\theta^n} = \left(1 - \tfrac{\varepsilon}{\theta}\right)^n. $$
+		Последнее выражение стремится к 0 при $ n \to +\infty $, так как $ |1 - \tfrac{\varepsilon}{\theta}| < 1 $.
+		Следовательно, последовательность $ X_{(n)} $ сходится по вероятности к $ \theta $
+		и, по определению, состоятельна для $ \theta $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2б]{inprocessing}
+		
+		Найдём функцию распределения величины $ n(\theta - X_{(n)}) $:
+		$$ F_{n(\theta - X_{(n)}), \theta}(x)
+		= \prob_\theta(n(\theta - X_{(n)}) \leqslant x)
+		= \prob_\theta(X_{(n)} \geqslant \theta - \tfrac{x}{n})
+		= 1 - F_{X_{(n)}, \theta}(\theta - \tfrac{x}{n}) = $$
+		$$ =
+		\definefunthree
+		{0}{x < 0}{1 - (1 - \tfrac{x}{n\theta})^n}{x \in [0, n\theta]}{1}{x > n\theta} $$
+		
+		При $ n \to +\infty $ данная последовательность функций распределений сходится к функции экспоненциального распределению
+		$$ F(x) = \definefuntwo
+		{0}{x < 0}{1 - e^{-\tfrac{x}{\theta}}}{x \geqslant 0} $$
+		Таким образом, $ n(\theta - X_{(n)}) \overunderset{d}{n \to +\infty}{\to} \xi \sim \mathrm{E}(\tfrac{1}{\theta}) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3а]{inprocessing}
+		
+		Пусть независимые случайные величины $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, 1) $ имеют стандартное нормальное распределение.
+		Случайная величина $ S_n = \sum\limits_{i = 1}^{n} X_i $, 
+		как свёртка $ n $ независимых нормально распределённых случайных величин, имеет распределение $ \mathcal{N}(n\theta, n) $.
+		Тогда случайная величина $ \overline{X} = \tfrac{1}{n}S_n $ имеет распределение $ \mathcal{N}(\theta, \tfrac{1}{n}) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3б]{inprocessing}
+		
+		Докажем, что при $ \theta \neq 0 $ последовательность случайных величин $ \overline{X}^2 $ является асимптотически нормальной для $ \theta^2 $.
+		
+		По центральной предельной теореме имеем сходимость
+		$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $$
+		Положим $ f(x) = x^2 $. При $ \theta \neq 0 $ производная $ f'(x) = 2x $ не равна 0, поэтому по лемме об асимптотической нормальности имеем
+		$$ \sqrt{n}(\overline{X}^2 - \theta^2) \overunderset{d}{n \to +\infty}{\to} \tilde{\eta} \sim \mathcal{N}(0, (2\theta)^2). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3в]{inprocessing}
+		
+		В случае $ \theta = 0 $ рассмотрим функцию распределения случайной величины $ \sqrt{n}\overline{X}^2 $ при $ n \to +\infty $:
+		
+		$$ F_{\sqrt{n}\overline{X}^2}(x) 
+		= \iint_{x_1x_2 \leqslant \tfrac{x}{\sqrt{n}}} \tfrac{n}{2\pi}e^{-\tfrac{n(x_1^2 + x_2^2)}{2}}dx_1dx_2
+		= \iint_{u_1u_2 \leqslant \sqrt{n}x} \tfrac{1}{2\pi}e^{-\tfrac{u_1^2 + u_2^2}{2}}du_1du_2. $$
+		Для $ x > 0 $ имеем 
+		$$ \iint_{u_1u_2 \leqslant \sqrt{n}x, u_1^2 + u_2^2 \leqslant n} \tfrac{1}{2\pi}e^{-\tfrac{u_1^2 + u_2^2}{2}}du_1du_2
+		\leqslant  \iint_{u_1u_2 \leqslant \sqrt{n}x} \tfrac{1}{2\pi}e^{-\tfrac{u_1^2 + u_2^2}{2}}du_1du_2 \leqslant 1. $$
+		Поскольку интеграл сходится абсолютно на всей плоскости, то при $ x > 0 $ выражение в левой части неравенства при 
+		$ n \to +\infty $ стремится к 1, поэтому при $ x > 0 $ выполнено 
+		$$ \lim\limits_{n \to +\infty} F_{\sqrt{n}\overline{X}^2}(x) = 1. $$
+		Пpи $ x < 0 $ имеем
+		$$ 0
+		\leqslant \iint_{u_1u_2 \leqslant \sqrt{n}x} \tfrac{1}{2\pi}e^{-\tfrac{u_1^2 + u_2^2}{2}}du_1du_2 
+		= \iint_{-u_1u_2 \geqslant -\sqrt{n}x} \tfrac{1}{2\pi}e^{-\tfrac{u_1^2 + u_2^2}{2}}du_1du_2
+		\leqslant \iint_{u_1^2 + u_2^2 \geqslant -\sqrt{n}x} \tfrac{1}{2\pi}e^{-\tfrac{u_1^2 + u_2^2}{2}}du_1du_2. $$
+		Правая часть двойного неравенства стремится к 0 при $ n \to +\infty $, 
+		поэтому	для $ x < 0 $ имеем
+		$$ \lim\limits_{n \to +\infty} F_{\sqrt{n}\overline{X}^2}(x) = 0. $$
+		Таким образом, функции распределения $ F_{\sqrt{n}\overline{X}^2} $ сходятся к функции распределения тождественно нулевой случайной величины и $ \sqrt{n}\overline{X}^2 \overunderset{d}{n \to +\infty}{\to} 0 $.	
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4а]{inprocessing}
+		
+		Пусть даны независимые случайные величины $ X_1, \ldots, X_n \sim \mathrm{Be}(\theta) $, где $ \theta \in (0, 1) $.
+		Поскольку $ \expect X_i = \theta $ и $ \disp X_i = \theta(1 - \theta) $,
+		то по центральной предельной теореме имеем
+		$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, \theta(1 - \theta)). $$
+		Положим $ f(x) = e^x $. Тогда производная $ f'(x) = e^x $ нигде не равна 0 и по лемме об асимптотической нормальности
+		$$ \sqrt{n}(e^{\overline{X}} - e^\theta) \overunderset{d}{n \to +\infty}{\to} \tilde{\eta} \sim \mathcal{N}(0, \theta(1 - \theta) \cdot e^{2\theta}). $$
+		Асимптотическая  дисперсия равна $ \theta(1 - \theta)e^{4\theta^2} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4б]{inprocessing}
+		
+		Пусть даны независимые случайные величины $ X_1, \ldots, X_n \sim \mathrm{Poiss}(\theta) $, где $ \theta > 0 $.
+		Поскольку $ \expect X_i = \theta $ и $ \disp X_i = \theta $,
+		то по центральной предельной теореме имеем
+		$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, \theta). $$
+		Положим $ f(x) = x^3 $. Тогда производная $ f'(x) = 3x^2 $ не равна 0 при $ \theta > 0 $. 
+		По лемме об асимптотической нормальности
+		$$ \sqrt{n}({\overline{X}}^3 - \theta^3) \overunderset{d}{n \to +\infty}{\to} \tilde{\eta} \sim \mathcal{N}(0, \theta\cdot (3\theta^2)^2). $$
+		Асимптотическая  дисперсия равна $ 9\theta^5 $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4в]{inprocessing}
+		
+		Пусть даны независимые случайные величины $ X_1, \ldots, X_n \sim \mathrm{Geom}(\theta) $, где $ \theta \in (0, 1) $.
+		Поскольку $ \expect X_i = \tfrac{1}{\theta} $ и $ \disp X_i = \tfrac{1 - \theta}{\theta^2} $,
+		то по центральной предельной теореме имеем
+		$$ \sqrt{n}(\overline{X} - \tfrac{1}{\theta}) \overunderset{d}{n \to +\infty}{\to} \eta 
+		\sim \mathcal{N}(0, \tfrac{1 - \theta}{\theta^2}). $$
+		Положим $ f(x) = \tfrac{1}{x^2} $. Тогда производная $ f'(x) = \tfrac{-2}{x^3} $ не равна 0 при $ \theta \in (0, 1) $. 
+		По лемме об асимптотической нормальности
+		$$ \sqrt{n}({\overline{X}}^{-2} - \theta^2) \overunderset{d}{n \to +\infty}{\to} \tilde{\eta} \sim \mathcal{N}(0, \tfrac{1 - \theta}{\theta^2} \cdot (-2\theta^3)^2). $$
+		Асимптотическая  дисперсия равна $ 4(1 - \theta)\theta^4 $.
+		
+	\end{problem}
+	
+	
+	\section{Построение оценок. Метод моментов и оценка максимального правдоподобия}
+	
+	\begin{problem}[Задача 1 (<<нулёвка>>)]{inprocessing}
+		
+		Пусть случайная величина $ X_1 $ распределена по закону 
+		$$ \prob_{\theta_1, \theta_2}(X_1 = k) 
+		= \theta_1 \cdot \tfrac{e^{-1}}{k!} + (1 - \theta_1)\cdot \tfrac{e^{-\theta_2}\theta_2^k}{k!}, $$
+		где $ \theta_1 \in (0, 1) $ и $ \theta_2 > 0 $.
+		Построим оценки методом моментов для $ (\theta_1, \theta_2) $.
+		
+		Имеем
+		$$ a_1(\theta) = \expect_{\theta_1, \theta_2} X_1 = \sum\limits_{k = 0}^{+\infty} k\theta_1 \tfrac{e^{-1}}{k!}
+		+ \sum\limits_{k = 0}^{+\infty} k(1 - \theta_1)\tfrac{e^{-\theta_2}\theta_2^k}{k!}
+		= \theta_1 + (1 - \theta_1)\theta_2, $$
+		$$ a_2(\theta) = \expect_{\theta_1, \theta_2} X_1^2 = \sum\limits_{k = 0}^{+\infty} k^2\theta_1 \tfrac{e^{-1}}{k!}
+		+ \sum\limits_{k = 0}^{+\infty} k^2(1 - \theta_1)\tfrac{e^{-\theta_2}\theta_2^k}{k!}
+		= \theta_1 \cdot(1 + 1^2) + (1 - \theta_1)\cdot(\theta_2 + \theta_2^2)
+		= 2\theta_1 + (1 - \theta_1)\cdot(\theta_2 + \theta_2^2). $$
+		
+		Далее для упрощения записи будем опускать обозначение аргумента у $ a_1 $ и $ a_2 $.
+		Выразим $ \theta_2 $ из первого равенства:
+		$$ \tfrac{a_1 - \theta_1}{1 - \theta_1} = \theta_2. $$
+		Аналогично преобразуем второе равенство и подставим в него выражение для $ \theta_2 $:
+		$$ \tfrac{a_2 - 2\theta_1}{1 - \theta} = \theta_2 + \theta_2^2, $$
+		$$ \tfrac{a_2 - 2\theta_1}{1 - \theta} = \tfrac{a_1 - \theta_1}{1 - \theta_1} 
+		+ \left(\tfrac{a_1 - \theta_1}{1 - \theta_1}\right)^2. $$
+		Умножая на $ (1 - \theta_1)^2 $ получаем
+		$$  (a_2 - 2\theta_1)(1 - \theta_1) = (a_1 - \theta_1)(1 - \theta_1) + (a_1 - \theta_1)^2, $$
+		$$  a_2 + \theta_1(-a_2-2) + 2\theta_1^2 = a_1 + a_1^2 + \theta_1(-a_1 - 1 - 2a_1) + 2\theta_1^2, $$
+		$$ \theta_1 = \tfrac{a_2 - a_1 - a_1^2}{1 + a_2 - 3a_1}. $$
+		Подставим в выражение для $ \theta_2 $:
+		$$ \theta_2 = \tfrac{a_1(1 + a_2 - 3a_1) - (a_2 - a_1 - a_1^2)}{(1 + a_2 - 3a_1) - (a_2 - a_1 - a_1^2)}
+		= \tfrac{-2a_1^2-2a_1-a_2+a_1a_2}{(a_1 - 1)^2}. $$
+		Тогда
+		$$ \widehat{\theta_1} = \tfrac{\overline{X^2} - \overline{X} - \overline{X}^2}{1 + \overline{X^2} - 3\overline{X}},
+		\widehat{\theta_2} = \tfrac{-2\overline{X}^2 - 2\overline{X} - \overline{X^2} + \overline{X}\overline{X^2}}
+		{(1 -\overline{X})^2}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 (нормальное распределение)]{inprocessing}
+		
+		Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathcal{N}(\theta, 1) $.
+		Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\sqrt{2\pi}} e^{-\tfrac{(x - \theta)^2}{2}} $.
+		Тогда
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= (2\pi)^{\tfrac{-n}{2}} \cdot e^{-\tfrac{1}{2}\sum\limits_{j = 1}^{n} (x_j - \theta)^2}. $$
+		Для нахождения точки максимума достаточно исследовать 
+		точки минимума функции $ \sum\limits_{j = 1}^{n} (x_j - \theta)^2 $.
+		Дифференцируя по $ \theta $ и приравнивая производную к 0, получаем
+		$$ 0 = \sum\limits_{j = 1}^{n} 2(x_j - \theta) = \sum\limits_{j = 1}^{n} 2x_j - 2n\theta, $$
+		$$ \theta = \tfrac{1}{n}\sum\limits_{j = 1}^{n} x_j. $$
+		Таким образом, экстремум достигается в точке $ \theta = \overline{X} $.
+		Поскольку функция $ \sum\limits_{j = 1}^{n} (x_j - \theta)^2 $ является квадратичным многочленом от $ \theta $
+		с положительным старшим коэффициентом, то её экстремум является точкой минимума.
+		
+		Согласно центральной предельное теореме имеем сходимость
+		$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $$
+		Следовательно, оценка асимптотически нормальна для $ \theta $ и асимптотическая дисперсия равна 1.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 (экспоненциальное распределение)]{inprocessing}	
+		
+		Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathrm{E}(\tfrac{1}{\theta}) $,
+		где $ \theta > 0 $.
+		Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\theta} e^{-\tfrac{x}{\theta}} $ при $ x \geqslant 0 $.
+		Тогда
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= \tfrac{1}{\theta^n} \cdot e^{-\tfrac{\sum\limits_{j = 1}^{n} x_j}{\theta}} $$
+		при $ x_1, \ldots, x_n \geqslant 0 $,
+		и $ f_{\theta}(x_1, \ldots, x_n) = 0 $, если хотя бы одна из координат отрицательна.
+		Для нахождения точек максимума продифференцируем совместную плотность по $ \theta $ при фиксированных $ x_i $:
+		$$ \tfrac{d}{d\theta} f_{\theta}(x_1, \ldots, x_n)
+		= \tfrac{-n}{\theta^{n + 1}}e^{-\sum\limits_{j = 1}^{n} \tfrac{ x_j}{\theta}} 
+		+ \sum\limits_{j = 1}^{n} \tfrac{ x_j}{\theta^{n + 2}}e^{-\sum\limits_{j = 1}^{n} \tfrac{ x_j}{\theta}}
+		= \tfrac{\sum\limits_{j = 1}^{n} x_j - n\theta}{\theta^{n + 2}}e^{-\tfrac{nx}{\theta}}. $$
+		Равенство нулю достигается при $ \theta = \overline{X} $. 
+		Поскольку при больших значениях производная будет отрицательна, а при меньших --- положительна,
+		точка $ \theta = \overline{X} $ является точкой максимума.
+		
+		Математическое ожидание $ X_1 $ равно $ \expect_{\theta} X_1 = \theta $,
+		а дисперсия --- $ \disp_{\theta} X_1 = \theta^2 $. Согласно центральной предельное теореме имеем сходимость
+		$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, \theta^2). $$
+		Следовательно, оценка асимптотически нормальна для $ \theta $ и асимптотическая дисперсия равна $ \theta^2 $.
+		
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 (распределение Пуассона)]{inprocessing}	
+		
+		Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathrm{Poiss}(\theta) $,
+		где $ \theta > 0 $.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+		= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+		= e^{-n\theta}\tfrac{1}{x_1!\ldots x_n!}\theta^{(x_1 + x_2 + \ldots + x_n)}. $$
+		Достаточно найти точки максимума для функции $ e^{n\theta}\theta^{(x_1 + x_2 + \ldots + x_n)} $.
+		Продифференцируем:
+		$$ -ne^{-n\theta}\theta^{(x_1 + x_2 + \ldots + x_n)}
+		+ (x_1 + x_2 + \ldots + x_n)e^{-n\theta}\theta^{(x_1 + x_2 + \ldots + x_n) - 1} 
+		= (-n\theta + x_1 + x_2 + \ldots + x_n)e^{-\tfrac{n}{\theta}}\theta^{(x_1 + x_2 + \ldots + x_n)-1}. $$
+		Производная принимает значение 0 в точке $ \theta = \overline{X} $, положительнапри меньших 
+		значениях и отрицательна при больших, поэтому точка $ \theta = \overline{X} $ является точкой максимума.
+		
+		Матожидание и дисперсия $ X_1 $ равны $ \expect_\theta X_1 = \theta $ и $ \disp_\theta X_1 = \theta^2 $,
+		соответственно. Согласно центральной предельное теореме имеем сходимость
+		$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, \theta^2). $$
+		Следовательно, оценка асимптотически нормальна для $ \theta $ и асимптотическая дисперсия равна $ \theta^2 $.
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 2 (геометрическое распределение)]{inprocessing}
+		
+		Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathrm{Geom}(\theta) $,
+		где $ \theta \in (0, 1) $.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+		= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+		= \theta^n(1 - \theta)^{x_1 + \ldots + x_n - n}. $$
+		Продифференцируем:
+		$$ n\theta^{n - 1}(1 - \theta)^{x_1 + \ldots + x_n - n}
+		- (x_1 + \ldots + x_n - n)\theta^n(1 - \theta)^{x_1 + \ldots + x_n - n - 1} = $$ 
+		$$ = (n(1 - \theta) - (x_1 + \ldots + x_n - n)\theta)\theta^{n - 1}(1 - \theta)^{x_1 + \ldots + x_n - n - 1} = $$
+		$$ = (n - (x_1 + \ldots + x_n)\theta)\theta^{n - 1}(1 - \theta)^{x_1 + \ldots + x_n - n - 1}. $$
+		Нуль достигается в точке $ \theta = \tfrac{1}{\overline{X}} $. Поскольку при меньших значениях производная положительна, а при больших отрицательна, то точка $ \theta = \tfrac{1}{\overline{X}} $ является точкой максимума.
+		
+		Матожидание и дисперсия $ X_1 $ равны $ \expect_\theta X_1 = \tfrac{1}{\theta} $ и $ \disp_\theta X_1 = \tfrac{1 - \theta}{\theta^2} $,
+		соответственно. Согласно центральной предельное теореме имеем сходимость
+		$$ \sqrt{n}(\overline{X} - \tfrac{1}{\theta}) \overunderset{d}{n \to +\infty}{\to} 
+		\eta \sim \mathcal{N}(0, \tfrac{1 - \theta}{\theta^2}). $$
+		Поскольку производная функции $ g(x) = \tfrac{1}{x} $ на интервале $ (0, 1) $ не обращается в 0,
+		то по лемме о асимптотической нормальности имеем
+		$$ \sqrt{n}(\tfrac{1}{\overline{X}} - \theta) \overunderset{d}{n \to +\infty}{\to} 
+		\tilde{\eta} \sim \mathcal{N}(0, \tfrac{1 - \theta}{\theta^2} \cdot \theta^4). $$
+		Таким образом, оценка $ \tfrac{1}{\overline{X}} $ асимптотически нормальна для $ \theta $
+		и имеет асимптотическую дисперсию $ (1 - \theta)\theta^2 $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n \sim \mathrm{R}[\theta_1, \theta_2] $ независимы и одинаково распределены.
+		Они имеют плотности $ f_{\theta_1, \theta_2}(x) = \tfrac{1}{\theta_2 - \theta_1}I(\theta_1 \leqslant x \leqslant \theta_2) $.
+		Найдём оценку методом моментов и оценку максимального правдоподобия.
+		
+		Имеем
+		$$ a_1(\theta) = \expect_{\theta_1, \theta_2} X_1 = \int\limits_{\theta_1}^{\theta_2} \tfrac{u}{\theta_2 - \theta_1}du = \tfrac{\theta_1 + \theta_2}{2}, $$
+		$$ a_2(\theta) = \expect_{\theta_1, \theta_2} X_1^2 = \int\limits_{\theta_1}^{\theta_2} \tfrac{u^2}{\theta_2 - \theta_1}du = \tfrac{\theta_1^2 + \theta_1\theta_2 + \theta_2^2}{3}. $$
+		Отсюда 
+		$$ (2a_1)^2 - 3a_2 = (\theta_1^2 + 2\theta_1\theta_2 + \theta_2^2) - (\theta_1^2 + \theta_1\theta_2 + \theta_2^2)
+		= \theta_1\theta_2. $$
+		Тогда $ \theta_1 $ и $ \theta_2 $ являются корнями уравнения $ \tau^2 - 2a_1\tau + (4a_1^2 - 3a_2) = 0 $.
+		Имеем $ \theta_1 = \tfrac{2a_1 - \sqrt{4a_1^2 - 4(4a_1^2 - 3a_2)}}{2}
+		= a_1 - \sqrt{3(a_2 - a_1^2)} $ и $ \theta_2 = a_1 + \sqrt{3(a_2 - a_1^2)} $
+		(можно отметить, что под знаком корня стоит утроенная дисперсия, и поэтому оба значения $ \theta_1 $ и $ \theta_2 $ будут вещественными).
+		Окончательно, $ \hat{\theta_1} = \overline{X} - \sqrt{3(\overline{X^2} - \overline{X}^2)} $
+		и $ \hat{\theta_2} = \overline{X} + \sqrt{3(\overline{X^2} - \overline{X}^2)} $.
+		
+		Теперь вычислим оценку максимального правдоподобия.
+		Из формулы для плотности имеем
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= \tfrac{1}{(\theta_2 - \theta_1)^n}, $$
+		при всех $ x_i \in [\theta_1, \theta_2] $ и $ f_{\theta}(x_1, \ldots, x_n) = 0 $ иначе.
+		Наибольшее значение достигается для отрезка $ [\theta_1, \theta_2] $ наименьшей длины, 
+		содержащего все точки $ x_i $ (чтобы значение не стало равным 0). Эта ситуация достигается, когда $ \theta_1 = \min\limits_{i = 1\ldots n} X_i = X_{(1)} $
+		и $ \theta_2 = \max\limits_{i = 1\ldots n} X_i = X_{(n)} $.
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 4]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ распределены с плотностью $ f_\theta(x) = e^{-(x - \theta)}I(x \geqslant \theta) $.
+		
+		Найдём оценку методом моментов.
+		Имеем
+		$$ a_1(\theta) = \expect X_1 = \int\limits_{\theta}^{+\infty} ue^{-(u - \theta)}du 
+		= \int\limits_{0}^{+\infty} (s + \theta)e^{-s}ds = \left.-se^{-s}\right|_{0}^{+\infty} + \int\limits_{0}^{+\infty} e^{-s}ds
+		+ \int\limits_{0}^{+\infty} \theta e^{-s}ds = \theta + 1. $$
+		Тогда $ \theta = a_1(\theta) - 1 $ или $ \hat{\theta} = \overline{X} - 1 $.
+		
+		Вычислим оценку максимального правдоподобия.
+		Из формулы для плотности имеем
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= e^{x_1 + \ldots + x_n - n\theta} \cdot \prod_{j = 1}^{n} I(x_j \geqslant \theta). $$
+		Наибольшее значение достигается при наибольшем $ \theta $ таком, что для всех $ j $ 
+		выполнены неравенства $ x_j \geqslant \theta $, то есть при $ \theta = \min\limits_{j = 1\ldots n} X_i = X_{(1)} $.
+		
+		Чтобы проверить асимптотическую нормальности вычислим функцию распределения $$ Y = \sqrt{n}(X_{(1)} - \theta): $$
+		$$ F_{{Y}, \theta}(x) = \prob_\theta(\sqrt{n}(X_{(1)} - \theta) \leqslant x)
+		= \prob_\theta(X_{(1)}\leqslant \tfrac{x}{\sqrt{n}} + \theta) = $$ 
+		$$ = 1 - \prob_\theta(X_{(1)} > \tfrac{x}{\sqrt{n}} + \theta) 
+		= 1 - \prob_\theta(X_{1} > \tfrac{x}{\sqrt{n}} + \theta, X_2 > \tfrac{x}{\sqrt{n}} + \theta, \ldots, 
+		X_n > \tfrac{x}{\sqrt{n}} + \theta) = $$ 
+		$$ = 1 - \prob(X_{1} > \tfrac{x}{\sqrt{n}} + \theta)^n 
+		= 1 - \left(\int\limits_{\tfrac{x}{\sqrt{n}} + \theta}^{+\infty} e^{-(u - \theta)}I(u \geqslant \theta)du\right)^n
+		= 1 - \left(\int\limits_{\max(\tfrac{x}{\sqrt{n}} + \theta, \theta)}^{+\infty} e^{-(u - \theta)}du\right)^n = $$
+		$$ = 1 - \left(\int\limits_{\max(\tfrac{x}{\sqrt{n}}, 0)}^{+\infty} e^{-s}ds\right)^n =
+		1 - e^{-n \cdot \max(\tfrac{x}{\sqrt{n}}, 0) }. $$
+		При $ n \to +\infty $ получаем, что
+		$$ \lim\limits_{n \to +\infty} F_{X(1), \theta}(x)
+		= \definefuntwo
+		{0}{x \leqslant 0}
+		{1}{x > 0} $$
+		Таким образом, функции распределения $ F_{Y, \theta} $ сходятся к функции распределения константы $ 0 $
+		и оценка $ X_{(1)} $ не является асимптотически нормальной.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5 (уравнение правдоподобия для первой <<нулёвки>>)]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n \sim \mathrm{Cauchy}(\theta) $ независимы и имеют распределение Коши.
+		Плотность имеет вид $ f_{\theta}(x) = \tfrac{1}{\pi((x - \theta)^2 + 1)} $.
+		Тогда
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= \tfrac{1}{\pi^n} \cdot \tfrac{1}{\prod_{j = 1}^{n} ((x_j - \theta)^2 + 1)}. $$
+		Продифференцируем по $ \theta $ и приравняем к 0, чтобы получить уравнение правдоподобия:
+		$$ \tfrac{1}{\pi^n} \cdot \sum\limits_{j = 1}^{n} \left( \tfrac{2x_j - 2\theta}{((x_j - \theta)^2 + 1)^2} \cdot \prod_{k \neq j} \tfrac{1}{(x_k - \theta)^2 + 1} \right) = 0. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5 (уравнение правдоподобия для второй <<нулёвки>>)]{inprocessing}
+		
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+		= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+		= \prod\limits_{j = 1}^{n} \left(\theta_1 \cdot \tfrac{e^{-1}}{x_j!} + (1 - \theta_1)\cdot \tfrac{e^{-\theta_2}\theta_2^{x_j}}{x_j!} \right) = $$
+		$$ = \tfrac{1}{x_1!\ldots x_n!} \cdot \prod\limits_{j = 1}^{n} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_j}). $$
+		
+		Выпишем частные производные от $ g(\theta) = \prod\limits_{j = 1}^{n} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_j}) $ по $ \theta_i $ и приравняем их к 0, чтобы получить уравнения правдоподобия.
+		$$ \left.\tfrac{\partial g}{\partial \theta_1}\right|_{\theta_1, \theta_2} 
+		= \sum\limits_{j = 1}^{n} \left( (e^{-1} - e^{-\theta_2}\theta_2^{x_j}) 
+		\cdot \prod\limits_{i \neq j} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_i}) \right) = 0, $$
+		$$ \left.\tfrac{\partial g}{\partial \theta_2}\right|_{\theta_1, \theta_2} 
+		= (1 - \theta_1)\sum\limits_{j = 1}^{n} \left( e^{-\theta_2}(-\theta_2^{x_j} + x_j\theta_2^{x_j - 1}) 
+		\cdot \prod\limits_{i \neq j} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_i}) \right) = 0. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задачи к семинару 25.09]{inprocessing}
+		
+		Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathcal{N}(a, \sigma^2) $.
+		Имеем формулу для плотности $ f_{a, \sigma}(x) = \tfrac{1}{\sqrt{2\pi}\sigma} e^{-\tfrac{(x - a)^2}{2\sigma^2}} $.
+		Тогда
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= (2\pi)^{\tfrac{-n}{2}} \cdot \tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}. $$
+		
+		Далее будем исследовать точки максимума логарифма 
+		$$ M(a, \sigma) = \ln 
+		\left(\tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}\right )
+		= -n\ln \sigma - \tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+		
+		Вычислим частные производные по $ a $ и $ \sigma $. Тогда
+		производную функции $ g(\theta) = M(a_0(\theta), \sigma_0(\theta)) $ можно будет вычислить
+		по формуле 
+		$$ \left.\tfrac{dg}{d\theta}\right|_{\theta}
+		= \left.\tfrac{\partial M}{\partial a}\right|_{a_0(\theta)}\left.\tfrac{da_0}{d\theta}\right|_{\theta}
+		+ \left.\tfrac{\partial M}{\partial\sigma}\right|_{\sigma_0(\theta)}\left.\tfrac{d\sigma_0}{d\theta}\right|_{\theta}. $$
+		Имеем
+		$$ \left.\tfrac{\partial M}{\partial a}\right|_{a}
+		= -\tfrac{1}{\sigma^2}\left(na - \sum\limits_{j = 1}^{n} x_j\right), $$
+		$$ \left.\tfrac{\partial M}{\partial\sigma}\right|_{\sigma}
+		= -\tfrac{n}{\sigma} + \tfrac{1}{\sigma^3}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+		
+		Пусть $ a_0(\theta) = \theta, \sigma_0(\theta)^2 = \theta^2, \theta \neq 0 $.
+		Тогда производная приобретает вид 
+		$$ \left.\tfrac{dg}{d\theta}\right|_{(\theta)} = 
+		-\tfrac{1}{\theta^2}\left(n\theta - \sum\limits_{j = 1}^{n} x_j\right)
+		-\tfrac{n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{j = 1}^{n} (x_j - \theta)^2 = $$
+		$$ = -\tfrac{n}{\theta} - \tfrac{x_1 + \ldots + x_n}{\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}
+		= -\tfrac{n\theta^2 + \theta(x_1 + \ldots + x_n) - (x_1^2 + \ldots + x_n^2)}{\theta^3}. $$
+		Значение 0 достигается в корнях квадратного многочлена: $ \theta = \tfrac{-\overline{X} \pm \sqrt{\overline{X}^2 + 4\overline{X^2}}}{2} $. Одно из значений отрицательно, а другое положительно, 
+		поэтому при переходе через каждый корень производная меняет знак с положительного на отрицательный и, следовательно,
+		обе точки являются точками максимума.
+		
+		Пусть $ a_0(\theta) = 0, \sigma_0(\theta) = \sqrt{\theta}, \theta > 0 $.
+		Тогда производная приобретает вид 
+		$$ \left.\tfrac{dg}{d\theta}\right|_{(\theta)} = 
+		\tfrac{1}{2\sqrt{\theta}}\left(-\tfrac{n}{\sqrt{\theta}} + \tfrac{1}{\theta\sqrt{\theta}}
+		\sum\limits_{j = 1}^{n} x_j^2\right) = $$
+		$$ = \tfrac{-n\theta + x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+		Значение 0 достигается в точке $ \theta = \overline{X^2} $. При меньших $ \theta $ производная положительна, 
+		а при больших --- отрицательна. Следовательно, $ \theta = \overline{X^2} $ --- точка максимума.
+		
+		Пусть $ a_0(\theta) = \theta, \sigma_0(\theta) = \sqrt{\theta}, \theta > 0 $.
+		Тогда производная приобретает вид 
+		$$ \left.\tfrac{dg}{d\theta}\right|_{(\theta)} = 
+		-\tfrac{1}{\theta}\left(n\theta - \sum\limits_{j = 1}^{n} x_j\right) +
+		\tfrac{1}{2\sqrt{\theta}}\left(-\tfrac{n}{\sqrt{\theta}} + \tfrac{1}{\theta\sqrt{\theta}}\sum\limits_{j = 1}^{n} (x_j - \theta)^2\right) = $$
+		$$ = \tfrac{-n\theta^2 - n\theta + x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+		Значение 0 достигается в корнях квадратного многочлена: $ \theta = \tfrac{-1 \pm \sqrt{1 + 4\overline{X^2}}}{2} $.
+		Поскольку между корнями производная принимает положительные значения, то точкой максимума является 
+		только больший корень: $ \theta = \tfrac{-1 + \sqrt{1 + 4\overline{X^2}}}{2} $.
+		
+	\end{problem}
+	
+	
+	\section{Информация Фишера}
+	
+	\begin{problem}[Задача 1 (<<нулёвка>>)]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, 1) $ независимы и одинаково распределены.
+		Вычислим информация Фишера.
+		Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\sqrt{2\pi}} e^{-\tfrac{(x - \theta)^2}{2}} $.
+		Тогда
+		$$ L(x_1, \ldots, x_n, \theta) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= (2\pi)^{\tfrac{-n}{2}} \cdot e^{-\tfrac{1}{2}\sum\limits_{j = 1}^{n} (x_j - \theta)^2}. $$
+		Далее,
+		$$ \left.\tfrac{\partial}{\partial \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+		= -\tfrac{1}{2} \cdot 2 \cdot \sum\limits_{i = 1}^{n}(\theta - x_j)
+		= -n\theta + \sum\limits_{i = 1}^{n} x_j. $$
+		Окончательно,
+		$$ \expect_{\theta}\left(-n\theta + \sum\limits_{i = 1}^{n} X_j\right)^2
+		= n^2\theta^2 - 2n\theta \cdot \expect_\theta\left(\sum\limits_{i = 1}^{n} X_j\right)
+		+ \expect_\theta\left(\sum\limits_{i = 1}^{n} X_j\right)^2 = $$ 
+		$$ = n^2\theta^2 - 2n\theta \cdot n\theta
+		+ n^2\theta^2 + n = n. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 ($ \mathcal{N}(\theta, \theta^2) $)]{inprocessing}
+		
+		Вычислим информацию Фишера для независимых одинаково распределённых случайных величин
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta^2) $.
+		Из вычислений выше имеем 
+		$$ \left.\tfrac{\partial}{\partial \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+		= -\tfrac{n}{\theta} - \tfrac{x_1 + \ldots + x_n}{\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}. $$
+		Тогда
+		$$ \left.\tfrac{\partial^2}{\partial^2 \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+		= \tfrac{n}{\theta^2} + 2 \cdot \tfrac{x_1 + \ldots + x_n}{\theta^3} - 3\cdot \tfrac{x_1^2 + \ldots + x_n^2}{\theta^4}. $$
+		Отсюда
+		$$ \expect_\theta\left(\left.\tfrac{\partial}{\partial \theta} 
+		\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)^2
+		= \expect_\theta\left(-\left.\tfrac{\partial^2}{\partial^2 \theta} 
+		\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)
+		= \expect_\theta(-\tfrac{n}{\theta^2} - 2 \cdot \tfrac{X_1 + \ldots + X_n}{\theta^3} + 3\cdot \tfrac{X_1^2 + \ldots + X_n^2}{\theta^4}) = $$
+		$$ = -\tfrac{n}{\theta^2} - \tfrac{2n\theta}{\theta^3} + \tfrac{3n(\theta^2 + \theta^2)}{\theta^4}
+		= \tfrac{3n}{\theta^2}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 ($ \mathcal{N}(0, \theta) $)]{inprocessing}
+		
+		Вычислим информацию Фишера для независимых одинаково распределённых случайных величин
+		$ X_1, \ldots, X_n \sim \mathcal{N}(0, \theta) $.
+		Из вычислений выше имеем 
+		$$ \left.\tfrac{\partial}{\partial \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+		= -\tfrac{n}{2\theta} + \tfrac{x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+		Тогда
+		$$ \left.\tfrac{\partial^2}{\partial^2 \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+		= \tfrac{n}{2\theta^2} - \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}. $$
+		Отсюда
+		$$ \expect_\theta\left(\left.\tfrac{\partial}{\partial \theta} 
+		\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)^2
+		= \expect_\theta\left(-\left.\tfrac{\partial^2}{\partial^2 \theta} 
+		\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)
+		= \expect_\theta(-АПф\tfrac{n}{2\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}) = $$
+		$$ = -\tfrac{n}{2\theta^2} + \tfrac{n\theta}{\theta^3}
+		= \tfrac{n}{2\theta^2}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 ($ \mathcal{N}(\theta, \theta) $)]{inprocessing}
+		
+		Вычислим информацию Фишера для независимых одинаково распределённых случайных величин
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta) $.
+		Из вычислений выше имеем 
+		$$ \left.\tfrac{\partial}{\partial \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+		= \tfrac{-n}{2}
+		+ \tfrac{-n}{2\theta}
+		+ \tfrac{x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+		Тогда
+		$$ \left.\tfrac{\partial^2}{\partial^2 \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta} 
+		= \tfrac{n}{2\theta^2} - \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}. $$
+		Отсюда
+		$$ \expect_\theta\left(\left.\tfrac{\partial}{\partial \theta} 
+		\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)^2
+		= \expect_\theta\left(-\left.\tfrac{\partial^2}{\partial^2 \theta} 
+		\ln L(X_1, \ldots, X_n, \theta) \right|_{\theta}\right)
+		= \expect_\theta(-\tfrac{n}{2\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}) = $$
+		$$ = -\tfrac{n}{2\theta^2} + \tfrac{n\theta}{\theta^3}
+		= \tfrac{n}{2\theta^2}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3]{inprocessing}	
+		
+		Пусть случайные величины $ X_1, \ldots, X_n \sim \mathrm{Cauchy}(\theta) $ независимы и имеют распределение Коши.
+		Плотность имеет вид $ f_{\theta}(x) = \tfrac{1}{\pi((x - \theta)^2 + 1)} $.
+		Вычислим информацию Фишера.
+		Имеем
+		$$ L(x_1, \ldots, x_n, \theta) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= \tfrac{1}{\pi^n} \cdot \tfrac{1}{\prod_{j = 1}^{n} ((x_j - \theta)^2 + 1)}. $$
+		Далее,
+		$$ \left.\tfrac{\partial}{\partial \theta} \ln L(x_1, \ldots, x_n, \theta)\right|_{\theta}
+		= \left.\tfrac{\partial}{\partial \theta} \left(-n\ln \pi 
+		- \sum\limits_{j = 1}^{n} \ln ((x_j - \theta)^2 + 1) \right) \right|_{\theta}
+		= \sum\limits_{j = 1}^{n} \tfrac{2(x_j - \theta)}{(x_j - \theta)^2 + 1}. $$
+		Имеем
+		$$ \expect_\theta \tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1} 
+		= \int\limits_{-\infty}^{+\infty} \tfrac{2(x_j - \theta)dx_j}{\pi((x_j - \theta)^2 + 1)^2} = 0, $$
+		поскольку подынтегральная функция после сдвига на $ \theta $ становится нечётной.
+		Из независимости для $ j \neq k $ получаем
+		$$ \expect_\theta \tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1} \cdot \tfrac{2(X_k - \theta)}{(X_k - \theta)^2 + 1}
+		= \expect_\theta \tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1} 
+		\cdot \expect_\theta \tfrac{2(X_k - \theta)}{(X_k - \theta)^2 + 1}
+		= 0 \cdot 0 = 0. $$
+		Также получаем
+		$$ \expect_\theta \left(\tfrac{2(X_j - \theta)}{(X_j - \theta)^2 + 1}\right)^2
+		= \int\limits_{-\infty}^{+\infty} \tfrac{4(x_j - \theta)^2dx_j}{\pi((x_j - \theta)^2 + 1)^3}
+		= \int\limits_{-\infty}^{+\infty} \tfrac{4x_j^2dx_j}{\pi(x_j^2 + 1)^3}
+		= \tfrac{8}{\pi} \int\limits_{0}^{+\infty} \tfrac{x_j^2dx_j}{(x_j^2 + 1)^3}
+		= $$
+		$$ = \{x_j = \tg \varphi\}
+		= \tfrac{8}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \sin^2 \varphi \cos^{-2+6-2} \varphi\ d\varphi
+		= \tfrac{8}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \sin^2 \varphi \cos^{2} \varphi\ d\varphi
+		= \tfrac{2}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \sin^2 (2\varphi)\ d\varphi = $$
+		$$ = \tfrac{2}{\pi} \int\limits_{0}^{\tfrac{\pi}{2}} \tfrac{1 - \cos (4\pi)}{2} d\varphi = 
+		\tfrac{2}{\pi} \cdot \tfrac{\pi}{4} = \tfrac{1}{2}. $$
+		Введём обозначение $ g(x, \theta) = \tfrac{2(x - \theta)}{(x - \theta)^2 + 1} $. Тогда
+		$$ \expect_\theta \left(\sum\limits_{j = 1}^{n} g(X_j, \theta)\right)^2
+		= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+		= \tfrac{n}{2} + 0 = \tfrac{n}{2}. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 4а]{inprocessing}
+		
+		Рассмотрим случайные величины с распределением $ \mathrm{E}(\tfrac{1}{\theta}) $,
+		где $ \theta > 0 $.
+		Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\theta} e^{-\tfrac{x}{\theta}} I(x \geqslant 0) $.
+		Тогда
+		$$ L(\theta, x_1, \ldots, x_n) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= \tfrac{1}{\theta^n} \cdot e^{-\tfrac{\sum\limits_{j = 1}^{n} x_j}{\theta}} $$
+		при $ x_1, \ldots, x_n \geqslant 0 $,
+		и $ f_{\theta}(x_1, \ldots, x_n) = 0 $, если хотя бы одна из координат отрицательна.
+		
+		Вычислим информацию Фишера.
+		Имеем
+		$$ \left.\tfrac{\partial}{\partial \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+		= \left.\tfrac{\partial}{\partial \theta} 
+		\left(-n\ln \theta -\tfrac{1}{\theta}\sum\limits_{j = 1}^{n} x_j\right) \right|_{\theta}
+		= -\tfrac{n}{\theta} + \tfrac{1}{\theta^2}\sum\limits_{j = 1}^{n} x_j = \sum\limits_{j = 1}^{n} \tfrac{x_j - \theta}{\theta^2}. $$
+		Обозначим через $ g(x, \theta) = \tfrac{x - \theta}{\theta^2} $.
+		Тогда (в последней формуле при $ j \neq k $)
+		$$ \expect_\theta g(X_j, \theta)^2 
+		= \expect_\theta \left(\tfrac{X_j^2}{\theta^4} - \tfrac{2X_j}{\theta^3} + \tfrac{1}{\theta^2}\right)
+		= \tfrac{\theta^2 + \theta^2}{\theta^4} - \tfrac{2\theta}{\theta^3} + \tfrac{1}{\theta^2} = \tfrac{1}{\theta^2}; $$
+		$$ \expect_\theta g(X_j, \theta) = \expect_\theta \tfrac{X_j - \theta}{\theta^2} = \tfrac{\theta - \theta}{\theta^2} = 0; $$
+		$$ \expect_\theta \left(g(X_j, \theta)g(X_k, \theta)\right) = \expect_\theta g(X_j, \theta)\expect_\theta g(X_k, \theta)
+		= 0 \cdot 0 = 0. $$
+		Далее,
+		$$ \expect_\theta\left(\sum\limits_{j = 1}^{n} \tfrac{x_j - \theta}{\theta^2}\right)^2
+		= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+		= \tfrac{n}{\theta^2} + 0 = \tfrac{n}{\theta^2}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4б]{inprocessing}
+		
+		Рассмотрим случайные величины с распределением $ \mathrm{Geom}(\theta) $,
+		где $ \theta \in (0, 1) $.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+		= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+		= \theta^n(1 - \theta)^{x_1 + \ldots + x_n - n}. $$
+		Вычислим информацию Фишера.
+		Имеем
+		$$ \left.\tfrac{\partial}{\partial \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+		= \left.\tfrac{\partial}{\partial \theta} 
+		\left(n\ln \theta + (- n + \sum\limits_{j = 1}^{n} x_j)\ln (1 - \theta)\right) \right|_{\theta}
+		= \tfrac{n}{\theta} - \tfrac{- n + \sum\limits_{j = 1}^{n} x_j}{1 - \theta}
+		= \tfrac{n}{\theta(1 - \theta)} - \sum\limits_{j = 1}^{n} \tfrac{x_j}{1 - \theta}. $$
+		Обозначим через $ g(x, \theta) = \tfrac{1 - x\theta}{\theta(1 - \theta)} $.
+		Тогда (в последней формуле при $ j \neq k $)
+		$$ \expect_\theta g(X_j, \theta)^2 
+		= \expect_\theta \tfrac{1 - 2X_j\theta + X_j^2\theta^2}{\theta^2(1 - \theta)^2}
+		= \tfrac{1 - 2\tfrac{\theta}{\theta} + \tfrac{\theta^2(2 - \theta)}{\theta^2}}{\theta^2(1 - \theta)^2} 
+		= \tfrac{1 - \theta}{\theta^2(1 - \theta)^2} = \tfrac{1}{\theta^2(1 - \theta)}; $$
+		$$ \expect_\theta g(X_j, \theta) = \expect_\theta \tfrac{1 - X_j\theta}{\theta(1 - \theta)} 
+		= \tfrac{1 - \tfrac{\theta}{\theta}}{\theta^2(1 - \theta)^2} = 0; $$
+		$$ \expect_\theta \left(g(X_j, \theta)g(X_k, \theta)\right) = \expect_\theta g(X_j, \theta)\expect_\theta g(X_k, \theta)
+		= 0 \cdot 0 = 0. $$
+		Далее,
+		$$ \expect_\theta\left(\sum\limits_{j = 1}^{n} \tfrac{x_j - \theta}{\theta^2}\right)^2
+		= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+		= \tfrac{n}{\theta^2(1 - \theta)} + 0 = \tfrac{n}{\theta^2(1 - \theta)}. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 4в]{inprocessing}
+		
+		Рассмотрим случайные величины с распределением $ \mathrm{\Gamma}(\alpha, \tfrac{1}{\theta}) $,
+		где $ \theta > 0, \alpha \leqslant 1 $.
+		Имеем формулу для плотности $ f_{\theta}(x) 
+		= \tfrac{x^{\alpha - 1}}{\Gamma(\alpha)\theta^{\alpha}} e^{-\tfrac{x}{\theta}} I(x \geqslant 0) $.
+		Тогда
+		$$ L(\theta, x_1, \ldots, x_n) = f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= \tfrac{(x_1\ldots x_n)^{\alpha - 1}}{\Gamma(\alpha)^n\theta^n} 
+		\cdot e^{-\tfrac{\sum\limits_{j = 1}^{n\alpha} x_j}{\theta}}. $$
+		Вычислим информацию Фишера и оценку максимального правдоподобия.
+		Имеем
+		$$ \left.\tfrac{\partial}{\partial \theta} 
+		\ln L(x_1, \ldots, x_n, \theta) \right|_{\theta}
+		= \left.\tfrac{\partial}{\partial \theta} 
+		\left((\alpha - 1)\sum\limits_{j = 1}^{n} (\ln x_j) - n\ln \Gamma(\alpha) - n\alpha\ln \theta 
+		+ -\tfrac{1}{\theta}\sum\limits_{j = 1}^{n} x_j\right) \right|_{\theta} = $$ 
+		$$ = - \tfrac{n\alpha}{\theta} + \tfrac{1}{\theta^2}\sum\limits_{j = 1}^{n} x_j
+		= \tfrac{1}{\theta^2}\left(-n\alpha\theta + \sum\limits_{j = 1}^{n} x_j\right)
+		= \sum\limits_{j = 1}^{n} \tfrac{x_j - \alpha\theta}{\theta^2}. $$
+		
+		При $ \theta = \overline{X} $ производная обращается в 0, при меньших значениях положительна,
+		а при больших --- отрицательна. Следовательно, в точке $ \overline{X} $ достигается максимум
+		и $ \overline{X} $ --- оценка максимального правдоподобия.
+		
+		Вычислим матожидание и дисперсию случайной величины $ X_j $.
+		$$ \expect_\theta X_j = \int\limits_{0}^{+\infty} \tfrac{u^\alpha}{\Gamma(\alpha)\theta^{\alpha}} e^{-\tfrac{u}{\theta}}du
+		= \tfrac{\theta}{\Gamma(\alpha)} \int\limits_{0}^{+\infty} s^\alpha e^{-s}ds
+		= \tfrac{\Gamma(\alpha + 1)}{\Gamma(\alpha)} \cdot \theta = \alpha \theta, $$
+		$$ \expect_\theta X_j^2 = \int\limits_{0}^{+\infty} \tfrac{u^{\alpha + 1}}
+		{\Gamma(\alpha)\theta^{\alpha}} e^{-\tfrac{u}{\theta}}du
+		= \tfrac{\theta^2}{\Gamma(\alpha)} \int\limits_{0}^{+\infty} s^{\alpha + 1} e^{-s}ds
+		= \tfrac{\Gamma(\alpha + 2)}{\Gamma(\alpha)} \cdot \theta^2 = \alpha(\alpha + 1) \theta^2. $$
+		
+		
+		Обозначим через $ g(x, \theta) = \tfrac{x_j - \alpha\theta}{\theta^2} $.
+		Тогда (в последней формуле при $ j \neq k $)
+		$$ \expect_\theta g(X_j, \theta)^2 
+		= \expect_\theta \tfrac{X_j^2 - 2X_j\alpha\theta + \alpha^2\theta^2}{\theta^4}
+		= \tfrac{\alpha(\alpha + 1)\theta^2 - 2\alpha^2\theta^2 + \alpha^2\theta^2}{\theta^4} 
+		= \tfrac{\alpha}{\theta^2}; $$
+		$$ \expect_\theta g(X_j, \theta) = \expect_\theta \tfrac{X_j - \alpha\theta}{\theta^2} 
+		= \tfrac{\alpha\theta - \alpha\theta}{\theta^2} = 0; $$
+		$$ \expect_\theta \left(g(X_j, \theta)g(X_k, \theta)\right) = \expect_\theta g(X_j, \theta)\expect_\theta g(X_k, \theta)
+		= 0 \cdot 0 = 0. $$
+		Далее,
+		$$ \expect_\theta\left(\sum\limits_{j = 1}^{n} \tfrac{x_j - \alpha\theta}{\theta^2}\right)^2
+		= \sum\limits_{j = 1}^{n} \expect_\theta g(X_j, \theta)^2 + 2\sum\limits_{j < k} \expect_\theta g(X_j, \theta)g(X_k, \theta)
+		= \tfrac{n\alpha}{\theta^2} + 0 = \tfrac{n\alpha}{\theta^2}. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 5]{inprocessing}
+		
+		Пусть случайные вектора 
+		$ \left(\begin{matrix}
+			X_1 \\
+			Y_1
+		\end{matrix}\right), 
+		\ldots, 
+		\left(\begin{matrix}
+			X_n \\
+			Y_n
+		\end{matrix}\right) $ независимы и таковы, что их компоненты $ X_i, Y_i $ независимы и распределены по закону 
+		$ \mathrm{E}(\tfrac{1}{\theta_1}) $ и $ \mathrm{E}(\tfrac{1}{\theta_2}) $, соответственно.
+		Вычислим информационную матрицу.
+		Поскольку плотности случайных $ X_i $ не зависят от $ \theta_2 $,
+		а плотности $ Y_i $ --- от $ \theta_1 $,
+		то в информационная матрица будет диагональной,
+		а на диагонали будут стоять информации Фишера для соответствующих компонент.
+		Таким образом, матрица имеет вид
+		$$ \left(
+		\begin{matrix}
+			\tfrac{n}{\theta_1^2} & 0 \\
+			0 & \tfrac{n}{\theta_2^2}
+		\end{matrix}
+		\right). $$ 
+		
+	\end{problem}
+	
+	
+	\section{Условные математические ожидания}
+	
+	\begin{problem}[Задача 1а]{inprocessing}
+		
+		Пусть случайные величины $ X, Y, Z $ распределены по закону $ \mathrm{E}(\tfrac{1}{\theta}) $.
+		
+		Предварительно заметим, что в силу независимости и одинаковой распределённости выполнены равенства
+		$$ \expect_\theta X = \expect_\theta Y = \expect_\theta Z = \theta, $$
+		$$ \expect_\theta X^2 = \expect_\theta Y^2 = \expect_\theta Z^2 = 2\theta^2, $$
+		$$ \expect_\theta XY = \expect_\theta YZ = \expect_\theta ZX = \theta^2. $$
+		
+		Вычислим условным математические ожидания.
+		$$ a(X, Y) = \expect_\theta(XY + XZ - Y^2 \mid X, Y)
+		= \expect_\theta(XY\mid X, Y) + \expect_\theta(XZ\mid X, Y) - \expect_\theta(Y^2 \mid X, Y) = $$  
+		$$ = \red{XY + X\expect_\theta(Z) - Y^2} 
+		= \blue{XY - \theta X - Y^2}. $$
+		Далее,
+		$$ b(Y, Z) = \expect_\theta(XY + XZ - Y^2 \mid Y, Z) 
+		= \expect_\theta(X(Y + Z)\mid Y, Z) - Y^2
+		= \red{(Y + Z)\expect_\theta (X) - Y^2} 
+		= \blue{\theta(Y + Z) - Y^2}, $$
+		$$ c(Z, X) = \expect_\theta(XY + XZ - Y^2 \mid Z, X) = \expect_\theta(XY\mid Z, X) + XZ - \expect_\theta(Y^2) = $$ 
+		$$ = \red{X\expect_\theta (Y) + XZ - \expect_\theta(Y^2)}
+		= \blue{\theta X + XZ - 2\theta^2}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б]{inprocessing}
+		
+		Теперь вычислим условные математические ожидания величин $ a, b, c $:
+		$$ a_X(X) = \expect_\theta(a(X, Y) \mid X) 
+		= \expect_\theta\left(XY - Y^2 + X\expect_\theta (Z) \mid X\right) = $$ 
+		$$ = \red{X\expect_\theta(Y) - \expect_\theta(Y^2) +  X\expect_\theta (Z)}
+		= \theta X - 2\theta^2 +  \theta X
+		= \blue{2\theta X - 2\theta^2}. $$
+		
+		$$ a_Y(Y) = \expect_\theta(a(X, Y) \mid Y) = \expect_\theta\left(XY - Y^2 + X\expect_\theta (Z) \mid Y
+		\right) = $$ 
+		$$ = \red{Y\expect_\theta(X) - Y^2 + \expect_\theta(X)\expect_\theta(Z)}
+		= \theta Y - Y^2 +  \theta^2
+		= \blue{\theta Y - Y^2 + \theta^2}. $$
+		
+		$$ b_Y(Y) = \expect_\theta(b(Y, Z) \mid Y) = \expect_\theta\left((Y + Z)\expect_\theta (X) - Y^2 \mid Y\right) = $$ 
+		$$ = \red{\expect_\theta (X)(Y + \expect_\theta(Z)) - Y^2}
+		= \blue{\theta Y - Y^2 + \theta^2}. $$
+		
+		$$ b_Z(Z) = \expect_\theta(b(Y, Z) \mid Z) = \expect_\theta\left((Y + Z)\expect_\theta (X) - Y^2 \mid Z\right) = $$ 
+		$$ = \red{ \expect_\theta (X)(\expect_\theta(Y) + Z) - \expect_\theta(Y^2)}
+		= \blue{ \theta Z - \theta^2 }. $$
+		
+		$$ c_Z(Z) = \expect_\theta(c(Z, X) \mid Z) 
+		= \expect_\theta\left(X\expect_\theta (Y) + XZ - \expect_\theta(Y^2) \mid Z\right) = $$ 
+		$$ = \red{ \expect_\theta (X)\expect_\theta (Y) + \expect_\theta (X) \cdot Z - \expect_\theta(Y^2)}
+		= \theta Z + \theta^2 - 2\theta^2
+		= \blue{\theta Z - \theta^2}. $$
+		
+		$$ c_X(X) = \expect_\theta(c(Z, X) \mid X) 
+		= \expect_\theta\left(X\expect_\theta (Y) + XZ - \expect_\theta(Y^2) \mid X\right) = $$ 
+		$$ = \red{ X\expect_\theta (Y) + X \cdot \expect_\theta (Z) - \expect_\theta(Y^2)}
+		= \blue{ 2\theta X - 2\theta^2}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1в]{inprocessing}
+		
+		Вычислим матожидания $ XY + XZ - Y^2, a, b, c, a_X, a_Y, b_Y, b_Z, c_Z, c_X $ и убедимся, что они совпадают.
+		
+		$$ \expect_\theta(XY + XZ - Y^2) =
+		\expect_\theta(X)\expect_\theta(Y) + \expect_\theta(X)\expect_\theta(Z) - \expect_\theta(Y^2) = $$ 
+		$$ = \theta^2 + \theta^2 - 2\theta^2 = 0. $$
+		
+		$$ \expect_\theta(a(X, Y)) 
+		= \expect_\theta \left(XY - Y^2 + X\expect_\theta (Z) \right)
+		= \expect_\theta(X)\expect_\theta(Y) - \expect_\theta(Y^2)  
+		+ \expect_\theta (X)\expect_\theta (Z) = $$ 
+		$$ = \theta^2 - 2\theta^2 + \theta^2 = 0. $$
+		
+		$$ \expect_\theta(b(Y, Z)) 
+		= \expect_\theta \left((Y + Z)\expect_\theta (X) - Y^2 \right)
+		= \expect_\theta(Y)\expect_\theta(X) + \expect_\theta(Z)\expect_\theta(X) - \expect_\theta(Y^2) = $$ 
+		$$ = \theta^2 + \theta^2 - 2\theta^2 = 0. $$
+		
+		$$ \expect_\theta(c(Z, X)) 
+		= \expect_\theta \left(X\expect_\theta (Y) + XZ - \expect_\theta(Y^2) \right)
+		= \expect_\theta(X)\expect_\theta(Y) + \expect_\theta(X)\expect_\theta(Z) - \expect_\theta(Y^2) = $$ 
+		$$ = \theta^2 + \theta^2 - 2\theta^2 = 0. $$
+		
+		$$ \expect_\theta(a_X(X)) = \expect_\theta(2\theta X - 2\theta^2) 
+		= 2\theta^2 - 2\theta^2 = 0. $$
+		$$ \expect_\theta(a_Y(X)) = \expect_\theta(\theta Y - Y^2 + \theta^2) 
+		= \theta^2 - 2\theta^2 + \theta^2 =  0. $$
+		$$ \expect_\theta(b_Y(X)) = \expect_\theta(\theta Y - Y^2 + \theta^2) 
+		= \theta^2 - 2\theta^2 + \theta^2 = 0. $$
+		$$ \expect_\theta(b_Z(X)) = \expect_\theta(\theta Z - \theta^2 )
+		= \theta^2 - \theta^2 =  0. $$
+		$$ \expect_\theta(c_Z(X)) = \expect_\theta(\theta Z - \theta^2) 
+		= \theta^2 - \theta^2 = 0. $$
+		$$ \expect_\theta(c_X(X)) = \expect_\theta(2\theta X - 2\theta^2) 
+		= 2\theta^2 - 2\theta^2 = 0. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2а (распределение Пуассона)]{inprocessing}
+		
+		Пусть имеются независимые случайные величины $ X_1, \ldots, X_n \sim \mathrm{Poiss}(\theta) $.
+		Вычислим условные математические ожидания.
+		$$ \expect_\theta(X_1 \mid X_1 + \ldots + X_n)
+		= \tfrac{1}{n}\sum\limits_{i = 1}^{n}\expect_\theta(X_i \mid X_1 + \ldots + X_n)
+		= \tfrac{1}{n}\expect_\theta(X_1 + \ldots + X_n \mid X_1 + \ldots + X_n)
+		= \tfrac{\sum\limits_{i = 1}^{n} X_i}{n} = \overline{X}. $$
+		
+		Вычислим $$ \prob_\theta(X_1 = k \mid X_1 + \ldots + X_n = m)
+		= \tfrac{\prob_\theta(X_1 = k, X_2 + \ldots + X_n = m - k)}{\prob_\theta(X_1 + \ldots + X_n = m)}
+		= \tfrac{e^{-\theta}\theta^k}{k!} \cdot \tfrac{e^{-(n - 1)\theta}((n - 1)\theta)^{m - k}}{(m - k)!}
+		\cdot \tfrac{m!}{e^{-n\theta}(n\theta)^m} = $$
+		$$ = \tfrac{m!}{k!(m - k)!} \cdot \left(\tfrac{1}{n}\right)^{k} \cdot \left(\tfrac{n - 1}{n}\right)^{m - k}. $$
+		Отсюда
+		$$ \sum\limits_{k = 0}^{m} k^2 \cdot \tfrac{m!}{k!(m - k)!} \cdot \left(\tfrac{1}{n}\right)^{k} \cdot \left(\tfrac{n - 1}{n}\right)^{m - k}
+		= \tfrac{m}{n} \sum\limits_{k = 1}^{m} k \cdot \tfrac{(m - 1)!}{(k - 1)!(m - k)!} \cdot \left(\tfrac{1}{n}\right)^{k - 1} \cdot \left(\tfrac{n - 1}{n}\right)^{m - k} = $$ 
+		$$ = \tfrac{m}{n}\left.\expect_\theta(X_1 + 1 \mid X_1 + \ldots + X_n)\right|_{X_1 + \ldots + X_n = m - 1}
+		= \tfrac{m}{n}\left(\tfrac{m - 1}{n} + 1\right) = \tfrac{m}{n} + \tfrac{m(m - 1)}{n^2}. $$
+		Поэтому
+		$$ \expect_\theta(X_1^2 \mid X_1 + \ldots + X_n) = \overline{X} + \overline{X}(\overline{X} - \tfrac{1}{n}). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2б (геометрическое распределение)]{inprocessing}	
+		
+		Пусть имеются независимые случайные величины $ X_1, \ldots, X_n \sim \mathrm{Geom}(\theta) $.
+		Вычислим условные математические ожидания.
+		$$ \expect_\theta(X_1 \mid X_1 + \ldots + X_n)
+		= \tfrac{1}{n}\sum\limits_{i = 1}^{n}\expect_\theta(X_i \mid X_1 + \ldots + X_n)
+		= \tfrac{1}{n}\expect_\theta(X_1 + \ldots + X_n \mid X_1 + \ldots + X_n)
+		= \tfrac{\sum\limits_{i = 1}^{n} X_i}{n} = \overline{X}. $$
+		
+		Найдём распределение свёртки геометрических случайных величин:
+		$$ \prob(X_1 + \ldots + X_n = m)
+		= \sum\limits_{x_1 + \ldots + x_n = m} \prod\limits_{i = 1}^{n} \prob(X_i = x_i)
+		= \sum\limits_{x_1 + \ldots + x_n = m} \prod\limits_{i = 1}^{n} \theta(1 - \theta)^{x_i - 1}
+		= \tfrac{(m - 1)!}{(m - n)!(n - 1)!} \theta^n(1 - \theta)^{m - n}. $$
+		
+		Вычислим (для $ m \geqslant k + n - 1 $) условную вероятность
+		$$ \prob_\theta(X_1 = k \mid X_1 + \ldots + X_n = m)
+		= \tfrac{\prob_\theta(X_1 = k, X_2 + \ldots + X_n = m - k)}{\prob_\theta(X_1 + \ldots + X_n = m)} = $$  
+		$$ = \theta(1 - \theta)^{k - 1} \cdot
+		\tfrac{(m - k - 1)!}{(m - k - n + 2)!(n - 2)!} \theta^{n - 1}(1 - \theta)^{m - k - (n - 1)}
+		\cdot
+		\tfrac{(m - n)!(n - 1)!}{(m - 1)!} \tfrac{1}{\theta^n(1 - \theta)^{m - n}} = $$
+		$$ = (C_{m - 1}^{n - 1})^{-1} \cdot C_{m - k - 1}^{n - 2}. $$
+		Отсюда
+		$$ (C_{m - 1}^{n - 1})^{-1} \cdot \sum\limits_{k = 1}^{m - n + 1} k^2 C_{m - k - 1}^{n - 2}
+		= (C_{m - 1}^{n - 1})^{-1} \cdot \sum\limits_{j = n - 2}^{m - 2} (m - 1 - j)^2C_{j}^{n - 2}. $$ 
+		Так как
+		$$ \sum\limits_{j = n - 2}^{m - 2} C_{j}^{n - 2}
+		= 1 + C_{n - 1}^{n - 2} + \ldots + C_{m - 2}^{n - 2}
+		= C_{m - 1}^{n - 1} $$
+		и
+		$$ \sum\limits_{j = n - 2}^{m - 2} (j + 1)C_{j}^{n - 2}
+		= (n - 1)\sum\limits_{j = n - 2}^{m - 2} C_{j + 1}^{n - 1}
+		= (n - 1)C_{m}^{n}, $$
+		а также
+		$$ \sum\limits_{j = n - 2}^{m - 2} (j + 1)^2C_{j}^{n - 2}
+		= \sum\limits_{j = n - 2}^{m - 2} ((j + 2)(j + 1) - (j + 1))C_{j}^{n - 2}
+		= n(n - 1)C_{m + 1}^{n + 1} - (n - 1)C_{m}^{n}, $$
+		то
+		$$ (C_{m - 1}^{n - 1})^{-1} \cdot \sum\limits_{k = 1}^{m - n + 1} k^2 C_{m - k - 1}^{n - 2}
+		= (C_{m - 1}^{n - 1})^{-1} \cdot \left(m^2C_{m - 1}^{n - 1} - 2m(n - 1)C_{m}^{n} + n(n - 1)C_{m + 1}^{n + 1} - (n - 1)C_{m}^{n}\right) = $$
+		$$ =
+		m^2 - \tfrac{2m(n - 1)m}{n} + \tfrac{n(n - 1)m(m + 1)}{n(n + 1)} - \tfrac{m(n - 1)}{n} = $$  $$
+		= \tfrac{m}{n(n + 1)}\left(mn(n + 1) -2m(n - 1)(n + 1) + n(n - 1)(m + 1) - (n - 1)(n + 1)\right) = $$  $$
+		= \tfrac{m}{n(n + 1)} \cdot \left(m(n^2 + n - 2n^2 + 2 + n^2 - n) + n^2 - n	-n^2 + 1 \right)
+		=\tfrac{m(2m - n + 1)}{n(n + 1)}.  $$
+		
+		Тогда условное матождание равно $ g(S_n) = \tfrac{S_n(2S_n -n + 1)}{n(n + 1)} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3]{inprocessing}	
+		
+		Пусть случайная величина $ X $ имеет распределение $ \mathrm{E}(1) $
+		и случайная величина $ Y \mid X $ распределена так же, как $ \exp(X) $.
+		Вычислим совместную плотность для $ (X, Y) $ 
+		и условные матожидания $ \expect(X^2 \mid Y), \expect (X \mid Y) $.
+		
+		Имеем
+		$ f_{Y \mid X}(y \mid x) = xe^{-yx}I(y > 0) $ и $ f_X(x) = e^{-x}I(x > 0) $.
+		Тогда совместная плотность равна $ f_{X, Y}(x, y) = xe^{-x(y + 1)}I(x > 0, y > 0). $
+		
+		Далее,
+		$$ f_{Y}(y) = \int\limits_{-\infty}^{+\infty} xe^{-x(y + 1)}I(x > 0, y > 0)dx
+		= I(y > 0) \cdot \int\limits_{0}^{+\infty} xe^{-x(y + 1)}dx = $$
+		$$ = I(y > 0) \cdot \left(\left.-\tfrac{xe^{-x(y + 1)}}{y + 1}\right|_{x=0}^{+\infty} 
+		+ \int\limits_{0}^{+\infty} \tfrac{e^{-x(y + 1)}}{y + 1}dx \right) = \tfrac{I(y > 0)}{(y + 1)^2}. $$
+		Тогда
+		$$ f_{X \mid Y}(x \mid y) = \tfrac{f_{X, Y}(x, y)}{f_{Y}(y)}
+		= x(y + 1)^2e^{-x(y + 1)}I(x > 0, y > 0). $$
+		Поэтому
+		$$ \expect(X \mid Y)(Y) = \int\limits_{-\infty}^{+\infty} x^2(Y + 1)^2e^{-x(Y + 1)}I(x > 0, Y > 0)dx = $$  $$
+		= (Y + 1)^2I(Y > 0)\int\limits_{0}^{+\infty} x^2e^{-x(Y + 1)}dx
+		= (Y + 1)^2I(Y > 0) \cdot \tfrac{2}{(Y + 1)^3} = \tfrac{2I(Y > 0)}{Y + 1}. $$
+		Вычислим второе условное матожидание:
+		$$ \expect(X^2 \mid Y)(Y) = \int\limits_{-\infty}^{+\infty} x^3(Y + 1)^2e^{-x(Y + 1)}I(x > 0, Y > 0)dx = $$  $$
+		= (Y + 1)^2I(Y > 0)\int\limits_{0}^{+\infty} x^3e^{-x(Y + 1)}dx
+		= (Y + 1)^2I(Y > 0) \cdot \tfrac{6}{(Y + 1)^4} = \tfrac{6I(Y > 0)}{(Y + 1)^2}. $$
+		
+	\end{problem}
+	
+	
+	\section{Полные и достаточные статистики}
+	
+	\begin{problem}[Задача 1а]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathrm{Geom}(\theta) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \prob_\theta(X_i = x_i)
+		= \prod\limits_{i = 1}^{n} \theta(1 - \theta)^{x_i - 1}I(x_i \in \mathbb{Z}_{\geqslant 1}) = $$ 
+		$$ = \theta^n(1 - \theta)^{\sum\limits_{i = 1}^{n} x_i - n} \cdot I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 1}). $$
+		Положим $ g(\theta, T) = \theta^n(1 - \theta)^{T - n} $
+		и $ h(X_1, \ldots, X_n) = I(X_1, \ldots, X_n \in \mathbb{Z}_{\geqslant 1}) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathrm{E}(\tfrac{1}{\theta}) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta} e^{-\tfrac{x_i}{\theta}}I(x_i > 0) = $$ 
+		$$ = \theta^{-n}e^{-\tfrac{1}{\theta}\sum\limits_{i = 1}^{n} x_i} \cdot I(x_1, \ldots, x_n > 0). $$
+		Положим $ g(\theta, T) = \theta^{-n}e^{-\tfrac{T}{\theta}} $
+		и $ h(X_1, \ldots, X_n) = I(X_1, \ldots, X_n > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1в]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathcal{N}(\theta, \theta) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi\theta}} e^{-\tfrac{(x_i - \theta)^2}{2\theta}} = $$ 
+		$$ = \theta^{-\tfrac{n}{2}}e^{-\tfrac{1}{2\theta}\sum\limits_{i = 1}^{n} {x_i^2}}e^{-\tfrac{n\theta}{2}}
+		(2\pi)^{-\tfrac{n}{2}}e^{\sum\limits_{i = 1}^{n} x_i}. $$
+		Положим $ g(\theta, T) = \theta^{-\tfrac{n}{2}}e^{-\tfrac{T}{2\theta}}e^{-\tfrac{n\theta}{2}} $
+		и $ h(X_1, \ldots, X_n) = (2\pi)^{-\tfrac{n}{2}}e^{\sum\limits_{i = 1}^{n} x_i} $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1^2 + \ldots + x_n^2)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n^2 = X_1^2 + \ldots + X_n^2 $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1г]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathcal{N}(\theta, 1) $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}} e^{-\tfrac{(x_i - \theta)^2}{2}} = $$ 
+		$$ = e^{\theta\sum\limits_{i = 1}^{n} x_i} e^{-\tfrac{n\theta^2}{2}}
+		(2\pi)^{-\tfrac{n}{2}}e^{-\tfrac{1}{2}\sum\limits_{i = 1}^{n} x_i^2}. $$
+		Положим $ g(\theta, T) = e^{\theta T} e^{-\tfrac{n\theta^2}{2}} $
+		и $ h(X_1, \ldots, X_n) = (2\pi)^{-\tfrac{n}{2}}e^{-\tfrac{1}{2}\sum\limits_{i = 1}^{n} x_i^2} $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1д]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ имеют распределение $ \mathrm{R}[0, \theta] $.
+		Найдём достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta}I(0 < x_i < \theta) = $$ 
+		$$ = \tfrac{1}{\theta^n}I(X_{(n)} < \theta)I(X_{(1)} > 0). $$
+		Положим $ g(\theta, T) = \tfrac{1}{\theta^n}I(T < \theta) $
+		и $ h(X_1, \ldots, X_n) = I(X_{(1)} > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, \max(x_1, \ldots, x_n))h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ X_{(1)} = \max(X_1, \ldots, X_n) $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2]{inprocessing}
+		
+		Пусть $ T $ --- достаточная статистика.
+		По критерию факторизации имеем $ L(\theta, x_1, \ldots, x_n) = g(\theta, T(x_1, \ldots, x_n)) \cdot h(x_1, \ldots, x_n) $.
+		Тогда 
+		$$ \tfrac{\partial}{\partial\theta} \left(\ln L(\theta, x_1, \ldots, x_n) \right)
+		= \tfrac{\tfrac{\partial}{\partial \theta} g(\theta, T(x_1, \ldots, x_n))}{g(\theta, T(x_1, \ldots, x_n))}. $$
+		По теореме о неявной функции в окрестности всякого $ \theta_0 $, при котором вторая частная производная по $ \theta $
+		не равна 0, можно выразить значения $ \theta $, удовлетворяющие условию
+		$ \tfrac{\partial}{\partial \theta} g(\theta, T(x_1, \ldots, x_n)) = 0 $,
+		как функцию от $ T(x_1, \ldots, x_n) $.
+		Таким образом, оценка максимального правдоподобия выражается через достаточную статистику.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3а]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{Poiss}(\theta) $.
+		Для начала найдём полную и достаточную статистику.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \prob_\theta(X_i = x_i)
+		= \prod\limits_{i = 1}^{n} e^{-\theta} \tfrac{\theta^{x_i}}{x_i!}I(x_i \in \mathbb{Z}_{\geqslant 0}) = $$ 
+		$$ = e^{-n\theta} \tfrac{\theta^{\sum\limits_{i = 1}^{n} x_i}}{\prod\limits_{i = 1}^{n} x_i!}
+		I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 0}). $$
+		Положим $ g(\theta, T) = e^{-n\theta}\theta^{T} $
+		и $ h(X_1, \ldots, X_n) = \tfrac{I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 0})}{\prod\limits_{i = 1}^{n} x_i!} $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ T = X_1 + \ldots + X_n $ достаточна.
+		
+		Проверим, что статистика $ X_1 + \ldots + X_n $ полна.
+		Пусть $ \expect_\theta f(X_1 + \ldots + X_n) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \sum\limits_{m = 0}^{+\infty} \left(f(m)\sum\limits_{x_1 + \ldots + x_n = m}L(\theta, x_1, \ldots, x_n) \right)
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^me^{-n\theta} }{m!}\theta^{m}. $$
+		После домножения на $ e^{-n\theta} $ воспользуемся равенством коэффициентов разложения в ряд Тейлора.
+		Тогда $ f(m) = 0 $ для всех целых $ m $ и, следовательно, $ f $ почти наверное равна 0 
+		(относительно распределения $ \mathrm{Poiss}(\theta) $).
+		
+		Теперь для каждой функции $ a(\theta) $ достаточно подобрать функцию $ f $
+		такую, что $ \expect_\theta(f(T)) = a(\theta) $. Тогда полученная статистика будет иметь наименьшую дисперсию.
+		Значения $ f $ можно определить из разложения в ряд Тейлора, приведённого выше.
+		
+		Пусть $ a(\theta) = e^{-\theta} $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^m }{m!}\theta^{m} = e^{(n - 1)\theta} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(n - 1)^m}{m!}\theta^{m}. $$
+		Отсюда $ f(m) = \left(\tfrac{n - 1}{n}\right)^m $
+		и $ f(X_1 + \ldots + X_n) = \left(\tfrac{n - 1}{n}\right)^{X_1 + \ldots + X_n} $.
+		
+		Пусть $ a(\theta) = e^{-\theta}\tfrac{\theta^n}{n!} $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^m }{m!}\theta^{m} = e^{(n - 1)\theta}\cdot\tfrac{\theta^n}{n!} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(n - 1)^m}{m!n!}\theta^{m+n}
+		= \sum\limits_{m = n}^{+\infty} \tfrac{(n - 1)^{m - n}}{(m - n)!n!}\theta^{m}. $$
+		Отсюда $ f(m) = C_{m}^{n} \left( \tfrac{1}{n} \right)^n \left( \tfrac{n - 1}{n} \right)^{m - n}I(m \geqslant n) $
+		и $$ f(X_1 + \ldots + X_n) 
+		= C_{X_1 + \ldots + X_n}^{n} \left( \tfrac{1}{n} \right)^n \left( \tfrac{n - 1}{n} \right)^{X_1 + \ldots + X_n - n}I(X_1 + \ldots + X_n \geqslant n). $$
+		
+		Пусть $ a(\theta) = \theta^3 $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)\cdot n^m }{m!}\theta^{m} = e^{n\theta}\theta^3 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{n^m}{m!}\theta^{m+3}
+		= \sum\limits_{m = 3}^{+\infty} \tfrac{n^{m - 3}}{(m - 3)!}\theta^{m}. $$
+		Отсюда $ f(m) = \tfrac{m(m-1)(m-2)}{n^3} $
+		и $$ f(X_1 + \ldots + X_n) 
+		= \tfrac{(X_1 + \ldots + X_n)(X_1 + \ldots + X_n-1)(X_1 + \ldots + X_n-2)}{n^3}. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 3б]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{Geom}(\theta) $.
+		Для начала найдём полную и достаточную статистику.
+		
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \prob_\theta(X_i = x_i)
+		= \prod\limits_{i = 1}^{n} \theta(1 - \theta)^{x_i - 1}I(x_i \in \mathbb{Z}_{\geqslant 1}) = $$ 
+		$$ = \theta^n(1 - \theta)^{\sum\limits_{i = 1}^{n} x_i - n}
+		I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 1}). $$
+		Положим $ g(\theta, T) = \theta^n(1- \theta)^{T - n} $
+		и $ h(X_1, \ldots, X_n) = I(x_1, \ldots, x_n \in \mathbb{Z}_{\geqslant 1}) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ T = X_1 + \ldots + X_n $ достаточна.
+		
+		Проверим, что статистика $ X_1 + \ldots + X_n $ полна.
+		Пусть $ \expect_\theta f(X_1 + \ldots + X_n) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \sum\limits_{m = 0}^{+\infty} \left(f(m)\sum\limits_{x_1 + \ldots + x_n = m}L(\theta, x_1, \ldots, x_n) \right)
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!} \theta^n(1 - \theta)^{m - n}. $$
+		После деления на $ \theta^n(1 - \theta)^{-n} $ воспользуемся равенством коэффициентов разложения в ряд Тейлора в точке 1.
+		Тогда $ f(m) = 0 $ для всех целых $ m $ и, следовательно, $ f $ почти наверное равна 0 
+		(относительно распределения $ \mathrm{Geom}(\theta) $).
+		
+		Теперь для каждой функции $ a(\theta) $ достаточно подобрать функцию $ f $
+		такую, что $ \expect_\theta(f(T)) = a(\theta) $. Тогда полученная статистика будет иметь наименьшую дисперсию.
+		Значения $ f $ можно определить из разложения в ряд Тейлора, приведённого выше.
+		
+		Пусть $ a(\theta) = \theta $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!}(1 - \theta)^{mщ} = \tfrac{(1 - \theta)^n}{\theta^{n - 1}} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(m + n - 2)!}{m!(n - 2)!}(1-\theta)^{m + n}
+		= \sum\limits_{m = n}^{+\infty} \tfrac{(m - 2)!}{(m - n)!(n - 2)!}(1-\theta)^{m}. $$
+		Отсюда $ f(m) = \tfrac{n - 1}{m - 1}I(m \geqslant n) $
+		и $ f(X_1 + \ldots + X_n) = \tfrac{n - 1}{X_1 + \ldots + X_n - 1}I(X_1 + \ldots + X_n \geqslant n) $.
+		
+		Пусть $ a(\theta) = \theta(1 - \theta) $.
+		Имеем
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!}(1 - \theta)^{mщ} 
+		= \tfrac{(1 - \theta)^{n + 1}}{\theta^{n - 1}} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(m + n - 2)!}{m!(n - 2)!}(1-\theta)^{m + n + 1}
+		= \sum\limits_{m = n + 1}^{+\infty} \tfrac{(m - 3)!}{(m - n - 1)!(n - 2)!}(1-\theta)^{m}. $$
+		Отсюда $ f(m) = \tfrac{(m - n)(n - 1)}{(m - 1)(m - 2)}I(m \geqslant n + 1) $
+		и $$ f(X_1 + \ldots + X_n) = \tfrac{(X_1 + \ldots + X_n - n)(n - 1)}{(X_1 + \ldots + X_n - 1)(X_1 + \ldots + X_n - 2)}
+		I(X_1 + \ldots + X_n \geqslant n + 1). $$
+		
+		Пусть $ a(\theta) = \theta^2 $.
+		$$ \sum\limits_{m = 0}^{+\infty} \tfrac{f(m)(m - 1)!}{(m - n)!(n - 1)!}(1 - \theta)^{mщ} = \tfrac{(1 - \theta)^n}{\theta^{n - 2}} 
+		= \sum\limits_{m = 0}^{+\infty} \tfrac{(m + n - 3)!}{m!(n - 3)!}(1-\theta)^{m + n}
+		= \sum\limits_{m = n}^{+\infty} \tfrac{(m - 3)!}{(m - n)!(n - 3)!}(1-\theta)^{m}. $$
+		Отсюда $ f(m) = \tfrac{((n - 1)(n - 2))}{(m - 1)(m - 2)}I(m \geqslant n) $
+		и $$ f(X_1 + \ldots + X_n) = \tfrac{((n - 1)(n - 2))}{(X_1 + \ldots + X_n - 1)(X_1 + \ldots + X_n - 2)}
+		I(X_1 + \ldots + X_n \geqslant n). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3в]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{R}[0, \theta] $.
+		Для начала найдём полную и достаточную статистику.
+		
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta}I(0 < x_i < \theta) = $$ 
+		$$ = \tfrac{1}{\theta^n}I(X_{(n)} < \theta)I(X_{(1)} > 0). $$
+		Положим $ g(\theta, T) = \tfrac{1}{\theta^n}I(T < \theta) $
+		и $ h(X_1, \ldots, X_n) = I(X_{(1)} > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, \max(x_1, \ldots, x_n))h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ X_{(1)} = \max(X_1, \ldots, X_n) $ достаточна (мы уже проверяли это в задаче 1д).
+		
+		Вычислим функцию распределения $ X_{(n)} $ и её плотность. Имеем
+		$$ F_{X_{(n)}, \theta}(x) = \prob_{\theta}(X_{(n)} \leqslant x) = \prod\limits_{i = 1}^{n} \prob(X_i \leqslant x)
+		= \tfrac{x^n}{\theta^n} I(0 < x < \theta) + I(x \geqslant \theta), $$
+		$$ f_{X_{(n)}, \theta} = \tfrac{nx^{n - 1}}{\theta^n}I(0 \leqslant x \leqslant \theta). $$
+		
+		Проверим, что статистика $ X_{(n)} $ полна.
+		Пусть $ \expect_\theta f(X_(n)) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \int\limits_{-\infty}^{+\infty} f(x)f_{\theta, X_{(1)}}dx
+		= \int\limits_{0}^{\theta} \tfrac{nf(x)x^{n - 1}dx}{\theta^n}. $$
+		Тогда 
+		$$ 0 = \int\limits_{0}^{\theta} f(x)x^{n - 1}dx $$
+		и после дифференцирования по $ \theta $ получаем $ f(\theta)\theta^{n - 1} $ = 0
+		и $ f(\theta) = 0 $. Таким образом, $ f $ почти наверное равна 0 (относительно распределения $ \mathrm{R}[0, \theta] $)
+		и $ X_{(n)} $ полна.
+		
+		Теперь для каждой функции $ a(\theta) $ достаточно подобрать функцию $ f $
+		такую, что $ \expect_\theta(f(T)) = a(\theta) $. Тогда полученная статистика будет иметь наименьшую дисперсию.
+		
+		Пусть $ a(\theta) = \tfrac{1}{\theta^2} $.
+		Имеем
+		$$ \int\limits_{0}^{\theta} f(x)x^{n - 1}dx = \tfrac{1}{n}\theta^{n - 2}. $$
+		Продифференцируем по $ \theta $.
+		Для $ n \geqslant 3 $ получаем $ f(\theta)\theta^{n - 1} = \tfrac{n - 2}{n}\theta^{n - 3} $
+		и $ f(\theta) = \tfrac{n - 2}{n}\theta^{-2} $.
+		Отсюда $ f(X_{(n)}) = \tfrac{n - 2}{n(X_{(n)})^2} $.
+		
+		Пусть $ a(\theta) = \ln \theta $.
+		Имеем
+		$$ \int\limits_{0}^{\theta} f(x)x^{n - 1}dx = \tfrac{1}{n}\theta^{n}\ln \theta. $$
+		Продифференцируем по $ \theta $.
+		Получаем $ f(\theta)\theta^{n - 1} = \theta^{n - 1}\ln \theta + \tfrac{1}{n}\theta^{n - 1} $
+		и $ f(\theta) = \ln \theta + \tfrac{1}{n} $.
+		Отсюда $ f(X_{(n)}) = \ln X_{(n)} + \tfrac{1}{n} $.
+		
+		Пусть $ a(\theta) = e^{\theta} $.
+		Имеем
+		$$ \int\limits_{0}^{\theta} f(x)x^{n - 1}dx = \tfrac{1}{n}\theta^{n}e^{\theta}. $$
+		Продифференцируем по $ \theta $.
+		Получаем $ f(\theta)\theta^{n - 1} = \theta^{n - 1}e^{\theta} + \tfrac{1}{n}\theta^{n}e^{\theta} $
+		и $ f(\theta) = e^{\theta}(1 + \tfrac{\theta}{n})$.
+		Отсюда $ f(X_{(n)}) = e^{X_{(n)}}(1 + \tfrac{X_{(n)}}{n}) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3г]{inprocessing}	
+		
+		Найдём несмещённые статистики с наименьшей дисперсией для случайных величин $ X_1, \ldots, X_n $,
+		распределённых по закону $ \mathrm{E}(\tfrac{1}{\theta}) $.
+		Для начала найдём полную и достаточную статистику.
+		
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta} e^{-\tfrac{x_i}{\theta}}I(x_i > 0) = $$ 
+		$$ = \theta^{-n}e^{-\tfrac{1}{\theta}\sum\limits_{i = 1}^{n} x_i} \cdot I(x_1, \ldots, x_n > 0). $$
+		Положим $ g(\theta, T) = \theta^{-n}e^{-\tfrac{T}{\theta}} $
+		и $ h(X_1, \ldots, X_n) = I(X_{(1)} > 0) $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, x_1 + \ldots + x_n)h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ S_n = X_1 + \ldots + X_n $ достаточна (мы ранее проверяли это в задаче 1б).
+		
+		Случайная величина $ S_n $ имеет гамма-распределение $ \Gamma(n, \tfrac{1}{\theta}) $
+		и плотность $ f_{S_n, \theta}(x) = \tfrac{x^{n - 1}e^{-\tfrac{x}{\theta}}}{\Gamma(n)\theta^n}I(x > 0) $
+		
+		Проверим, что статистика $ S_n $ полна.
+		Пусть $ \expect_\theta f(S_n) = 0 $.
+		Отсюда для всех $ \theta $ выполнено равенство
+		$$ 0 = \int\limits_{-\infty}^{+\infty} f(x)f_{\theta, X_{(1)}}dx
+		= \int\limits_{0}^{+\infty} \tfrac{f(x)x^{n - 1}e^{-\tfrac{x}{\theta}}dx}{\Gamma(n)\theta^n}. $$
+		Тогда 
+		$$ 0 = \int\limits_{0}^{+\infty} f(x)x^{n - 1}e^{-\tfrac{x}{\theta}}dx. $$
+		В правой части равенства написано преобразование Лапласса от функции $ f(x)x^{n - 1} $
+		(или преобразование Меллина от функции $ f(x)e^{-\tfrac{x}{\theta}} $).
+		Из его инъективности (или инъективности преобразования Меллина) получаем $ f(x)x^{n - 1} = 0 $
+		и $ f(x) = 0 $ (почти наверное). Поэтому статистика $ S_n $ полна.
+		
+		Теперь для каждой функции $ a_k(\theta) = \theta^k $ подберём несмещённую статистику $ T_k $ для $ a_k $,
+		а после вычислим условное матожидание $ \expect_\theta(T_k \mid S_n) $.
+		Имеем $ \expect(X_1^k) = k!\theta^k $ и $ \expect(\tfrac{1}{k!}\overline{X^k}) = \theta^k $.
+		
+		Из симметричности и линейности
+		$$ \expect_\theta (\tfrac{1}{k!}\overline{X^k} \mid S_n)
+		= \tfrac{1}{k!}\expect_\theta(X_1^k \mid S_n)
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot f_{X_1 \mid S_n, \theta}(x \mid y)dx
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot \tfrac{f_{X_1, S_n, \theta}(x, y)}{f_{S_n, \theta}(y)}dx = $$
+		$$ = \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot 
+		\tfrac{f_{S_n \mid X_1, \theta}(y \mid x)f_{X_1,\theta}(x)}{f_{S_n, \theta}(y)}dx
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot 
+		\tfrac{f_{S_{n - 1}, \theta}(y - x)f_{X_1,\theta}(x)}{f_{S_n, \theta}(y)}dx = $$  $$
+		= \tfrac{1}{k!}\int\limits_{-\infty}^{+\infty} x^k \cdot 
+		\tfrac{(y - x)^{n - 2}e^{-\tfrac{y - x}{\theta}}}{\Gamma(n - 1)\theta^{n - 1}}I(y - x > 0) \cdot 
+		\tfrac{e^{-\tfrac{x}{\theta}}}{\theta}I(x > 0) \cdot \tfrac{\Gamma(n)\theta^n}{y^{n - 1}e^{-\tfrac{y}{\theta}}}I(y > 0)dx = $$
+		$$ = \tfrac{n - 1}{k!}\int\limits_{-\infty}^{+\infty} 
+		\tfrac{x^k(y - x)^{n - 2}}{y^{n - 1}}I(y - x > 0) \cdot 
+		I(x > 0) \cdot I(y > 0)dx 
+		= \tfrac{n - 1}{k!}I(y > 0)\int\limits_{0}^{y} x^k(1 - \tfrac{x}{y})^{n - 2}d\tfrac{x}{y} = $$
+		$$ = \tfrac{(n - 1)y^{k}}{k!}I(y > 0)\int\limits_{0}^{1} t^k(1 - t)^{n - 2}dt
+		= \tfrac{(n - 1)y^{k}}{k!}I(y > 0)B(k + 1, n - 1) = $$  $$
+		= y^{k} \cdot \tfrac{(n - 1)k!(n - 2)!}{k!(n + k - 1)!}I(y > 0)
+		= y^{k} \tfrac{(n - 1)!}{(n + k - 1)!}I(y > 0). $$
+		Отсюда $ E_\theta(T_k \mid S_n) = (S_n)^k\tfrac{(n - 1)!}{(n + k - 1)!}I(S_n > 0) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4а]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n $ распределены по закону $ \mathrm{R}[\theta_1, \theta_2] $.
+		Имеем
+		$$ L(\theta, x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} f_{X_i,\theta}(x_i)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\theta_2 - \theta_1}I(\theta_1 < x_i < \theta_2) = $$ 
+		$$ = \tfrac{1}{(\theta_2 - \theta_1)^n}I(X_{(n)} < \theta_2)I(X_{(1)} > \theta_1). $$
+		Положим $ g(\theta, T) = \tfrac{1}{(\theta_2 - \theta_1)^n}I(T_2 < \theta_2)I(T_1 > \theta_1) $,
+		где $ T $ --- вектор,
+		и $ h(X_1, \ldots, X_n) = 1 $.
+		Тогда $ L(\theta, x_1, \ldots, x_n) = g(\theta, (\min(x_1, \ldots, x_n), \max(x_1, \ldots, x_n)))h(x_1, \ldots, x_n) $ 
+		и по критерию факторизации статистика $ (X_{(1)}, X_{(n)}) $ достаточна.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4б]{inprocessing}
+		
+		Докажем неполноту (? см. ниже) статистики из предыдущего пункта, построив ненулевые последовательности $ \{a_n\} $
+		и $ \{b_n\} $ такие, что $ \expect_\theta(a_nX_{(1)} + b_nX_{(n)}) = 0 $ для любого $ \theta = (\theta_1, \theta_2) $.
+		
+		Вычислим функции распределения и плотности величин $ X_{(1)} $ и $ X_{(n)} $.
+		$$ F_{X_{(n)}, \theta}(x) = \prob_{\theta}(X_{(n)} \leqslant x)
+		= \prob_\theta(X_1 \leqslant x, \ldots, X_n \leqslant x) = \prod\limits_{i = 1}^{n} \prob(X_i \leqslant x)
+		= $$
+		$$ = \left(\tfrac{x - \theta_1}{\theta_2 - \theta_1}\right)^nI(\theta_1 < x < \theta_2) + I(x \geqslant \theta_2), $$
+		$$ f_{X_{(n)}, \theta}(x) = \tfrac{n(x - \theta_1)^{n - 1}}{(\theta_2 - \theta_1)^n}I(\theta_1 < x < \theta_2). $$
+		$$ F_{X_{(1)}, \theta}(x) = \prob_{\theta}(X_{(1)} \leqslant x)
+		= 1 - \prob_{\theta}(X_{(1)} > x)
+		= 1 - \prob_\theta(X_1 > x, \ldots, X_n > x) 
+		= $$  $$= 1 - \prod\limits_{i = 1}^{n} (1 -\prob(X_i \leqslant x))
+		= 1 - \left(\tfrac{\theta_2 - x}{\theta_2 - \theta_1}\right)^nI(\theta_1 < x < \theta_2) + I(x \leqslant \theta_1), $$
+		$$ f_{X_{(n)}, \theta}(x) = \tfrac{n(\theta_2 - x)^{n - 1}}{(\theta_2 - \theta_1)^n}I(\theta_1 < x < \theta_2). $$
+		Теперь вычислим их матожидания:
+		$$ \expect_\theta(X_{(n)})
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\int\limits_{\theta_1}^{\theta_2} x(x - \theta_1)^{n - 1}dx
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\left(\int\limits_{\theta_1}^{\theta_2} (x - \theta_1)^{n}dx
+		+ \theta_1\int\limits_{\theta_1}^{\theta_2} (x - \theta_1)^{n - 1}dx\right) = $$
+		$$ = \tfrac{n}{(\theta_2 - \theta_1)^n}\left(\tfrac{(\theta_2 - \theta_1)^{n + 1}}{n + 1}
+		+ \tfrac{\theta_1(\theta_2 - \theta_1)^{n}}{n}\right)
+		= \tfrac{n}{n + 1}\theta_2 + \tfrac{1}{n + 1}\theta_1. $$
+		$$ \expect_\theta(X_{(1)})
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\int\limits_{\theta_1}^{\theta_2} x(\theta_2 - x)^{n - 1}dx
+		= \tfrac{n}{(\theta_2 - \theta_1)^n}\left(-\int\limits_{\theta_1}^{\theta_2} (\theta_2 - x)^{n}dx
+		+ \theta_2\int\limits_{\theta_1}^{\theta_2} (\theta_2 - x)^{n - 1}dx\right) = $$
+		$$ = \tfrac{n}{(\theta_2 - \theta_1)^n}\left(-\tfrac{(\theta_2 - \theta_1)^{n + 1}}{n + 1}
+		+ \tfrac{\theta_2(\theta_2 - \theta_1)^{n}}{n}\right)
+		= \tfrac{n}{n + 1}\theta_1 + \tfrac{1}{n + 1}\theta_2. $$
+		Теперь $ \expect_\theta(a_nX_{(1)} + b_nX_{(n)}) = 0 $ для любого $ \theta = (\theta_1, \theta_2) $
+		тогда и только тогда, когда $ a_nn + b_n = 0 $ и $ a_n + nb_n = 0 $.
+		Таким образом, при $ n = 1 $ получаем $ a_1 = -b_1 $ и при больших $ n $ выполнено $ a_n = b_n = 0 $ (вроде, хотели получить ненулевые $ a_k, b_k $?)
+		
+	\end{problem}
+	
+	
+	\section{Асимптотические и точные доверительные интервалы}
+	
+		\begin{problem}[Задача 1 ($ \mathcal{N}(\theta, \theta) $)]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta) $
+		на основе оценки максимального правдоподобия $ T = \tfrac{-1 + \sqrt{1 + 4\overline{X^2}}}{2} $ (см. домашнюю работу 3).
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ 2\theta^2 $ (см. домашнюю работу 4).
+		Тогда оценка $ \tfrac{-1 + \sqrt{1 + 4\overline{X^2}}}{\sqrt{2}} $ состоятельна для $ \sqrt{2}\theta $.
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}\theta}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}T}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(T(1 - \tfrac{b\sqrt{2}}{\sqrt{n}}) \leqslant \theta
+		\leqslant T(1 - \tfrac{a\sqrt{2}}{\sqrt{n}})) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал $ (T(1 - \tfrac{z_{1 - \frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}), T(1 - \tfrac{z_{\frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}})) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1 ($ \mathcal{N}(\theta, \theta^2) $)]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta^2) $
+		на основе оценки максимального правдоподобия 
+		$ T = \tfrac{-\overline{X} \pm \sqrt{\overline{X}^2 + 4\overline{X^2}}}{2} $ (см. домашнюю работу 3).
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ \tfrac{\theta^2}{3} $ (см. домашнюю работу 4).
+		Тогда оценка $ \tfrac{T}{\sqrt{3}} $ состоятельна для $ \tfrac{\theta}{\sqrt{3}} $.
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{3n}(T - \theta)}{\theta}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{3n}(T - \theta)}{T}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(T(1 - \tfrac{b}{\sqrt{3n}}) \leqslant \theta
+		\leqslant T(1 - \tfrac{a}{\sqrt{3n}})) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал $ (T(1 - \tfrac{z_{1 - \frac{\alpha}{2}}}{\sqrt{3n}}), T(1 - \tfrac{z_{\frac{\alpha}{2}}}{\sqrt{3n}})) $.
+	\end{problem}
+	
+	\begin{problem}[Задача 1 ($ \mathcal{N}(0, \theta) $)]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathcal{N}(0, \theta) $
+		на основе оценки максимального правдоподобия 
+		$ T = \overline{X^2} $ (см. домашнюю работу 3).
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ 2\theta^2 $ (см. домашнюю работу 4).
+		Тогда оценка $ \sqrt{2}T $ состоятельна для $ \sqrt{2}\theta $.
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}\theta}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(T - \theta)}{\sqrt{2}T}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(T(1 - \tfrac{b\sqrt{2}}{\sqrt{n}}) \leqslant \theta
+		\leqslant T(1 - \tfrac{a\sqrt{2}}{\sqrt{n}})) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал $ (T(1 - \tfrac{z_{1 - \frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}), T(1 - \tfrac{z_{\frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}})) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2]{inprocessing}
+		
+		Построим асимптотические доверительные интервалы в модели $ X_1, \ldots, X_n \sim \mathrm{Cauchy}(\theta) $
+		на основе оценки максимального правдоподобия 
+		$ \hat{\theta}_n $.
+		Эта оценка состоятельна для $ \theta $ и имеет асимптотическую дисперсию $ 2 $ (см. домашнюю работу 4).
+		Тогда
+		$$ \prob_\theta(a \leqslant \tfrac{\sqrt{n}(\hat{\theta}_n - \theta)}{\sqrt{2}}
+		\leqslant b) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a), $$
+		$$ \prob_\theta(\hat{\theta}_n - \tfrac{b\sqrt{2}}{\sqrt{n}} \leqslant \theta
+		\leqslant \hat{\theta}_n - \tfrac{a\sqrt{2}}{\sqrt{n}}) \underset{n \to +\infty}{\to} \Phi(b) - \Phi(a). $$
+		
+		Для $ \Phi(b) - \Phi(a) = 1 - \alpha $ положим $ a = z_{\frac{\alpha}{2}}, b = z_{1 - \frac{\alpha}{2}} $.
+		Тогда доверительным будет интервал 
+		$ (\hat{\theta}_n - \tfrac{z_{1 - \frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}, \hat{\theta}_n - \tfrac{z_{\frac{\alpha}{2}}\sqrt{2}}{\sqrt{n}}) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3 (равномерное распределение)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathrm{R}[0, \theta] $.
+		Пусть $ Y_i = \tfrac{X_i}{\theta} \sim \mathrm{R}[0, 1] $.
+		Оценка максимального правдоподобия в модели есть $ X_{(n)} $ (см. домашнюю работу 3).
+		Тогда случайные величины $ \tfrac{X_{(n)}}{\theta} $ и $ Y_{(n)} $ имеют одинаковые распределения.
+		Имеем
+		$ F_{\frac{X_{(n)}}{\theta}, \theta}(x) = F_{Y_{(n)}}(x) = x^nI(0 < x < 1) + I(x > 1) $.
+		Тогда из равенства $ F_{\frac{X_{(n)}}{\theta}, \theta}(q_{\alpha}) = \alpha $
+		получаем $ q_\alpha = \sqrt[n]{\alpha} $.
+		
+		Пусть $ \prob_\theta(q_1 < \tfrac{X_{(n)}}{\theta} < q_2) = 1 - \alpha $.
+		Тогда $ \prob_\theta(\tfrac{X_{(n)}}{q_2} < \theta < \tfrac{X_{(n)}}{q_1}) = 1 - \alpha $
+		и $ q_2^n - q_1^n = 1 - \alpha $.
+		Функция $ l(q_2) = \tfrac{1}{\sqrt[n]{q_2^n - (1 - \alpha)}} - \tfrac{1}{q_2} $ имеет производную
+		$$ \tfrac{1}{q_2^2} - \tfrac{q_2^{n - 1}}{(q_2^n - (1 - \alpha))^{
+				\frac{n + 1}{n}}} = \tfrac{q_2^{n + 1} - (q_2^n - (1 - \alpha))^{
+				\frac{n + 1}{n}}}{q_2^2(q_2^n - (1 - \alpha))^{
+				\frac{n + 1}{n}}}. $$
+		Поскольку $ 1 - \alpha > 0 $, то производная всегда принимает положительные значения
+		и, следовательно, функция $ l $ принимает наименьшее значение при наибольшем допустимом значении $ q_2 $.
+		Поскольку $ 0 \leqslant q_2 \leqslant 1 $, то минимум достигается при $ q_2 = 1 $.
+		Тогда $ q_1 = \sqrt[n]{\alpha} $.
+		Следовательно, точный доверительный интервал имеет вид $ (X_{(n)}, \tfrac{X_{(n)}}{\sqrt[n]{\alpha}}) $.
+		
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3 ($ f_\theta(x) = e^{-(x - \theta)}I(x > \theta) $)]{inprocessing}
+		
+		Пусть случайные величины $ X_1, \ldots, X_n $ распределены
+		с плотностью $ f_\theta(x) = e^{-(x - \theta)}I(x > \theta) $.
+		Пусть $ Y_i = X_i - \theta \sim \mathrm{Exp}(1) $.
+		Оценка максимального правдоподобия в модели есть $ X_{(1)} $ (см. домашнюю работу 3).
+		Тогда случайные величины $ X_{(1)} - \theta $ и $ Y_{(1)} \sim \mathrm{Exp}(n) $ имеют одинаковые распределения.
+		
+		Пусть $ \prob_\theta(q_1 < X_{(1)} - \theta < q_2) = 1 - \alpha $.
+		Тогда $ \prob_\theta(X_{(1)} - q_2 < \theta < X_{(1)} - q_1) = 1 - \alpha $
+		и $ (1 - e^{-nq_2}) - (1 - e^{-nq_1}) = 1 - \alpha. $
+		Отсюда $ 1 - \alpha = e^{-nq_1} - e^{-nq_2} = e^{-nq_1}(1 - e^{-n(q_2 - q_1)}) $.
+		Тогда наименьшее значение разности $ q_2 - q_1 $ достигается при наименьшем возможном $ q_1 $,
+		то есть при $ q_1 = 0 $. В этом случае $ q_2 = -\tfrac{1}{n}\ln \alpha $ (поскольку $ \alpha < 0 $, то $ q_2 $ будет положительным).
+		
+		Точный доверительный интервал будет иметь вид 
+		$ (X_{(1)} + \tfrac{1}{n}\ln \alpha, X_{(1)}) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4 ($ \mathcal{N}(\theta, \theta) $)]{inprocessing}
+		
+		Построим точный доверительный интервал для $ \theta > 0 $ в случае 
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta) $ на основе $ \overline{X} $.
+		Имеем $ \tfrac{X_i - \theta}{\sqrt{\theta}} \sim \mathcal{N}(0, 1) $
+		и $ \tfrac{(\overline{X} - \theta)\sqrt{n}}{\sqrt{\theta}} \sim \mathcal{N}(0, 1) $.
+		
+		Имеем $$ \prob_{\theta}(-z_{1 - \frac{\alpha}{2}} < \tfrac{(\overline{X} - \theta)\sqrt{n}}{\sqrt{\theta}}
+		< z_{1 - \frac{\alpha}{2}}) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob_{\theta}(-\tfrac{\sqrt{\theta}}{\sqrt{n}}z_{1 - \frac{\alpha}{2}} < \overline{X} - \theta
+		< \tfrac{\sqrt{\theta}}{\sqrt{n}}z_{1 - \frac{\alpha}{2}}) = 1 - \alpha, $$
+		$$ \prob_{\theta}((\overline{X} - \theta)^2
+		< \tfrac{\theta}{n}z_{1 - \frac{\alpha}{2}}^2) = 1 - \alpha, $$
+		Корни уравнения $ (\overline{X} - \theta)^2 = \tfrac{\theta}{n}z_{1 - \frac{\alpha}{2}}^2 $
+		относительно $ \theta $ равны 
+		$$ \overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{2n} \pm 
+		\tfrac{1}{2}\sqrt{\left(2\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^2 - 4\overline{X}^2}. $$
+		Тогда точный доверительный интервал есть
+		$$ \left(
+		\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{2n} - 
+		\tfrac{1}{2}\sqrt{\left(2\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^2 - 4\overline{X}^2},
+		\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{2n} + 
+		\tfrac{1}{2}\sqrt{\left(2\overline{X} + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^2 - 4\overline{X}^2}
+		\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4 ($ \mathcal{N}(\theta, \theta^2) $)]{inprocessing}
+		
+		Построим точный доверительный интервал для $ \theta $ в случае 
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta, \theta^2) $ на основе $ \overline{X} $.
+		Имеем $ \tfrac{X_i - \theta}{\theta} \sim \mathcal{N}(0, 1) $
+		и $ \tfrac{(\overline{X} - \theta)\sqrt{n}}{\theta} \sim \mathcal{N}(0, 1) $.
+		
+		Имеем (для $ \theta > 0 $) $$ \prob_{\theta}(-z_{1 - \frac{\alpha}{2}} < \tfrac{(\overline{X} - \theta)\sqrt{n}}{\theta}
+		< z_{1 - \frac{\alpha}{2}}) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob_{\theta}(-\tfrac{\theta}{\sqrt{n}}z_{1 - \frac{\alpha}{2}} < \overline{X} - \theta
+		< \tfrac{\theta}{\sqrt{n}}z_{1 - \frac{\alpha}{2}}) = 1 - \alpha, $$
+		$$ \prob_{\theta}\left(\overline{X}\left(1 - \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1} < \theta
+		< \overline{X}\left(1 + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1} \right) = 1 - \alpha, $$
+		Тогда точный доверительный интервал есть
+		$$ \left(
+		\overline{X}\left(1 - \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1},
+		\overline{X}\left(1 + \tfrac{z_{1 - \frac{\alpha}{2}}^2}{n}\right)^{-1}
+		\right). $$
+		
+	\end{problem}
+	
+	
+	\section{Распределения, связанные с нормальным распределением}
+	
+	\begin{problem}[Задача 1а (о плотности распределения Стьюдента)]{inprocessing}
+		
+		Пусть $ X \sim \mathcal{N}(0, 1) $ и $ Y \sim \chi^2_n $.
+		Положим $ \xi = \tfrac{X}{\sqrt{\frac{Y}{n}}} $.
+		Вычислим условную плотности $ \xi $ при условии $ Y $.
+		При фиксированном $ Y = y_0 $ плотность $ \xi $
+		равна плотности случайной величины $ \tfrac{X}{\sqrt{\frac{y_0}{n}}} $,
+		то есть равна $ \sqrt{\tfrac{y_0}{2\pi n}}e^{-\tfrac{y_0z^2}{2n}} $.
+		Тогда $ f_{\xi \mid Y}(z \mid y) = \sqrt{\tfrac{y}{2\pi n}}e^{-\tfrac{yz^2}{2n}} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б (о плотности распределения Стьюдента)]{inprocessing}
+		
+		Вычислим условные матожидания $ \expect(\xi \mid Y) $ и $ \expect(\xi^2 \mid Y) $.
+		
+		Имеем
+		$$ \expect(\xi \mid Y) = \int\limits_{-\infty}^{+\infty} z\sqrt{\tfrac{Y}{2\pi n}}e^{-\tfrac{Yz^2}{2n}}dz = 0, $$
+		так как подынтегральная функция нечётна по $ z $.
+		
+		Далее,
+		$$ \expect(\xi^2 \mid Y) = \int\limits_{-\infty}^{+\infty} z^2\sqrt{\tfrac{Y}{2\pi n}}e^{-\tfrac{Yz^2}{2n}}dz = 0 + \tfrac{Y}{n} = \tfrac{Y}{n}, $$
+		как дисперсия нормально распределённой случайной величины с параметрами $ 0 $ и $ \tfrac{Y}{n} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1а (о плотности распределения Стьюдента)]{inprocessing}
+		
+		Вычислим плотность величины $ \xi $.
+		Имеем
+		$$ f_\xi(z) = \int\limits_{-\infty}^{+\infty} f_{\xi \mid Y}(z \mid y)f_{Y}(y)dy
+		= \int\limits_{-\infty}^{+\infty} \sqrt{\tfrac{y}{2\pi n}}e^{-\tfrac{yz^2}{2n}} 
+		\cdot \tfrac{y^{\frac{n}{2} - 1}}{\Gamma(\frac{n}{2})2^{\frac{n}{2}}}e^{-\tfrac{y}{2}}dy = $$
+		$$ = \int\limits_{-\infty}^{+\infty} \tfrac{y^{\frac{n - 1}{2}}}{\Gamma(\frac{n}{2})2^{\frac{n}{2}}} \cdot
+		\sqrt{\tfrac{1}{2\pi n}}e^{-\tfrac{y}{2}(1 + \tfrac{z^2}{n})}dy =
+		$$  $$ = \tfrac{\Gamma(\frac{n + 1}{2})}{\Gamma(\frac{n}{2})2^{\frac{n}{2}}}
+		\cdot 2^{\frac{n + 1}{2}}\left(1 + \tfrac{z^2}{n}\right)^{-\frac{n + 1}{2}}
+		\cdot \tfrac{1}{\sqrt{2\pi n}} \cdot I, $$
+		где $ I $ --- интеграл по всему $ \mathbb{R} $ от плотности случайной величины с распределением $ \mathrm{\Gamma}(\tfrac{n + 1}{2}, \tfrac{1}{2} + \tfrac{z^2}{2n}) $. Тогда $ I = 1 $ и
+		$$ f_\xi(z) = \tfrac{\Gamma(\frac{n + 1}{2})}{\Gamma(\frac{n}{2})\sqrt{\pi n}}
+		\left(1 + \tfrac{z^2}{n}\right)^{-\frac{n + 1}{2}}. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2а (распределение Фишера-Снедекора)]{inprocessing}
+		
+		Пусть $ X \sim \xi_n^2 = \mathrm{\Gamma}(\tfrac{n}{2}, 2) $
+		и $ Y \sim \xi_n^2 = \mathrm{\Gamma}(\tfrac{m}{2}, 2) $ независимы.
+		Положим $ \xi = \tfrac{\sfrac{X}{n}}{\sfrac{Y}{m}} $.
+		
+		Найдём условную плотность $ \xi $ при условии $ Y $.
+		При $ Y = y $ величина $ \xi = \tfrac{X}{\sfrac{yn}{m}} $ имеет распределение 
+		$ \mathrm{\Gamma}(\tfrac{n}{2}, \tfrac{2m}{yn}) $
+		и плотность $ \tfrac{z^{\frac{n}{2} - 1}(yn)^{\frac{n}{2}}}{\Gamma(\frac{n}{2})(2m)^{\frac{n}{2}}}e^{-\tfrac{zyn}{2m}}I(z > 0) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2б (распределение Фишера-Снедекора)]{inprocessing}
+		
+		Найдём плотность $ \xi $.
+		Имеем
+		$$ f_{\xi}(z) = \int\limits_{-\infty}^{+\infty} f_{\xi \mid Y}(z \mid y)f_{Y}(y)dy
+		= \int\limits_{-\infty}^{+\infty} \tfrac{z^{\frac{n}{2} - 1}(yn)^{\frac{n}{2}}}{\Gamma(\frac{n}{2})(2m)^{\frac{n}{2}}}e^{-\tfrac{zyn}{2m}}
+		\cdot \tfrac{y^{\frac{m}{2} - 1}}{\Gamma(\frac{m}{2})2^{\frac{m}{2}}}e^{-\tfrac{y}{2}}I(z > 0)I(y > 0)dy = $$
+		$$ \tfrac{z^{\frac{n}{2} - 1}n^{\frac{n}{2}}}{B(\frac{n}{2},\frac{m}{2})(2m)^{\frac{n}{2}}}
+		\cdot 2^{\frac{n + m}{2}} \cdot \left(1 + \tfrac{zn}{m}\right)^{-\frac{n + m}{2}}I(z > 0)
+		\cdot \int\limits_{-\infty}^{+\infty} \tfrac{y^{\frac{(n + m)}{2} - 1}}
+		{\Gamma(\frac{n + m}{2})2^{\frac{n + m}{2}} \cdot \left(1 + \tfrac{zn}{m}\right)^{-\frac{n + m}{2}}}
+		e^{-\tfrac{y}{2}(1 + \tfrac{zn}{m})}I(y > 0)dy = $$
+		$$ = 2^{\frac{m}{2}}z^{\tfrac{n}{2} - 1} \cdot \tfrac{n^{\frac{n}{2}}m^{\frac{m}{2}}}{B(\frac{n}{2}, \frac{m}{2})} 
+		\cdot (m + zn)^{-\frac{n + m}{2}}I(z > 0). $$
+		Интеграл в предпоследней строчке равен 1, как интеграл от плотности случайной величины по $ \mathbb{R} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2в (распределение Фишера-Снедекора)]{inprocessing}
+		
+		Найдём $ \expect \xi $ и $ \expect \xi^2 $.
+		Предварительно для случайной величины $ T $ с распределением $ \mathrm{\Gamma}(\alpha, \beta) $
+		вычислим $ \expect T^s $.
+		Имеем
+		$$ \expect T^s = \int\limits_{-\infty}^{+\infty} \tfrac{t^{s + \alpha - 1}}{\Gamma(\alpha)\beta^{\alpha}}e^{-\tfrac{x}{\beta}}
+		= \tfrac{\Gamma(s + \alpha)}{\Gamma(\alpha)} \cdot \beta^{s} \int\limits_{-\infty}^{+\infty} \tfrac{t^{s + \alpha - 1}}{\Gamma(s + \alpha)\beta^{s + \alpha}}e^{-\tfrac{x}{\beta}} = \tfrac{\Gamma(s + \alpha)}{\Gamma(\alpha)} \cdot \beta^{s}. $$
+		
+		Теперь
+		$$ \expect \xi = \expect \tfrac{mX}{nY} = \tfrac{m}{n} \expect X \cdot \expect \tfrac{1}{Y}
+		= \tfrac{m}{n} \cdot \tfrac{\Gamma(\frac{n}{2} + 1)}{\Gamma(\frac{n}{2})} \cdot \tfrac{\Gamma(\frac{m}{2} - 1)}{\Gamma(\frac{m}{2})} = \tfrac{mn}{n(m -2)} = \tfrac{m}{m - 2}. $$
+		и матожидание будет конечным при $ m > 2 $.
+		
+		Далее,
+		$$ \expect \xi^2 = \expect \tfrac{m^2X^2}{n^2Y^2} = \tfrac{m^2}{n^2} \expect X^2 \cdot \expect \tfrac{1}{Y^2}
+		= \tfrac{m^2}{n^2} \cdot \tfrac{\Gamma(\frac{n}{2} + 2)}{\Gamma(\frac{n}{2})} \cdot \tfrac{\Gamma(\frac{m}{2} - 2)}{\Gamma(\frac{m}{2})} = \tfrac{m^2n(n + 2)}{n^2(m - 4)(m - 2)} = \tfrac{m^2(n + 2)}{n(m - 4)(m - 2)}. $$
+		и матожидание будет конечным при $ m > 4 $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3 ]{inprocessing}
+		
+		Пусть $ X_n \sim \mathcal{N}(0, 1) $ и $ Y_m \sim \mathcal{N}(0, 1) $ --- последовательности попарно независимых
+		(между последовательностями тоже) случайных величин.
+		Положим $ \tilde{X}_n = \tfrac{1}{n}\sum\limits_{i = 1}^{n} X_i^2 $, 
+		$ \tilde{Y}_m = \tfrac{1}{m}\sum\limits_{i = 1}^{m} Y_i^2 $
+		и $ \xi_{m}^{(n)} = \tfrac{\tilde{X}_n}{\tilde{Y}_n} \sim F_{n, m} $.
+		Тогда $ \expect Y_i^2 = 1 $ и по закону больших чисел $ \tilde{Y}_m \overunderset{\prob}{m \to +\infty}{\to} 1 $.
+		По лемме Слуцкого
+		$ \xi_{m}^{(n)} = \tilde{X}_n \cdot \tfrac{1}{\tilde{Y}_m} \overunderset{d}{m \to +\infty}{\to} \tilde{X}_n $.
+		
+		Пусть $ Z \sim \mathcal{N}(0, 1) $ --- ещё одна случайная величина, независимая с $ Y_m $.
+		Положим $ \eta_m = \tfrac{Z}{\sqrt{\tilde{Y}_m}} \sim t_m $.
+		Выше было показано, что $ \tilde{Y} \overunderset{\prob}{m \to +\infty}{\to} 1 $.
+		Тогда $ \sqrt{\tilde{Y}_m} \overunderset{\prob}{m \to +\infty}{\to} 1 $
+		и снова по лемме Слуцкого
+		$$ \eta_m = Z \cdot \tfrac{1}{\sqrt{\tilde{Y}_m}} \overunderset{d}{m \to +\infty}{\to} Z. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_x, \sigma^2) $
+		и $ Y_1, \ldots, Y_m \sim \mathcal{N}(\theta_y, \sigma^2) $.
+		Построим точный доверительный интервал для $ \theta_x - \theta_y $ на основе
+		оценки
+		$$ \tfrac{\overline{X} - \overline{Y}}{\sqrt{\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2
+				+ \sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2}}. $$
+		Положим $ S^2 = \tfrac{\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2
+			+ \sum\limits_{i = 1}^{n} (-Y_i + \overline{Y})^2}{n + m - 2} $.
+		Случайная величина $ (\overline{X} - \overline{Y}) - (\theta_x - \theta_y) $
+		имеет распределение $ \mathcal{N}(0, \sigma^2(\tfrac{1}{n} + \tfrac{1}{m})) $.
+		Тогда случайная величина
+		$ \tfrac{(\overline{X} - \overline{Y}) - (\theta_x - \theta_y)}{S\sqrt{\frac{1}{n} + \frac{1}{m}}} $
+		имеет распределение Стьюдента $ t_{n + m - 2} $.
+		Имеем 
+		$$ \prob\left(t_{\frac{\alpha}{2}} < \tfrac{(\overline{X} - \overline{Y}) - (\theta_x - \theta_y)}{S\sqrt{\frac{1}{n} + \frac{1}{m}}} < t_{1 - \frac{\alpha}{2}} \right) = 1 - \alpha. $$
+		Тогда
+		$$ \prob\left( (\overline{X} - \overline{Y}) - t_{1 - \frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}} < (\theta_x - \theta_y) < (\overline{X} - \overline{Y}) - t_{\frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}} \right) = 1 - \alpha $$
+		и доверительный интервал есть
+		$$ \left((\overline{X} - \overline{Y}) - t_{1 - \frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}},
+		(\overline{X} - \overline{Y}) - t_{\frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}} \right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5а ($ \mathcal{N}(0, \theta) $)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(0, \theta) $.
+		Построим точный доверительный интервал на основе оценки максимального правдоподобия
+		$ T = \overline{X^2} $ (см. домашнюю работу 3).
+		Поскольку случайные величины $ \tfrac{X_i}{\sqrt{\theta}} $ имеют стандартное нормальное распределение,
+		то случайная величина $ \tfrac{nT}{\theta} $ имеет $ \chi^2_n $-распределение.
+		Обозначим через $ c_{\alpha, n} $ --- квантиль уровня $ \alpha $ 
+		для функции распределения случайной величины с распределением $ \chi^2_n $.
+		Тогда
+		$$ \prob\left(c_{1- \frac{\alpha}{2}, n} < \tfrac{nT}{\theta} < c_{\frac{\alpha}{2}, n} \right) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob\left(\tfrac{nT}{c_{\frac{\alpha}{2}, n}} < \theta < \tfrac{nT}{c_{1 - \frac{\alpha}{2}, n}} \right) = 1 - \alpha $$
+		и точный доверительный интервал есть 
+		$$ \left(\tfrac{nT}{c_{\frac{\alpha}{2}, n}}, \tfrac{nT}{c_{1- \frac{\alpha}{2}, n}}\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5б ($ \mathcal{N}(\theta_1, \theta) $)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \theta) $.
+		Построим точный доверительный интервал на основе оценки максимального правдоподобия (для $ \theta $):
+		$ T = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X}) $ (см. вычисление после решений задач,
+		где $ a = \theta_1 $ и $ \theta = \sigma^2 $).
+		Поскольку случайные величины $ Y_i = \tfrac{X_i - \theta_1}{\sqrt{\theta}} $ имеют стандартное нормальное распределение,
+		то случайная величина 
+		$$ \sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2
+		= \sum\limits_{i = 1}^{n} \left(\tfrac{X_i - \theta_i}{\sqrt{\theta}} - 
+		\tfrac{\overline{X} - \theta_i}{\sqrt{\theta}}\right)^2
+		= \tfrac{\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}{\theta} = \tfrac{nT}{\theta} $$ 
+		имеет $ \chi^2_{n - 1} $-распределение.
+		Обозначим через $ c_{\alpha, n} $ --- квантиль уровня $ \alpha $ 
+		для функции распределения случайной величины с распределением $ \chi^2_n $.
+		Тогда
+		$$ \prob\left(c_{1- \frac{\alpha}{2}, n - 1} < \tfrac{nT}{\theta} < c_{\frac{\alpha}{2}, n - 1} \right) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob\left(\tfrac{nT}{c_{\frac{\alpha}{2}, n - 1}} < \theta < \tfrac{nT}{c_{\frac{1 - \alpha}{2}, n - 1}} \right) = 1 - \alpha $$
+		и точный доверительный интервал есть 
+		$$ \left(\tfrac{nT}{c_{\frac{\alpha}{2}, n - 1}}, \tfrac{nT}{c_{1- \frac{\alpha}{2}, n - 1}}\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5в ($ \mathcal{N}(\theta_1, \theta) $)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n, Y \sim \mathcal{N}(\theta_1, \theta) $.
+		Построим аналог точного доверительного интервала для $ Y $.
+		Случайная величина $ \overline{X} - Y $ имеет распределение $ \mathcal{N}(0, \tfrac{n + 1}{n}\theta) $,
+		а случайные величины $ X_i - \overline{X} = (X_i - Y) - (\overline{X} - Y) $ --- распределение $ \mathcal{N}(0, \tfrac{n - 1}{n}\theta) $.
+		Тогда следующая случайная величина имеет распределение Стьюдента $ t_{n - 1} $:
+		$$ \tfrac{\sqrt{\frac{n}{(n + 1)\theta}}(\overline{X} - Y)}
+		{\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} \frac{n}{(n - 1)\theta}(X_i - \overline{X})^2}}
+		= \tfrac{\sqrt{n - 1}}{\sqrt{n + 1}}T, $$
+		где $ T = \tfrac{\overline{X} - Y}
+		{\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}} $.
+		Теперь
+		$$ \prob\left(c_{1- \frac{\alpha}{2}, n - 1} < \tfrac{\sqrt{n - 1}}{\sqrt{n + 1}} \cdot \tfrac{\overline{X} - Y}
+		{\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}} < c_{\frac{\alpha}{2}, n - 1} \right) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob
+		\left(
+		\overline{X} - c_{\frac{\alpha}{2}, n - 1} \tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}
+		< Y < 
+		\overline{X} - c_{1 - \frac{\alpha}{2}, n - 1} \tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}
+		\right) 
+		= 1 - \alpha $$
+		и точный доверительный интервал есть 
+		$$ \left(
+		\overline{X} - c_{\frac{\alpha}{2}, n - 1}\tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}, 
+		\overline{X} - c_{1 - \frac{\alpha}{2}, n - 1}\tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}
+		\right) . $$
+		
+	\end{problem}
+	
+	\begin{problem}[Вычисление ОМП для $ \mathcal{N}(a, \sigma^2) $]{inprocessing}
+		
+		Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathcal{N}(a, \sigma^2) $.
+		Имеем формулу для плотности $ f_{a, \sigma}(x) = \tfrac{1}{\sqrt{2\pi}\sigma} e^{-\tfrac{(x - a)^2}{2\sigma^2}} $.
+		Тогда
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= (2\pi)^{\tfrac{-n}{2}} \cdot \tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}. $$
+		
+		Далее будем исследовать точки максимума логарифма 
+		$$ M(a, \sigma) = \ln 
+		\left(\tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}\right )
+		= -n\ln \sigma - \tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+		
+		Вычислим частные производные по $ a $ и $ \sigma $:
+		$$ \left.\tfrac{\partial M}{\partial a}\right|_{a}
+		= -\tfrac{1}{\sigma^2}\left(na - \sum\limits_{j = 1}^{n} x_j\right), $$
+		$$ \left.\tfrac{\partial M}{\partial\sigma}\right|_{\sigma}
+		= -\tfrac{n}{\sigma} + \tfrac{1}{\sigma^3}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+		Тогда приравнивая их к 0, получаем $ a = \tfrac{1}{n}\sum\limits_{i = 1}^{n} x_i $ и $ \hat{a} = \overline{X} $,
+		а также $ \sigma^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (x_i - a)^2 $, 
+		откуда $ \hat{\sigma} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2} $.
+		
+	\end{problem}
+	
+	
+	\section{Критерии отклонения гипотез. Критерий Неймана-Пирсона}
+	
+	\begin{problem}[Задача 1 ]{inprocessing}
+		
+		Пусть нулевая гипотеза $ H_0 $ состоит в том, что $ X_1 \sim \mathrm{R}[0, 1]$,
+		а альтернатива $ H_1 $ заключается в том, что $ X_1 $ имеем функцию распределения 
+		$ F_{X_1}(x) = \sin(\tfrac{\pi x}{2})I(0 < x < 1) + I(x \geqslant 1) $.
+		
+		Построим наиболее мощный критерий и вычислим мощность.
+		
+		Теперь $ \tfrac{L_1(x_1)}{L_0(x_1)} = \tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2}) $
+		и неравенство $ \tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2}) > c_\alpha $
+		выполнено  тогда и только тогда,
+		когда $ x_1 < \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi} $.
+		Поэтому
+		$$ \alpha = \prob_{0}(\tfrac{L_1(x_1)}{L_0(x_1)} > c_\alpha)
+		= \prob_0(x_1 < \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi})
+		= \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi}. $$
+		Отсюда $ c_\alpha = \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}) $.
+		Таким образом, если $ \tfrac{L_1(x_1)}{L_0(x_1)} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}) $,
+		то нулевая гипотеза отклоняется.
+		
+		Вычислим мощность критерия.
+		$$ \prob_{1}(\tfrac{L_1(x_1)}{L_0(x_1)} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}))
+		= \prob_{1}(\tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}))
+		= \prob_{1}(\tfrac{\pi x_1}{2} < \tfrac{\pi \alpha}{2})
+		= \prob_{1}(x_1 < \alpha)
+		= \sin(\tfrac{\pi \alpha}{2}). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 (почему возникает достаточная статистика)]{inprocessing}
+		
+		По критерию факторизации для достаточной статистики $ T $ и некоторых функций $ g(\theta, t) $ и $ h(x_1, \ldots, x_n) $ 
+		имеется равенство $ L(\theta, x_1, \ldots, x_n) = g(\theta, t)h(x_1, \ldots, x_n) $.
+		При решении задач используется критерий Неймана-Пирсона,
+		в построении которого участвует функция 
+		$$ \tfrac{L(s, X_1, \ldots, X_n)}{L(s_0, X_1, \ldots, X_n)}
+		= \tfrac{g(s, T)h(X_1, \ldots, X_n)}{g(s_0, T)h(X_1, \ldots, X_n)}
+		= \tfrac{g(s, T)}{g(s_0, T)}. $$
+		Тогда неравенство $ \tfrac{g(s, T)}{g(s_0, T)} > c_\alpha $ равносильно некоторому неравенству для $ T $.
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 2аб ($ \mathrm{Exp}(1), \mathrm{Exp}(\tfrac{1}{s}) $)]{inprocessing}
+		
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathrm{Exp}(1) $.
+		Альтернативной является гипотеза о распределении $ \mathrm{Exp}(\tfrac{1}{s}) $.
+		Если $ X_1, \ldots, X_n \sim \mathrm{Exp}(\tfrac{1}{s}) $,
+		то $ \overline{X} \sim \mathrm{\Gamma}(n, \tfrac{s}{n}) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} e^{-x_i}I(X_{(1)} > 0); $$
+		$$ L_1(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} s^{-1}e^{-s^{-1}x_i}I(X_{(1)} > 0). $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= s^{-n}e^{-(s^{-1} -1)\sum\limits_{i = 1}^{n} x_i}. $$
+		Отсюда
+		$$ \alpha = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha + n\ln s). $$
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}). $$
+		Поэтому $ \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}} = \gamma_{n, \frac{1}{n}, \alpha} $,
+		где $ \gamma_{n, \frac{1}{n}, \alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathrm{\Gamma}(n, \tfrac{1}{n}) $-распределения.
+		Тогда $ c_\alpha = s^ne^{(1-s^{-1})\gamma_{n, \frac{1}{n}, \alpha}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha - n\ln s)
+		= \prob_{1}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}) = $$
+		$$ = \prob_{1}(\overline{X} < \gamma_{n, \frac{1}{n}, \alpha})
+		= \int\limits_{0}^{\gamma_{n, \frac{1}{n}, \alpha}} \tfrac{n^nx^{n - 1}}{\Gamma(n)}e^{nx}dx. $$
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(\overline{X} > \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}). $$
+		Поэтому $ \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}} = \gamma_{n, \frac{1}{n}, 1 - \alpha} $,
+		где $ \gamma_{n, \frac{1}{n}, 1- \alpha} $ --- квантиль уровня $ 1-\alpha $
+		для $ \mathrm{\Gamma}(n, \tfrac{1}{n}) $-распределения.
+		Тогда $ c_\alpha = s^ne^{(1-s^{-1})\gamma_{n, \frac{1}{n}, 1-\alpha}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha - n\ln s)
+		= \prob_{1}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}) = $$
+		$$ = \prob_{1}(\overline{X} > \gamma_{n, \frac{1}{n}, \alpha})
+		= 1 - \int\limits_{0}^{\gamma_{n, \frac{1}{n}, 1 - \alpha}} \tfrac{n^nx^{n - 1}}{\Gamma(n)}e^{nx}dx. $$
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(\overline{X}) = 1 $, $ \disp_0(\overline{X}) = \tfrac{1}{n} $.
+		Тогда $ \sqrt{n}(\overline{X} - 1) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < 1 + \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2аб ($ \mathcal{N}(0, 1), \mathcal{N}(s, 1) $)]{inprocessing}
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathcal{N}(0, 1) $.
+		Альтернативной является гипотеза о распределении $ \mathcal{N}(s, 1) $.
+		Если $ X_1, \ldots, X_n \sim \mathcal{N}(s, 1) $,
+		то $ \overline{X} \sim \mathcal{N}(s, \tfrac{1}{n}) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}}e^{-\tfrac{x_i^2}{2}}; $$
+		$$ L_1(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}}e^{-\tfrac{(x_i - s)^2}{2}}. $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= e^{\tfrac{2s\sum\limits_{i = 1}^{n} x_i - ns^2}{2}}. $$
+		Отсюда
+		$$ \beta = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(2s\overline{X} - s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{0}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}). $$
+		
+		Если $ s > 0 $, то
+		$$ \alpha = \prob_{0}(\overline{X} > \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn}). $$
+		Поэтому $ \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn} = \tfrac{z_{1-\alpha}}{\sqrt{n}} $,
+		где $ z_{\alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathcal{N}(0, 1) $-распределения.
+		Тогда $ c_\alpha = e^{\sqrt{n}sz_{1 - \alpha} - \frac{ns^2}{2}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta(s) = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(2s\overline{X}-s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{1}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}) = $$
+		$$ = \prob_{1}(\overline{X} > \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn})
+		= 1 - \Phi(\sqrt{n}(\tfrac{z_{1 - \alpha}}{\sqrt{n}} - s))
+		= 1 - \Phi(z_{1 - \alpha} - \sqrt{n}s). $$
+		
+		Если $ s < 0 $, то
+		$$ \alpha = \prob_{0}(\overline{X} < \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn}). $$
+		Поэтому $ \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn} = \tfrac{z_{\alpha}}{\sqrt{n}} $,
+		где $ z_{\alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathcal{N}(0, 1) $-распределения.
+		Тогда $ c_\alpha = e^{\sqrt{n}sz_{\alpha} - \frac{ns^2}{2}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(2s\overline{X}-s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{1}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}) = $$
+		$$ = \prob_{1}(\overline{X} < \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn})
+		= \Phi(\sqrt{n}(\tfrac{z_{\alpha}}{\sqrt{n}} - s))
+		= \Phi(z_{\alpha} - \sqrt{n}s). $$
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(\overline{X}) = 0 $, $ \disp_0(\overline{X}) = \tfrac{1}{n} $.
+		Тогда $ \sqrt{n}\overline{X} \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 2аб ($ \mathrm{Poiss}(1), \mathrm{Poiss}(s) $)]{inprocessing}
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathrm{Poiss}(1) $.
+		Если $ X_1, \ldots, X_n \sim \mathrm{Poiss}(s) $,
+		то $ n\overline{X} \sim \mathrm{Poiss}(ns) $.
+		Альтернативной является гипотеза о распределении $ \mathrm{Poiss}(s) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+		= e^{-n}\tfrac{1}{x_1!\ldots x_n!}; $$
+		$$ L_1(s, x_1, \ldots, x_n)
+		= e^{-ns}\tfrac{1}{x_1!\ldots x_n!}s^{(x_1 + x_2 + \ldots + x_n)}. $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= e^{n(1 - s)}s^{x_1 + x_2 + \ldots + x_n}. $$
+		Отсюда
+		$$ \alpha = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{0}(n\overline{X}\ln s < c_\alpha + n(s - 1)). $$
+		
+		Если $ s > 1 $, то
+		$$ \alpha = \prob_{0}(n\overline{X} < \tfrac{c_\alpha + n(s - 1)}{\ln s}). $$
+		Поэтому $ \tfrac{c_\alpha + n(s - 1)}{\ln s} = p_{s, \alpha} $,
+		где $ p_{n, \alpha} $ --- квантиль уровня $ \alpha $
+		для распределения $ \mathrm{Poiss}(n) $.
+		Тогда $ c_\alpha = p_{s, \alpha}\ln s - n(s - 1) $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{1}(n\overline{X}\ln s < c_\alpha + n(s - 1)) = $$
+		$$ = \prob_{1}(n\overline{X} < \tfrac{c_\alpha + n(s - 1)}{\ln s})
+		= 1 - F_{ns}(p_{s, \alpha}), $$
+		где $ F_{ns} $ --- функция распределения для случайной величины с распределением $ \mathrm{Poiss}(ns) $.
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(n\overline{X} > \tfrac{c_\alpha + n(s - 1)}{\ln s}). $$
+		Поэтому $ \tfrac{c_\alpha + n(s - 1)}{\ln s} = p_{n, 1-\alpha} $,
+		где $ p_{n, \alpha} $ --- квантиль уровня $ \alpha $
+		для распределения $ \mathrm{Poiss}(n) $.
+		Тогда $ c_\alpha = p_{s, 1-\alpha}\ln s - n(s - 1) $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{1}(n\overline{X}\ln s < c_\alpha + n(s - 1)) = $$
+		$$ = \prob_{1}(n\overline{X} > \tfrac{c_\alpha + n(s - 1)}{\ln s})
+		= 1 - F_{ns}(p_{s, 1-\alpha}), $$
+		где $ F_{ns} $ --- функция распределения для случайной величины с распределением $ \mathrm{Poiss}(ns) $.
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(n\overline{X}) = n $, $ \disp_0(n\overline{X}) = n $.
+		Тогда $ \sqrt{n}(\overline{X} - n) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < n + \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \theta_2) $.
+		
+		Пусть нулевая гипотеза состоит в том, что $ \theta_1 = 0 $,
+		а альтернатива заключается в том, что $ \theta_1 \neq 0 $.
+		Построим критерий на основе $ g(\theta_1, X_1, \ldots, X_n) = \tfrac{\overline{X} - \theta_1}
+		{\sqrt{\frac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}}. $
+		Тогда при фиксированном $ \theta_1 $ случайная величина $ g\sqrt{n} $ имеет распределение $ t_{n - 1} $.
+		Тогда
+		$$ \prob_{0}(q_{n - 1, \frac{\alpha}{2}} < g\sqrt{n} < q_{n - 1, 1 - \frac{\alpha}{2}}) = \alpha $$
+		и
+		$$ \prob_{0}(\tfrac{q_{n - 1, \frac{\alpha}{2}}}{\sqrt{n}} < g < \tfrac{q_{n - 1, 1 - \frac{\alpha}{2}}}{\sqrt{n}}) = \alpha. $$
+		Критерий уровня $ 1 - \alpha $ будет состоять в отклонении нулевой гипотезы при
+		$ |g(0, X_1, \ldots, X_n)| > \tfrac{t_{n - 1, 1 - \frac{\alpha}{2}}}{\sqrt{n}} $.
+		
+		Пусть теперь нулевая гипотеза состоит в том, что $ \theta_2 = 1 $,
+		а альтернатива утверждает обратное.
+		Построим критерий на основе 
+		$ h(X_1, \ldots, X_n) = \sum\limits_{i = 1}^{n} (X_i - \overline{X})^2. $
+		Тогда при фиксированном $ \theta_2 $ случайная величина $ \tfrac{h}{(n - 1)\theta_2} $
+		имеет распределение $ \chi^2_{n - 1} $.
+		В предположении $ \theta_2 = 1 $ имеем
+		$$ \prob_{0}(\tfrac{h}{n - 1} > c_{n - 1, \alpha}) = 1 - \alpha. $$
+		Критерий уровня $ \alpha $ будет состоять в отклонении нулевой гипотезы при
+		$ h(0, X_1, \ldots, X_n) > (n - 1)c_{n - 1, \alpha} $.	
+		
+	\end{problem}
+	
+	
+	\section{Байесовские оценки}
+	
+	\begin{problem}[Задача 1а]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta, 1) $ и $ \theta \sim \mathcal{N}(\mu, 1) $.
+		Вычислим апостериорную плотность $ \theta $.
+		Имеем
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{\frac{1}{\sqrt{2\pi}}e^{-\frac{(t - \mu)^2}{2}}\prod\limits_{i = 1}^{n} 
+			\tfrac{1}{\sqrt{2\pi}}e^{-\frac{(x_i - t)^2}{2}}}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)} = $$
+		$$ = C(x_1, \ldots, x_n, \mu)e^{-\frac{t^2 - 2t\mu}{2}-\frac{\sum\limits_{i = 1}^{n}(x_i - t)^2}{2}} 
+		= C(x_1, \ldots, x_n, \mu)
+		e^{-\tfrac{1}{2}\left((n + 1)t^2 - 2t\sum\limits_{i = 1}^{n} x_i - 2t\mu + \sum\limits_{i = 1}^{n} x_i^2\right)} = $$ 
+		$$ = \tilde{C}(x_1, \ldots, x_n, \mu)e^{-\tfrac{n + 1}{2}\left(t - \frac{1}{n + 1}\sum\limits_{i = 1}^{n} x_i - \frac{\mu}{n + 1}\right)^2}.$$
+		Тогда $ \pi_{\theta \mid X_1, \ldots, X_n} $ --- плотность случайной величины $ \hat{\theta} $ с распределением
+		$$ \mathcal{N}\left(\tfrac{n\overline{X} + \mu}{n + 1}, \tfrac{1}{n + 1}\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б]{inprocessing}
+		
+		Вычислим байесовскую оценка для абсолютного риска.
+		Имеем 
+		$$ \tfrac{1}{2} = F_{\hat{\theta}}(q) = \Phi_{\tfrac{n\overline{X} + \mu}{n + 1}, \tfrac{1}{n + 1}}(q). $$
+		Отсюда $ q - \tfrac{n\overline{X} + \mu}{n + 1} = 0 $
+		и $ q = \tfrac{n\overline{X} + \mu}{n + 1} $.
+		
+		Вычислим байесовскую оценку для среднеквадратичного риска:
+		$$ S = \expect \hat{\theta} = \tfrac{n\overline{X} + \mu}{n + 1}. $$
+		
+		Вычислим байесовский доверительный интервал.
+		В условиях задачи имеем 
+		$$ q_{\alpha} = \tfrac{z_{\alpha}}{\sqrt{n + 1}} + \tfrac{n\overline{X} + \mu}{n + 1}. $$
+		Тогда доверительный интервал $ (q_{\frac{\alpha}{2}}, q_{1 - \frac{\alpha}{2}}) $ равен
+		$$ \left(\tfrac{z_{\frac{\alpha}{2}}}{\sqrt{n + 1}} + \tfrac{n\overline{X} + \mu}{n + 1},
+		\tfrac{z_{1 - \frac{\alpha}{2}}}{\sqrt{n + 1}} + \tfrac{n\overline{X} + \mu}{n + 1} \right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(0, \tfrac{1}{\theta}) $ и $ \theta \sim \mathrm{\Gamma}(2, \beta) $.
+		Вычислим апостериорную плотность $ \theta $.
+		Имеем
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{\frac{t}{\beta^2}e^{-\tfrac{t}{\beta}}I(t > 0)\prod\limits_{i = 1}^{n} 
+			\tfrac{\sqrt{t}}{\sqrt{2\pi}}e^{-\frac{x_i^2t}{2}}}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)} = $$
+		$$ = C(x_1, \ldots, x_n, \beta)t^{1 + \tfrac{n}{2}}e^{-\frac{t}{2}(\frac{2}{\beta} + \sum\limits_{i = 1}^{n} x_i^2)}.$$
+		Тогда $ \pi_{\theta \mid X_1, \ldots, X_n} $ --- плотность случайной величины $ \hat{\theta} $ с распределением
+		$$ \mathrm{\Gamma}\left(2 + \tfrac{n}{2}, \left(\tfrac{1}{\beta} + \tfrac{1}{2}S_n^2 \right)^{-1}\right), $$
+		где $ S_n^2 = \sum\limits_{i = 1}^{n} X_i^2 $.
+		
+		Вычислим байесовскую оценку для среднеквадратичного риска:
+		$$ S = \expect \hat{\theta} = \tfrac{2 + \tfrac{n}{2}}{\tfrac{1}{\beta} + \tfrac{1}{2}S_n^2}. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 3аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathrm{R}[0, \theta] $ и $ \theta \sim \mathrm{B}(\alpha, 1) $.
+		Вычислим апостериорную плотность $ \theta $.
+		Имеем
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{\frac{1}{B(\alpha, 1)}t^{\alpha - 1}I(0 < t < 1)\prod\limits_{i = 1}^{n} \tfrac{1}{t}I(0 < x_i < t)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)} = $$
+		$$ = C(x_1, \ldots, x_n, \alpha)t^{\alpha - n - 1}I(\max\limits_{i = 1\ldots n} x_i < t < 1).$$
+		Тогда $ \pi_{\theta \mid X_1, \ldots, X_n} 
+		= C(X_1, \ldots, X_n, \alpha)t^{\alpha - n - 1}I(X_{(n)} < t < 1) $ --- плотность случайной величины $ \hat{\theta} $.
+		Для $ C(X_1, \ldots, X_n) $ имеем выражение:
+		$$ C(X_1, \ldots, X_n) 
+		= \int\limits_{-\infty}^{+\infty} t^{\alpha - n - 1}I(X_{(n)} < t < 1)dt
+		= \int\limits_{X_{(n)}}^{1} t^{\alpha - n - 1}dt
+		= \left.t^{\alpha - n}\right|_{X_{(n)}}^{1} = 1 - X_{(n)}^{\alpha - n}. $$
+		Таким образом, $$ \pi_{\theta \mid X_1, \ldots, X_n} 
+		= \tfrac{t^{\alpha - n - 1}I(X_{(n)} < t < 1)}{1 - X_{(n)}^{\alpha - n}}. $$
+		
+		Вычислим квантили этого распределения.
+		Имеем
+		$$ \beta = \int\limits_{-\infty}^{q_\beta} \tfrac{t^{\alpha - n - 1}I(X_{(n)} < t < 1)}{1 - X_{(n)}^{\alpha - n}}dt
+		= \int\limits_{X_{(n)}}^{q_\beta} \tfrac{t^{\alpha - n - 1}}{1 - X_{(n)}^{\alpha - n}}dt
+		= \tfrac{q_\beta^{\alpha - n} - X_{(n)}^{\alpha - n}}{1 - X_{(n)}^{\alpha - n}}. $$
+		Отсюда
+		$$ q_\beta = \left(\beta(1 - X_{(n)}^{\alpha - n}) + X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}}
+		= \left(\beta + (1 - \beta)X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}}. $$
+		
+		Тогда байесовский доверительный интервал для $ 1 - \beta $ есть
+		$$ \left(\left(\tfrac{\beta}{2} + (1 - \tfrac{\beta}{2})X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}},
+		\left(1 - \tfrac{\beta}{2} + \tfrac{\beta}{2}X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}} \right). $$
+		Байесовская оценка для абсолютного риска равна
+		$$ q = \left(\tfrac{1}{2} + \tfrac{1}{2}X_{(n)}^{\alpha - n}\right)^{\tfrac{1}{\alpha - n}}. $$
+		
+		
+	\end{problem}	
+	
+	
+	\begin{problem}[Задача 4аб]{inprocessing}
+		
+		Пусть $ T $ --- достаточная статистика. По критерию факторизации имеется разложение
+		$$ L(t, x_1, \ldots, x_n) = g(t, T(x_1, \ldots, x_n))h(x_1, \ldots, x_n) $$
+		для некоторых $ g $ и $ h $.
+		Тогда апостериорная плотность равна
+		$$ \pi_{\theta \mid X_1, \ldots, X_n}(t, x_1, \ldots, x_n)
+		= \tfrac{f_{\theta, X_1, \ldots, X_n}(t, x_1, \ldots, x_n)}{f_{ X_1, \ldots, X_n}(x_1, \ldots, x_n)}
+		= \tfrac{g(t, T)h(x_1, \ldots, x_n)}
+		{\int\limits_{\Theta} g(t, T)h(x_1, \ldots, x_n)dt}
+		= \tfrac{h(x_1, \ldots, x_n)}{\int\limits_{\Theta} g(t, T)h(x_1, \ldots, x_n)dt} \cdot g(t, T)
+		= \tfrac{g(t, T)}{\int\limits_{\Theta} g(t, T)dt}. $$
+		Таким образом, параметры апостериорного распределения выражаются через достаточную статистику $ T $.
+		
+		В задаче $ 1 $ в качестве такой статистики выступает $ \overline{X} $.
+		В задаче $ 2 $ в качестве такой статистики выступает $ S_n^2 = \sum\limits X_i^2 $. 
+		В задаче $ 3 $ в качестве такой статистики выступает $ X_{(n)} $.
+		Все эти оценки возникают как оценки максимального правдоподобия или пропорциональные им (задача 2) и были посчитаны в 3-й домашней работе
+		(такие оценки являются достаточными).
+		
+		
+	\end{problem}
+	
+	
+	\section{КООП, Vald, score-test}
+	
+	\begin{problem}[Задача 1 (КООП)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_x, \theta_1^2) $ 
+		и $ Y_1, \ldots, Y_n \sim \mathcal{N}(\theta_y, \theta_2^2) $ --- независимые случайные величины.
+		Пусть нулевая гипотеза заключается в равенстве $ \theta_1 = \theta_2 $,
+		а альтернатива --- её отрицание.
+		
+		Построим критерий обобщённого отношения правдоподобий.
+		
+		Имеем в общем случае
+		$$ L(\theta_1, \theta_2, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta_1\theta_2}e^{-\frac{(X_i - \theta_x)^2}{2\theta_1^2} - \frac{(Y_i - \theta_y)^2}{2\theta_2^2}}. $$
+		Тогда 
+		$$ \ln L(\theta_1, \theta_2, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		= -n\ln(\theta_1) - n\ln(\theta_2) - n\ln (2\pi) 
+		- \tfrac{1}{2\theta_1^2}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2 - 
+		\tfrac{1}{2\theta_2^2}\sum\limits_{i = 1}^{n}(Y_i - \theta_y)^2, $$
+		$$ \tfrac{\partial}{\partial \theta_x} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta_1^2}\left( -n\theta_x + \sum\limits_{i = 1}^{n} X_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_y} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta_2^2}\left( -n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_1} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= -\tfrac{n}{\theta_1} + \tfrac{1}{\theta_1^3}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2 = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_2} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= -\tfrac{n}{\theta_2} + \tfrac{1}{\theta_2^3}\sum\limits_{i = 1}^{n} (Y_i - \theta_y)^2 = 0. $$
+		
+		Поэтому максимум достигается в точке $ \hat{\theta_x} = \overline{X} $, $ \hat{\theta_y} = \overline{Y} $,
+		$ \hat{\theta_1} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}$
+		и $ \hat{\theta_2} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2}$.
+		
+		При $ \theta_1 = \theta_2 = \theta $ имеем
+		$$ L(\theta, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		\prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\frac{(X_i - \theta_x)^2}{2\theta^2} - \frac{(Y_i - \theta_y)^2}{2\theta^2}}. $$
+		Тогда 
+		$$ \ln L(\theta, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		= -2n\ln(\theta) - n\ln (2\pi) - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2 - 
+		\tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n}(y_i - \theta_y)^2, $$
+		$$ \tfrac{\partial}{\partial \theta_x} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta^2}\left( -n\theta_x + \sum\limits_{i = 1}^{n} X_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_y} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta^2}\left( -n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta} L(\theta, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2
+		+ \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} (Y_i - \theta_y)^2 = 0. $$
+		Тогда максимум достигается в точек $ \hat{\theta_x} = \overline{X}, \hat{\theta_y} = \overline{Y} $
+		и $ \hat{\theta} = \sqrt{\tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)}$.
+		
+		Положим $ S_X = \sum\limits_{i = 1}^{n} (X_i - \overline{X}), S_Y = \sum\limits_{i = 1}^{n} (Y_i - \overline{Y}) $
+		и $ S = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right) $.
+		
+		Имеем 
+		$$ \lambda 
+		= \tfrac{\sup_{\theta \in \Theta} L(\theta_1, \theta_2, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)}
+		{\sup_{\theta \in \Theta_0} L(\theta, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)}
+		= \tfrac{\frac{1}{S_X^{\frac{n}{2}}S_Y^{\frac{n}{2}}} \cdot \frac{1}{(2\pi)^n}e^{-n}}
+		{\frac{1}{S^n} \cdot \frac{1}{(2\pi)^n}e^{-n}} = \tfrac{S^n}{\sqrt{S_X^nS_Y^n}} $$
+		и $$ \ln \lambda = n\ln S - \tfrac{n}{2}\ln S_X - \tfrac{n}{2}\ln S_Y. $$
+		
+		Так как $ \dim \Theta - \dim \Theta_0 = 4 - 3 = 1 $, то
+		$ 2\ln \lambda \overunderset{d}{\theta \in \Theta_0}{\to} \xi \sim \chi_{1}^2 $.
+		
+		Тогда $ \prob_{H_0}(2n\ln S - n\ln S_X - n\ln S_Y > q_{1 - \alpha}) \underset{n \to +\infty}{\to} \alpha $,
+		где $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $ распределения $ \chi_1^2 $.
+		Нулевая гипотеза отклоняется при $ 2n\ln S - n\ln S_X - n\ln S_Y > q_{1 - \alpha} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1 (Vald)]{inprocessing}
+		
+		Построим вальдовский критерий в рамках задачи 1а.
+		Пусть $ h(\theta_1, \theta_x, \theta_2, \theta_y) = \theta_1 - \theta_2 $.
+		Нулевая гипотеза в этом случае обретает равносильную формулировку $ h(\theta_1, \theta_2, \theta_x, \theta_y) = 0 $.
+		
+		Выше мы вычислили точку максимума на $ \Theta $ как точку с координатами $ \hat{\theta_x} = \overline{X} $, $ \hat{\theta_y} = \overline{Y} $,
+		$ \hat{\theta_1} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2} = \sqrt{S_X}$
+		и $ \hat{\theta_2} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2} = \sqrt{S_Y}$.
+		
+		Вычислим информационную матрицу для $ n = 1 $ в точке максимума:
+		$$ I_1(\theta_1, \theta_x, \theta_2, \theta_y) =
+		\left.\expect(-\tfrac{\partial^2}{\partial \theta_i \partial \theta_j}\ln L)\right|_{\theta = \hat{\theta}} = $$  $$
+		=
+		\left.\left(\begin{smallmatrix}
+			\expect\left(-\tfrac{n}{\theta_1^2} + \tfrac{3}{\theta_1^4}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2\right)
+			& \expect\left(\tfrac{2}{\theta_1^3}\left(-n\theta_x + \sum\limits_{i = 1}^{n} X_i\right)\right) & 0 & 0 \\
+			\expect\left(\tfrac{2}{\theta_1^3}\left(-n\theta_x + \sum\limits_{i = 1}^{n} X_i\right)\right) & \expect\tfrac{n}{\theta_1^2} & 0 & 0 \\
+			0 & 0 & \expect\left(-\tfrac{n}{\theta_2^2} + \tfrac{3}{\theta_2^4}\sum\limits_{i = 1}^{n} (Y_i - \theta_y)^2\right) & \expect\left(\tfrac{2}{\theta_2^3}\left(-n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right)\right) \\
+			0 & 0 & \expect\left(\tfrac{2}{\theta_2^3}\left(-n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right)\right) & \expect\tfrac{n}{\theta_2^2}
+		\end{smallmatrix}\right)\right|_{\theta = \hat{\theta}, n = 1} = $$
+		$$ 
+		= \left.\left(\begin{smallmatrix}
+			\tfrac{2n}{\theta_1^2} & 0 & 0 & 0 \\
+			0 & \tfrac{n}{\theta_1^2} & 0 & 0 \\
+			0 & 0 & \tfrac{2n}{\theta_2^2} & 0 \\
+			0 & 0 & 0 & \tfrac{n}{\theta_2^2}
+		\end{smallmatrix}\right)\right|_{\theta = \hat{\theta}, n = 1}
+		= \left(\begin{smallmatrix}
+			\tfrac{2}{S_X} & 0 & 0 & 0 \\
+			0 & \tfrac{1}{S_X} & 0 & 0 \\
+			0 & 0 & \tfrac{2}{S_Y} & 0 \\
+			0 & 0 & 0 & \tfrac{1}{S_Y}
+		\end{smallmatrix}\right). $$
+		Градиент $ h $ есть $ (1, 0, -1, 0) $, поэтому
+		$$ JI_1^{-1}(\hat{\theta})J^T = \tfrac{S_X + S_Y}{2}. $$
+		
+		Тогда для квантиля $ q_{1 - \alpha} $ получаем 
+		$$ \prob_{H_0}(\tfrac{2n(\sqrt{S_Y} - \sqrt{S_X})^2}{S_X + S_Y} > q_{1 - \alpha}) \underset{n \to +\infty}{\to} \alpha. $$
+		Нулевая гипотеза отвергается при $ \tfrac{2n(\sqrt{S_Y} - \sqrt{S_X})^2}{S_X + S_Y} > q_{1 - \alpha} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2]{inprocessing}
+		
+		Пусть фиксировано целое положительное число $ k $ и имеются $ k $ последовательностей независимых случайных величин
+		$ X_{k,1}, \ldots, X_{k,n_k} \sim \mathrm{Exp}(\tfrac{1}{\theta_k}) $.
+		Пусть нулевая гипотеза состоит в том, что $ \theta_1 = \ldots = \theta_k $.
+		
+		Построим score-test для проверки гипотезы.
+		
+		Имеем
+		$$ \ln L(\overrightarrow{\theta}, X_{ij}) = \ln \prod\limits_{i = 1}^{k} \prod\limits_{j = 1}^{n_i}
+		\tfrac{1}{\theta_i}e^{-\tfrac{X_{ij}}{\theta_i}}I(X_{ij} > 0)
+		= \sum\limits_{i = 1}^{k} \left(-n_i\ln \theta_i - \tfrac{1}{\theta_i}\sum\limits_{j = 1}^{n_i} X_{ij}\right). $$
+		Частная производная по $ \theta_i $ не равна нулю только для $ i $-го слагаемого в внешней сумме.
+		Поэтому
+		$$ \tfrac{\partial}{\partial \theta_i} \ln L(\overrightarrow{\theta}, X_{ij})
+		= \tfrac{\partial}{\partial \theta_i}
+		\left(-n_i\ln \theta_i - \tfrac{1}{\theta_i}\sum\limits_{j = 1}^{n_i} X_{ij}\right)
+		= 
+		\tfrac{-n_i}{\theta_i} + \tfrac{1}{\theta_i^2}\sum\limits_{j = 1}^{n_i} X_{ij}. $$
+		
+		Найдём оценку максимального правдоподобия при условии гипотезы ($ \theta = \theta_1 = \ldots = \theta_k $).
+		Имеем
+		$$ \sum\limits_{i = 1}^{k}
+		\left(\tfrac{-n_i}{\theta} + \tfrac{1}{\theta^2}\sum\limits_{j = 1}^{n_i} X_{ij}\right) = 0. $$
+		Отсюда
+		$$ \hat{\theta} = \tfrac{\sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{n_i} X_{ij}}{\sum\limits_{i = 1}^{k} n_i}. $$
+		
+		Вычислим информационную матрицу.
+		Из формул для частных производных видим, что вторые частные производные по $ \theta_i $ и $ \theta_j $ 
+		равны 0 при $ i \neq j $. Поэтому матрица диагональна. Вычислим значения элементов на диагонали.
+		Тогда
+		$$ -\tfrac{\partial^2}{\partial^2 \theta_i} \ln L(\theta, X_{ij})
+		= -\tfrac{n_i}{\theta_i^2} + \tfrac{2}{\theta_i^3}\sum\limits_{j = 1}^{n_i} X_{ij}, $$
+		$$ I_{ii}(\theta_i) = \expect \left(-\tfrac{n_i}{\theta_i^2} + \tfrac{2}{\theta_i^3}\sum\limits_{j = 1}^{n_i} X_{ij}\right)
+		= -\tfrac{n_i}{\theta_i^2} + \tfrac{2}{\theta_i^3} \cdot n_i\theta_i = \tfrac{n_i}{\theta_i^2}. $$
+		
+		Отсюда 
+		$$ \sum\limits_{i = 1}^{k} \tfrac{\hat{\theta}^2}{n_i}\left(\tfrac{-n_i}{\hat{\theta}} 
+		+ \tfrac{1}{\hat{\theta}^2}\sum\limits_{j = 1}^{n_i} X_{ij}\right)^2
+		= \tfrac{\hat{\theta}^2}{\hat{\theta}^4} \sum\limits_{i = 1}^{k}
+		\tfrac{1}{n_i}\left(\sum\limits_{j = 1}^{n_i} X_{ij} - n_i\hat{\theta}\right)^2
+		= \tfrac{\sum\limits_{i = 1}^{k}
+			\tfrac{1}{n_i}\left(\sum\limits_{j = 1}^{n_i} X_{ij} - n_i\hat{\theta}\right)^2}
+		{\left(\tfrac{\sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{n_i} X_{ij}}{\sum\limits_{i = 1}^{k} n_i}\right)^2}. $$
+		
+		Эта случайная величина сходится по распределению к $ \chi^2_{k - 1} $-случайной величине. 
+		Пусть $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $.
+		Тогда
+		$$ \prob\left(\tfrac{\sum\limits_{i = 1}^{k}
+			\tfrac{1}{n_i}\left(\sum\limits_{j = 1}^{n_i} X_{ij} - n_i\hat{\theta}\right)^2}
+		{\left(\tfrac{\sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{n_i} X_{ij}}{\sum\limits_{i = 1}^{k} n_i}\right)^2}
+		> q_{1 - \alpha} \right) \underset{n \to +\infty}{\to} \alpha. $$
+	\end{problem}
+	
+	\begin{problem}[Задача 3а]{inprocessing}
+		
+		Пусть имеются три набора независимых случайных величин
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \sigma^2) $,
+		$ Y_1, \ldots, Y_n \sim \mathcal{N}(\theta_2, \sigma^2) $ и
+		$ Z_1, \ldots, Z_n \sim \mathcal{N}(\theta_3, \sigma^2) $,
+		представляющие значения длин рёбер параллелепипеда.
+		
+		Пусть $ V $ --- фиксированное положительное число.
+		Построим критерий Вальда для проверки гипотезы о том, что объём параллелепипеда равен $ V $:
+		$$ \theta_1\theta_2\theta_3 = V. $$
+		В пространстве всех допустимых значений $ \Theta = \defineset{(\theta_1, \theta_2, \theta_3,
+			\sigma)}{\theta_1, \theta_2, \theta_3, \sigma > 0} $
+		равенство $ \theta_1\theta_2\theta_3 = V $ определяет гиперповерхность, то есть подмногообразие размерности $ 3 - 1 = 2 $.
+		
+		Для построения критерия Вальда будем рассматривать функцию $ h(x, y, z, t) = xyz - V $.
+		Тогда $ \operatorname{grad} h = (yz, zx, xy, 0) $.
+		
+		Вычислим функцию правдоподобия:
+		$$ L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{8\pi^3}\sigma^3} 
+		e^{-\tfrac{(X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2}{2\sigma^2}}; $$
+		$$ \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{3n}{2}\ln (2\pi) - 3n\ln \sigma -
+		\tfrac{1}{2\sigma^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2\right). $$
+		Для частных производных имеем:
+		$$ \tfrac{\partial}{\partial \theta_1} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-n\theta_1 + \sum\limits_{i = 1}^{n} X_i)
+		= \tfrac{n}{\sigma^2}(\overline{X} - \theta_1), $$
+		$$ \tfrac{\partial}{\partial \theta_2} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-n\theta_2 + \sum\limits_{i = 1}^{n} Y_i)
+		= \tfrac{n}{\sigma^2}(\overline{Y} - \theta_2), $$
+		$$ \tfrac{\partial}{\partial \theta_3} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-n\theta_3 + \sum\limits_{i = 1}^{n} Z_i)
+		= \tfrac{n}{\sigma^2}(\overline{Z} - \theta_3), $$
+		$$ \tfrac{\partial}{\partial\sigma} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{n}{\sigma} + \tfrac{1}{\sigma^3}\sum\limits_{i = 1}^{n} 
+		\left((X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2\right). $$
+		Тогда точка максимума есть точка с координатами
+		$ \hat \theta_1 = \overline{X}, \hat \theta_2 = \overline{Y}, \hat \theta_3 = \overline{Z} $
+		и \\ $ \hat \sigma^2 = \tfrac{1}{n} \sum\limits_{i = 1}^{n}
+		\left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2 + (Z_i - \overline{Z})^2\right). $
+		Матождиания от минус частных производных второго порядка равны
+		$$ -\expect\tfrac{\partial^2}{\partial \theta_i^2} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect\left(-\tfrac{n}{\sigma^2}\right) = -\tfrac{n}{\sigma^2}; $$
+		$$ -\expect\tfrac{\partial^2}{\partial \theta_i \partial \theta_j} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect0 = 0 \ (i \neq j); $$
+		$$ -\expect\tfrac{\partial^2}{\partial \sigma^2} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect\left(\tfrac{n}{\sigma^2} - \tfrac{3}{\sigma^4}\sum\limits_{i = 1}^{n} 
+		\left((X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2\right)\right)
+		= -\tfrac{n}{\sigma^2} + \tfrac{9\sigma^2}{\sigma^3} = \tfrac{8n}{\sigma^2}; $$
+		$$ -\expect\tfrac{\partial^2}{\partial \sigma \partial \theta_1} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect\tfrac{2}{\sigma^3} (n\theta_1 - \sum\limits_{i = 1}^{n} X_i) = 0. $$
+		
+		Тогда информационная матрица в точке максимума равна
+		$$ I_n(\hat \theta) = \begin{pmatrix}
+			\tfrac{n}{\hat \sigma^2} & 0 & 0 & 0 \\
+			0 & \tfrac{n}{\hat \sigma^2} & 0 & 0 \\
+			0 & 0 & \tfrac{n}{\hat \sigma^2} & 0 \\
+			0 & 0 & 0 & \tfrac{8n}{\hat \sigma^2}
+		\end{pmatrix}.
+		$$
+		
+		Имеем
+		$$ g = \grad h (\hat \theta) I_1(\hat \theta)^{-1} \grad h (\hat \theta)^{t}
+		= \hat \sigma^2(\overline{X}^2\overline{Y}^2 + \overline{Y}^2\overline{Z}^2 + \overline{Z}^2\overline{X}^2). $$
+		Тогда случайная величина 
+		$$ \tfrac{nh^2}{g} = \tfrac{n(\overline{X}\overline{Y}\overline{Z} - V)^2}{\hat \sigma^2(\overline{X}^2\overline{Y}^2 + \overline{Y}^2\overline{Z}^2 + \overline{Z}^2\overline{X}^2)} $$
+		сходится по распределению к $ \chi^2_{3 - 2} = \chi^2_1 $.
+		
+		Если $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $ соответствующего распределения,
+		то 
+		$$ \prob\left(\tfrac{n(\overline{X}\cdot\overline{Y}\cdot\overline{Z} - V)^2}{\hat \sigma^2(\overline{X}^2\overline{Y}^2 + \overline{Y}^2\overline{Z}^2 + \overline{Z}^2\overline{X}^2)} > q_{1 - \alpha} \right) 
+		\underset{n \to +\infty}{\to} \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3б]{inprocessing}
+		
+		В условиях задачи 3а построим score-test для проверки гипотезы $ \theta_1 = \theta_2 = \theta_3 $.
+		Данная система задаёт подмногообразие размерности 2 в пространстве $ \Theta = \defineset{(\theta_1, \theta_2, \theta_3,
+			\sigma)}{\theta_1, \theta_2, \theta_3, \sigma > 0} $.
+		
+		Найдём точку максимума функции правдоподобия на этом подмногообразии.
+		Имеем
+		$$ L_{H_0}(\theta, \sigma, \vect{X}, \vect{Y}, \vect{Z})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{8\pi^3}\sigma^3} 
+		e^{-\tfrac{(X_i - \theta)^2 + (Y_i - \theta)^2 + (Z_i - \theta)^2}{2\sigma^2}}; $$
+		$$ \ln L_{H_0}(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{3n}{2}\ln (2\pi) - 3n\ln \sigma -
+		\tfrac{1}{2\sigma^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta)^2 + (Y_i - \theta)^2 + (Z_i - \theta)^2\right). $$
+		Вычислим частные производные:
+		$$ \tfrac{\partial}{\partial \theta} \ln L_{H_0}(\theta, \sigma, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-3n\theta + \sum\limits_{i = 1}^{n} (X_i + Y_i + Z_i)); $$
+		$$ \tfrac{\partial}{\partial \sigma} \ln L_{H_0}(\theta, \sigma, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{3n}{\sigma} + 
+		\tfrac{1}{\sigma^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta)^2 + (Y_i - \theta)^2 + (Z_i - \theta)^2\right). $$
+		Тогда координаты точки максимума равны $ \hat \theta_{H_0} = \tfrac{1}{3}(\overline{X} + \overline{Y} + \overline{Z}) $
+		и \\ $ \hat \sigma^2_{H_0}
+		= \tfrac{1}{3n}\sum\limits_{i = 1}^{n} \left((X_i - \hat\theta)^2 + (Y_i - \hat\theta)^2 + (Z_i - \hat\theta)^2\right) $.
+		
+		Оценка
+		$$ T = \tfrac{1}{n}\grad L (\hat \theta_{H_0},\hat \theta_{H_0},\hat \theta_{H_0}, \hat \sigma_{H_0}, \vect{X}, \vect{Y}, \vect{Z}) 
+		I_1(\hat \theta_{H_0},\hat \theta_{H_0},\hat \theta_{H_0}, \hat \sigma_{H_0})^{-1} 
+		\grad L (\hat \theta_{H_0},\hat \theta_{H_0},\hat \theta_{H_0}, \hat \sigma_{H_0}, \vect{X}, \vect{Y}, \vect{Z})^{t} = $$ 
+		$$ = \tfrac{\hat\sigma^2_{H_0}}{n}\cdot \tfrac{n^2}{\hat\sigma^4_{H_0}}\left((\hat \theta_{H_0} - \overline{X})^2 + (\hat \theta_{H_0} - \overline{Y})^2 
+		+ (\hat \theta_{H_0} - \overline{Z})^2\right) + $$ 
+		$$ + \tfrac{\hat\sigma^2_{H_0}}{8n}\cdot \left(
+		-\tfrac{n}{\hat\sigma_{H_0}} + \tfrac{1}{\hat\sigma_{H_0}^3}\sum\limits_{i = 1}^{n} 
+		\left((X_i - \hat \theta_{H_0})^2 + (Y_i - \hat \theta_{H_0})^2 + (Z_i - \hat \theta_{H_0})^2\right)\right)^2 $$
+		сходится по распределению к $ \xi^2_{2} $.
+		
+		Если $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $, то имеем
+		$$ \prob(T > q_{1 - \alpha}) \underset{n \to +\infty}{\to} \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_x, \theta^2) $
+		и $ Y_1, \ldots, Y_n \sim \mathcal{N}(\theta_y, \theta^2) $
+		--- независимые случайные величины.
+		Построим критерий обобщённого отношения правдоподобий для проверки гипотезы $ \theta_x = \theta_y $.
+		
+		Вычислим функции правдоподобия в общем случае и при условии гипотезы.
+		$$ L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\tfrac{(X_i - \theta_x)^2 + (Y_i - \theta_y)^2}{2\theta^2}}; $$
+		$$ \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -n \ln 2\pi -2n \ln \theta - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_x)^2 + (Y_i - \theta_y)^2\right). $$
+		Вычислим частные производные:
+		$$ \tfrac{\partial}{\partial \theta_x} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-n\theta_x + \sum\limits_{i = 1}^{n} X_i\right); $$
+		$$ \tfrac{\partial}{\partial \theta_y} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right); $$
+		$$ \tfrac{\partial}{\partial \theta} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta_x)^2 + (Y_i - \theta_y)^2\right). $$
+		
+		Максимум достигается в точке с координатами $\hat \theta_x = \overline{X}, \hat \theta_y = \overline{Y} $
+		и \\ $ \hat \theta^2 = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right) $.
+		В точке максимума значение равно
+		$$ L(\hat \theta_x, \hat \theta_y, \hat \theta, \vect{X}, \vect{Y})
+		= \tfrac{ne^{-n}}{\pi}\left(\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)^{-1}. $$
+		
+		В предположении гипотезы имеем
+		$$ L_{0}(\theta_0, \theta, \vect{X}, \vect{Y})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\tfrac{(X_i - \theta_0)^2 + (Y_i - \theta_0)^2}{2\theta^2}}; $$
+		$$ \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -n \ln 2\pi -2n \ln \theta - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_0)^2 + (Y_i - \theta_0)^2\right). $$
+		Снова вычислим частные производные:
+		$$ \tfrac{\partial}{\partial \theta_0} \ln L(\theta_0, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-2n\theta_0 + \sum\limits_{i = 1}^{n} (X_i + Y_i)\right); $$
+		$$ \tfrac{\partial}{\partial \theta} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta_0)^2 + (Y_i - \theta_0)^2\right). $$
+		
+		Максимум достигается в точке $ \hat \theta_0 = \tfrac{\overline{X} + \overline{Y}}{2}, $
+		$ \hat \theta^2 = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right) $. Значение в этой точке равно
+		$$ L(\hat \theta_0, \hat \theta, \vect{X}, \vect{Y})
+		= \tfrac{ne^{-n}}{\pi}\left(\sum\limits_{i = 1}^{n} (X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right)^{-1}. $$
+		
+		Тогда для
+		$$ \lambda 
+		= \tfrac{\sup_{\theta \in \Theta} L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})}
+		{\sup_{\theta \in \Theta_0} L(\theta_0, \theta, \vect{X}, \vect{Y})} $$
+		имеем $$ 2\ln \lambda = \ln \left(\sum\limits_{i = 1}^{n} (X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right)
+		- \ln \left(\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)
+		\overunderset{d}{n \to +\infty}{\to} \xi \sim \chi^2_{1}. $$
+		
+		Если $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $, то
+		$$ \prob\left( \ln \left(\sum\limits_{i = 1}^{n} (X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right)
+		- \ln \left(\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right) > q_{1 - \alpha} \right)
+		\to \alpha. $$
+		
+	\end{problem}
+	
+	
+	\section{Точный критерий обобщённого отношения правдоподобий}
+	
+	\begin{problem}[Задача 1аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_x, \theta^2) $
+		и $ Y_1, \ldots, Y_n \sim \mathcal{N}(\theta_y, \theta^2) $ --- независимые случайные величины.
+		
+		Пусть нулевая гипотеза предполагает истинность неравенства $ \theta_x \geqslant \theta_y $.
+		
+		Вычислим функцию правдоподобия и найдём её точку максимума.
+		$$ L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\tfrac{(X_i - \theta_x)^2 + (Y_i - \theta_y)^2}{2\theta^2}}; $$
+		$$ \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -n\ln 2\pi - 2n\ln \theta - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_x)^2 + (Y_i - \theta_y)^2\right). $$
+		Частные производные равны
+		$$ \tfrac{\partial}{\partial \theta_x} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-n\theta_x + \sum\limits_{i = 1}^{n} X_i\right); $$
+		$$ \tfrac{\partial}{\partial \theta_y} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right); $$
+		$$ \tfrac{\partial}{\partial \theta} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta_x)^2 + (Y_i - \theta_y)^2\right). $$
+		Точка максимума имеет координаты
+		$ \hat \theta_x = \overline{X}, \hat \theta_y = \overline{Y},
+		\hat \theta^2 = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right) $.
+		Значение в точке максимума равно
+		$$ \tfrac{e^{-n}}{2^n\pi^n\hat\theta^{2n}}. $$
+		
+		Если $ \overline{X} > \overline{Y} $, то точка максимума при условии гипотезы оказывается такой же, 
+		как и в общем случае. Поэтому будем рассматривать случай, когда $ \overline{X} \leqslant \overline{Y} $.
+		Тогда максимум достигается на границе $ \theta_x = \theta_y =: \theta_{xy} $.
+		Вычислим точку максимума и его значение.
+		Имеем
+		$$ L(\theta_0, \theta, \vect{X}, \vect{Y})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\tfrac{(X_i - \theta_{xy})^2 + (Y_i - \theta_{xy})^2}{2\theta^2}}; $$
+		$$ \ln L(\theta_0, \theta, \vect{X}, \vect{Y})
+		= -n\ln 2\pi - 2n\ln \theta - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_0)^2 + (Y_i - \theta_0)^2\right). $$
+		Частные производные равны
+		$$ \tfrac{\partial}{\partial \theta_x} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{2\theta^2}\left(-2n\theta_{xy} + \sum\limits_{i = 1}^{n} X_i + \sum\limits_{i = 1}^{n} Y_i\right); $$
+		$$ \tfrac{\partial}{\partial \theta} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta_{xy})^2 + (Y_i - \theta_{xy})^2\right). $$
+		Точка максимума имеет координаты
+		$ \hat \theta_{xy} = \tfrac{\overline{X} + \overline{Y}}{2},
+		\hat \theta^2_{H_0} = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} 
+		\left((X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right) $.
+		Значение в точке максимума равно
+		$$ \tfrac{e^{-n}}{2^n\pi^n\hat\theta_{H_0}^{2n}}. $$
+		Отсюда 
+		$$ \lambda = \tfrac{\sup_{\theta \in \Theta} L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})}
+		{\sup_{\theta \in \Theta_0} L(\theta_0, \theta, \vect{X}, \vect{Y})}
+		= \tfrac{\hat\theta_{H_0}^{2n}}{\hat\theta^{2n}}. $$
+		$$ \sqrt[n]{\lambda} = \tfrac{\sum\limits_{i = 1}^{n} 
+			\left((X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right)}
+		{\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)}
+		= \tfrac{\sum\limits_{i = 1}^{n} 
+			\left((X_i - \overline{X} - \tfrac{\overline{Y} - \overline{X}}{2})^2 + (Y_i - \overline{Y} - \tfrac{\overline{X} - \overline{Y}}{2})^2\right)}
+		{\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)} 
+		= 1 +
+		\tfrac{2n(\tfrac{\overline{X} - \overline{Y}}{2})^2}
+		{\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)}. $$
+		Отсюда
+		$$ \sqrt[n]{\lambda} - 1 = \tfrac{n}{2} \cdot \tfrac{(\overline{X} - \overline{Y})^2}
+		{\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)}. $$
+		Имеем следующие распределения для случайных величин
+		$$ (\overline{X} - \overline{Y}) - (\theta_x - \theta_y) \sim \mathcal{N}(0, \tfrac{2\theta^2}{n}); $$
+		$$ \tfrac{1}{\theta^2}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2 \sim \xi_{n - 1}^2; $$
+		$$ \tfrac{1}{\theta^2}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2
+		+ \tfrac{1}{\theta^2}\sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2 \sim \xi_{2n - 2}^2; $$
+		Тогда
+		$$ \sqrt{\sqrt[n]{\lambda} - 1} \cdot 
+		\sqrt{\tfrac{2}{n} \cdot \tfrac{\frac{n}{2\theta^2}}{\frac{1}{(2n - 2)\theta^2}}}
+		= \tfrac{\sqrt{\frac{n}{2\theta^2}}((\overline{X} - \overline{Y}) - (\theta_x - \theta_y))}
+		{\sqrt{\frac{1}{(2n - 2)\theta^2}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)}}
+		\sim t_{2n - 2} $$
+		и
+		$$ \sqrt{\sqrt[n]{\lambda} - 1} \cdot \tfrac{1}{\sqrt{2n - 2}} \sim t_{2n - 2}. $$
+		
+		Пусть $ q_{\alpha} $ --- квантиль уровня $ \alpha $ для распределения Стьюдента $ t_{2n - 2} $.
+		Будем отклонять гипотезу при $ \tfrac{\sqrt{\frac{n}{2}}(\overline{X} - \overline{Y})}
+		{\sqrt{\tfrac{1}{2n - 2}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)}} < q_{\alpha} $. 
+		
+		Обозначим через $ F_{t_{2n - 2}} $ --- функцию распределения Стьюдента.
+		Тогда
+		$$ \sup\limits_{\theta_x \geqslant \theta_y} 
+		\prob\left(
+		\tfrac{\sqrt{2n}(\tfrac{\overline{X} - \overline{Y}}{2})}
+		{\sqrt{\tfrac{1}{2n - 2}\sum\limits_{i = 1}^{n} 
+				\left(
+				(X_i - \overline{X})^2 + (Y_i - \overline{Y})^2
+				\right)
+			}
+		}
+		< q_{\alpha}
+		\right) = $$  
+		$$
+		= \sup\limits_{\theta_x \geqslant \theta_y} 
+		\prob\left(
+		\tfrac{\sqrt{\tfrac{n}{2}}((\overline{X} - \overline{Y}) - (\theta_x - \theta_y))}
+		{\sqrt{\tfrac{1}{2n - 2}
+				\sum\limits_{i = 1}^{n} 
+				\left(
+				(X_i - \overline{X})^2 + (Y_i - \overline{Y})^2
+				\right)
+			}
+		}
+		< q_{\alpha} 
+		- \tfrac{\sqrt{\tfrac{n}{2}}(\theta_x - \theta_y)}
+		{\sqrt{\tfrac{1}{2n - 2}
+				\sum\limits_{i = 1}^{n} 
+				\left(
+				(X_i - \overline{X})^2 + (Y_i - \overline{Y})^2
+				\right)
+			}
+		} 
+		\right) = $$ 
+		$$
+		= \sup\limits_{\theta_x \geqslant \theta_y} 
+		F_{t_{2n - 2}}\left(
+		q_{\alpha} 
+		- \tfrac{\sqrt{\tfrac{n}{2}}(\theta_x - \theta_y)}
+		{\sqrt{\tfrac{1}{2n - 2}
+				\sum\limits_{i = 1}^{n} 
+				\left(
+				(X_i - \overline{X})^2 + (Y_i - \overline{Y})^2
+				\right)
+			}
+		}
+		\right)
+		= F_{t_{2n - 2}}(q_\alpha - 0) = \alpha. $$
+		Аналогично, имеем выражение для мощности:
+		$$ \beta(\theta_1, \theta_2) =
+		F_{t_{2n - 2}}\left(
+		q_{\alpha} 
+		- \tfrac{\sqrt{\tfrac{n}{2}}(\theta_x - \theta_y)}
+		{\sqrt{\tfrac{1}{2n - 2}
+				\sum\limits_{i = 1}^{n} 
+				\left(
+				(X_i - \overline{X})^2 + (Y_i - \overline{Y})^2
+				\right)
+			}
+		}
+		\right), $$
+		что больше $ F_{t_{2n - 2}}(q_\alpha) = \alpha $ при $ \theta_x < \theta_y $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2]{inprocessing}
+		
+		Рассмотрим независимые случайные величины $ X_1, \ldots, X_n \sim \mathcal{N}(\mu_x, \theta_x^2) $
+		и $ Y_1, \ldots \mathcal{N}(\mu_y, \theta_y^2) $. Параметры $ \mu_x, \mu_y $ будем считать известными числами.
+		
+		Пусть гипотеза состоит в том, что $ \theta_x \geqslant 2\theta_y $.
+		Построим точный критерий обобщённого отношения правдоподобий.
+		Имеем
+		$$ L(\theta_x, \theta_y, \vect X, \vect Y) = \prod\limits_{i = 1}^{n} 
+		\tfrac{1}{2\pi \theta_x\theta_y} e^{-\tfrac{(X_i - \mu_x)^2}{2\theta_x^2} - \tfrac{(Y_i - \mu_y)^2}{2\theta_y^2}}, $$
+		$$ \ln L(\theta_x, \theta_y, \vect X, \vect Y) = -n\ln 2\pi - n\ln \theta_x - n\ln \theta_y - \tfrac{1}{2\theta_x^2}\sum\limits_{i = 1}^{n} (X_i - \mu_x)^2 - \tfrac{1}{2\theta_y^2}\sum\limits_{i = 1}^{n} (Y_i - \mu_y)^2. $$
+		Тогда
+		$$ \tfrac{\partial}{\partial \theta_x} \ln L(\theta_x, \theta_y, \vect X, \vect Y) = -\tfrac{n}{\theta_x} 
+		+ \tfrac{1}{\theta_x^3}\sum\limits_{i = 1}^{n} (X_i - \mu_x)^2, $$
+		$$ \tfrac{\partial}{\partial \theta_y} \ln L(\theta_x, \theta_y, \vect X, \vect Y) = -\tfrac{n}{\theta_y} 
+		+ \tfrac{1}{\theta_y^3}\sum\limits_{i = 1}^{n} (Y_i - \mu_y)^2. $$
+		Максимум достигается в точке с координатами 
+		$ S_x^2 := \hat \theta_x^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \mu_x)^2 $
+		и $ S_y^2 := \hat \theta_y^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (Y_i - \mu_y)^2 $.
+		
+		Заметим, что
+		$$ \tfrac{S_x^2}{S_y^2} = \tfrac{\sum\limits_{i = 1}^{n} (X_i - \mu_x)^2}{\sum\limits_{i = 1}^{n} (Y_i - \mu_y)^2}
+		= \tfrac{\frac{1}{n\theta_x^2}\sum\limits_{i = 1}^{n} (X_i - \mu_x)^2}{\frac{1}{n\theta_y^2}\sum\limits_{i = 1}^{n} (Y_i - \mu_y)^2} \cdot \tfrac{\theta_x^2}{\theta_y^2} $$
+		и $ \tfrac{\frac{1}{n\theta_x^2}\sum\limits_{i = 1}^{n} (X_i - \mu_x)^2}{\frac{1}{n\theta_y^2}\sum\limits_{i = 1}^{n} (Y_i - \mu_y)^2} \sim F_{n, n} $.
+		
+		Если $ S_x^2 \geqslant 4S_y^2 $, то точка максимума лежит в подмножестве $ \{\theta_x > 2\theta_y\} $
+		и поэтому отношение супремумов правдоподобий будет равно 1. Будем рассматривать случай, когда $ S_x^2 < 4S_y^2 $.
+		Тогда максимум достигается на границе области $ \theta_x = 2\theta_y $, $ \theta_y =: \theta_{xy} $. 
+		Найдём его
+		$$ L(\theta_{xy}, \vect X, \vect Y) = \prod\limits_{i = 1}^{n} 
+		\tfrac{1}{4\pi \theta_{xy}^2} e^{-\tfrac{(X_i - \mu_x)^2}{8\theta_{xy}^2} - \tfrac{(Y_i - \mu_y)^2}{2\theta_{xy}^2}}, $$
+		$$ \ln L(\theta_{xy}, \vect X, \vect Y) = -n\ln 4\pi - 2n\ln \theta_{xy} - \tfrac{1}{8\theta_{xy}^2}\sum\limits_{i = 1}^{n} (X_i - \mu_x)^2 - \tfrac{1}{2\theta_{xy}^2}\sum\limits_{i = 1}^{n} (Y_i - \mu_y)^2. $$
+		Тогда
+		$$ \tfrac{\partial}{\partial \theta_{xy}} \ln L(\theta_x, \theta_y, \vect X, \vect Y) 
+		= -\tfrac{2n}{\theta_{xy}} 
+		+ \tfrac{1}{\theta_{xy}^3}\sum\limits_{i = 1}^{n}( \tfrac{1}{4}(X_i - \mu_x)^2 + (Y_i - \mu_y)^2). $$
+		Точка максимума есть $ \hat \theta_{xy}^2 = \tfrac{1}{2n}\sum\limits_{i = 1}^{n}( \tfrac{1}{4}(X_i - \mu_x)^2 + (Y_i - \mu_y)^2) = \tfrac{1}{8}S_x^2 + \tfrac{1}{2}S_y^2. $
+		
+		Имеем
+		$$ \lambda = \tfrac{\sup\limits_{\vect \theta \in \Theta} L(\theta_x, \theta_y, \vect X, \vect Y)}
+		{\sup\limits_{\vect \theta \in \Theta_0} L(\theta_x, \theta_y, \vect X, \vect Y)}
+		= \left(\tfrac{\hat \theta_{xy}^2}{S_xS_y} \right)^n
+		= \left(\tfrac{\tfrac{1}{8}S_x^2 + \tfrac{1}{2}S_y^2}{S_xS_y} \right)^n
+		= \left(\tfrac{1}{8}\tfrac{S_x}{S_y} + \tfrac{1}{2}(\tfrac{S_x}{S_y})^{-1}\right)^n, $$
+		$$ \sqrt[n]{\lambda}
+		= \tfrac{1}{8}\tfrac{S_x}{S_y} + \tfrac{1}{2}(\tfrac{S_x}{S_y})^{-1}. $$
+		По предположению $ 0 < \tfrac{S_x}{S_y} < 2 $.
+		Рассмотрим функцию $ f(u) = \tfrac{u}{8} + \tfrac{1}{2u} $. Её производная равна $ f'(u) = \tfrac{1}{8} - \tfrac{1}{2u^2} $
+		и она меньше нуля при $ 0 < u < 2 $. Следовательно, функция $ f $ монотонно убывает на $ (0, 2) $.
+		
+		Имеем
+		$$ \prob\left(\tfrac{S_x^2}{S_y^2} < c_\alpha \right)
+		= \prob\left(\tfrac{S_x^2}{S_y^2} \cdot \tfrac{\theta_y^2}{\theta_x^2} 
+		< \tfrac{c_\alpha\theta_y^2}{\theta_x^2} \right) 
+		= F_{F_{2n, 2n}}(\tfrac{c_\alpha\theta_y^2}{\theta_x^2}). $$
+		
+		Будет отвергать гипотезу при $ \tfrac{S_x^2}{S_y^2} <
+		4q_\alpha = c_\alpha $, где $ q_{\alpha} $ --- квантиль уровня $ \alpha $
+		распределения Фишера-Снедекора.
+		Тогда можно вычислить уровень значимости
+		$$ \sup\limits_{\theta_x \geqslant 2\theta_y} \prob\left(\tfrac{S_x^2}{S_y^2} < c_\alpha \right)
+		= \sup\limits_{\theta_x \geqslant 2\theta_y} F_{F_{2n, 2n}}(\tfrac{2\theta_y^2}{\theta_x^2} \cdot q_{\alpha})
+		= \alpha $$
+		и мощность критерия:
+		$$ \beta(\theta_x, \theta_y) = \prob\left(\tfrac{S_x^2}{S_y^2} < c_\alpha \right)
+		= F_{F_{2n, 2n}}(\tfrac{4\theta_y^2}{\theta_x^2} \cdot q_{\alpha})
+		> \alpha. $$
+	\end{problem}
+	
+\end{document}
+
+\begin{problem}[Задача 3]{inprocessing}
+	
+	Предположим, что в предыдущей задаче $ \mu_x $ и $ \mu_y $ являются параметрами.
+	Построим точный критерий обобщённого правдоподобия для гипотезы $ 
+	\theta_x \leqslant 2\theta_y $.
+	
+	Точкой максимума для $ L(\theta_x, \theta_y, \mu_x, \mu_y, \vect X, \vect Y) $ 
+	будет точка с координатами $ \hat \mu_x = \overline{X}, \hat \mu_y = \overline{Y} $
+	и $ S_x^2 = \hat \theta_x^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2,
+	S_y^2 = \hat \theta_y^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2 $.
+	
+	В этом случае
+	$$ \tfrac{S_x^2}{S_y^2} 
+	= \frac{\frac{1}{(n - 1)\theta_x^2}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}
+	{\frac{1}{(n - 1)\theta_y^2}\sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2} $$
+	
+	
+	При условии гипотезы, если $ \hat\theta_y^2 $
+	
+\end{problem}

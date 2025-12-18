@@ -1,0 +1,898 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{nicefrac, xfrac}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	%	\tableofcontents
+	
+	%\section{Дз 2}
+	
+	\begin{problem}[Задача 1 ]{inprocessing}
+		
+		Пусть нулевая гипотеза $ H_0 $ состоит в том, что $ X_1 \sim \mathrm{R}[0, 1]$,
+		а альтернатива $ H_1 $ заключается в том, что $ X_1 $ имеем функцию распределения 
+		$ F_{X_1}(x) = \sin(\tfrac{\pi x}{2})I(0 < x < 1) + I(x \geqslant 1) $.
+		
+		Построим наиболее мощный критерий и вычислим мощность.
+		
+		Теперь $ \tfrac{L_1(x_1)}{L_0(x_1)} = \tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2}) $
+		и неравенство $ \tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2}) > c_\alpha $
+		выполнено  тогда и только тогда,
+		когда $ x_1 < \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi} $.
+		Поэтому
+		$$ \alpha = \prob_{0}(\tfrac{L_1(x_1)}{L_0(x_1)} > c_\alpha)
+		= \prob_0(x_1 < \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi})
+		= \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi}. $$
+		Отсюда $ c_\alpha = \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}) $.
+		Таким образом, если $ \tfrac{L_1(x_1)}{L_0(x_1)} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}) $,
+		то нулевая гипотеза отклоняется.
+		
+		Вычислим мощность критерия.
+		$$ \prob_{1}(\tfrac{L_1(x_1)}{L_0(x_1)} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}))
+		= \prob_{1}(\tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}))
+		= \prob_{1}(\tfrac{\pi x_1}{2} < \tfrac{\pi \alpha}{2})
+		= \prob_{1}(x_1 < \alpha)
+		= \sin(\tfrac{\pi \alpha}{2}). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 (почему возникает достаточная статистика)]{inprocessing}
+		
+		По критерию факторизации для достаточной статистики $ T $ и некоторых функций $ g(\theta, t) $ и $ h(x_1, \ldots, x_n) $ 
+		имеется равенство $ L(\theta, x_1, \ldots, x_n) = g(\theta, t)h(x_1, \ldots, x_n) $.
+		При решении задач используется критерий Неймана-Пирсона,
+		в построении которого участвует функция 
+		$$ \tfrac{L(s, X_1, \ldots, X_n)}{L(s_0, X_1, \ldots, X_n)}
+		= \tfrac{g(s, T)h(X_1, \ldots, X_n)}{g(s_0, T)h(X_1, \ldots, X_n)}
+		= \tfrac{g(s, T)}{g(s_0, T)}. $$
+		Тогда неравенство $ \tfrac{g(s, T)}{g(s_0, T)} > c_\alpha $ равносильно некоторому неравенству для $ T $.
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 2аб ($ \mathrm{Exp}(1), \mathrm{Exp}(\tfrac{1}{s}) $)]{inprocessing}
+		
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathrm{Exp}(1) $.
+		Альтернативной является гипотеза о распределении $ \mathrm{Exp}(\tfrac{1}{s}) $.
+		Если $ X_1, \ldots, X_n \sim \mathrm{Exp}(\tfrac{1}{s}) $,
+		то $ \overline{X} \sim \mathrm{\Gamma}(n, \tfrac{s}{n}) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} e^{-x_i}I(X_{(1)} > 0); $$
+		$$ L_1(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} s^{-1}e^{-s^{-1}x_i}I(X_{(1)} > 0). $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= s^{-n}e^{-(s^{-1} -1)\sum\limits_{i = 1}^{n} x_i}. $$
+		Отсюда
+		$$ \alpha = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha + n\ln s). $$
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}). $$
+		Поэтому $ \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}} = \gamma_{n, \frac{1}{n}, \alpha} $,
+		где $ \gamma_{n, \frac{1}{n}, \alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathrm{\Gamma}(n, \tfrac{1}{n}) $-распределения.
+		Тогда $ c_\alpha = s^ne^{(1-s^{-1})\gamma_{n, \frac{1}{n}, \alpha}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha - n\ln s)
+		= \prob_{1}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}) = $$
+		$$ = \prob_{1}(\overline{X} < \gamma_{n, \frac{1}{n}, \alpha})
+		= \int\limits_{0}^{\gamma_{n, \frac{1}{n}, \alpha}} \tfrac{n^nx^{n - 1}}{\Gamma(n)}e^{nx}dx. $$
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(\overline{X} > \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}). $$
+		Поэтому $ \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}} = \gamma_{n, \frac{1}{n}, 1 - \alpha} $,
+		где $ \gamma_{n, \frac{1}{n}, 1- \alpha} $ --- квантиль уровня $ 1-\alpha $
+		для $ \mathrm{\Gamma}(n, \tfrac{1}{n}) $-распределения.
+		Тогда $ c_\alpha = s^ne^{(1-s^{-1})\gamma_{n, \frac{1}{n}, 1-\alpha}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha - n\ln s)
+		= \prob_{1}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}) = $$
+		$$ = \prob_{1}(\overline{X} > \gamma_{n, \frac{1}{n}, \alpha})
+		= 1 - \int\limits_{0}^{\gamma_{n, \frac{1}{n}, 1 - \alpha}} \tfrac{n^nx^{n - 1}}{\Gamma(n)}e^{nx}dx. $$
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(\overline{X}) = 1 $, $ \disp_0(\overline{X}) = \tfrac{1}{n} $.
+		Тогда $ \sqrt{n}(\overline{X} - 1) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < 1 + \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2аб ($ \mathcal{N}(0, 1), \mathcal{N}(s, 1) $)]{inprocessing}
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathcal{N}(0, 1) $.
+		Альтернативной является гипотеза о распределении $ \mathcal{N}(s, 1) $.
+		Если $ X_1, \ldots, X_n \sim \mathcal{N}(s, 1) $,
+		то $ \overline{X} \sim \mathcal{N}(s, \tfrac{1}{n}) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}}e^{-\tfrac{x_i^2}{2}}; $$
+		$$ L_1(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}}e^{-\tfrac{(x_i - s)^2}{2}}. $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= e^{\tfrac{2s\sum\limits_{i = 1}^{n} x_i - ns^2}{2}}. $$
+		Отсюда
+		$$ \beta = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(2s\overline{X} - s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{0}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}). $$
+		
+		Если $ s > 0 $, то
+		$$ \alpha = \prob_{0}(\overline{X} > \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn}). $$
+		Поэтому $ \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn} = \tfrac{z_{1-\alpha}}{\sqrt{n}} $,
+		где $ z_{\alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathcal{N}(0, 1) $-распределения.
+		Тогда $ c_\alpha = e^{\sqrt{n}sz_{1 - \alpha} - \frac{ns^2}{2}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta(s) = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(2s\overline{X}-s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{1}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}) = $$
+		$$ = \prob_{1}(\overline{X} > \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn})
+		= 1 - \Phi(\sqrt{n}(\tfrac{z_{1 - \alpha}}{\sqrt{n}} - s))
+		= 1 - \Phi(z_{1 - \alpha} - \sqrt{n}s). $$
+		
+		Если $ s < 0 $, то
+		$$ \alpha = \prob_{0}(\overline{X} < \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn}). $$
+		Поэтому $ \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn} = \tfrac{z_{\alpha}}{\sqrt{n}} $,
+		где $ z_{\alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathcal{N}(0, 1) $-распределения.
+		Тогда $ c_\alpha = e^{\sqrt{n}sz_{\alpha} - \frac{ns^2}{2}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(2s\overline{X}-s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{1}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}) = $$
+		$$ = \prob_{1}(\overline{X} < \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn})
+		= \Phi(\sqrt{n}(\tfrac{z_{\alpha}}{\sqrt{n}} - s))
+		= \Phi(z_{\alpha} - \sqrt{n}s). $$
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(\overline{X}) = 0 $, $ \disp_0(\overline{X}) = \tfrac{1}{n} $.
+		Тогда $ \sqrt{n}\overline{X} \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 2аб ($ \mathrm{Poiss}(1), \mathrm{Poiss}(s) $)]{inprocessing}
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathrm{Poiss}(1) $.
+		Если $ X_1, \ldots, X_n \sim \mathrm{Poiss}(s) $,
+		то $ n\overline{X} \sim \mathrm{Poiss}(ns) $.
+		Альтернативной является гипотеза о распределении $ \mathrm{Poiss}(s) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+		= e^{-n}\tfrac{1}{x_1!\ldots x_n!}; $$
+		$$ L_1(s, x_1, \ldots, x_n)
+		= e^{-ns}\tfrac{1}{x_1!\ldots x_n!}s^{(x_1 + x_2 + \ldots + x_n)}. $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= e^{n(1 - s)}s^{x_1 + x_2 + \ldots + x_n}. $$
+		Отсюда
+		$$ \alpha = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{0}(n\overline{X}\ln s < c_\alpha + n(s - 1)). $$
+		
+		Если $ s > 1 $, то
+		$$ \alpha = \prob_{0}(n\overline{X} < \tfrac{c_\alpha + n(s - 1)}{\ln s}). $$
+		Поэтому $ \tfrac{c_\alpha + n(s - 1)}{\ln s} = p_{s, \alpha} $,
+		где $ p_{n, \alpha} $ --- квантиль уровня $ \alpha $
+		для распределения $ \mathrm{Poiss}(n) $.
+		Тогда $ c_\alpha = p_{s, \alpha}\ln s - n(s - 1) $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{1}(n\overline{X}\ln s < c_\alpha + n(s - 1)) = $$
+		$$ = \prob_{1}(n\overline{X} < \tfrac{c_\alpha + n(s - 1)}{\ln s})
+		= 1 - F_{ns}(p_{s, \alpha}), $$
+		где $ F_{ns} $ --- функция распределения для случайной величины с распределением $ \mathrm{Poiss}(ns) $.
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(n\overline{X} > \tfrac{c_\alpha + n(s - 1)}{\ln s}). $$
+		Поэтому $ \tfrac{c_\alpha + n(s - 1)}{\ln s} = p_{n, 1-\alpha} $,
+		где $ p_{n, \alpha} $ --- квантиль уровня $ \alpha $
+		для распределения $ \mathrm{Poiss}(n) $.
+		Тогда $ c_\alpha = p_{s, 1-\alpha}\ln s - n(s - 1) $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{1}(n\overline{X}\ln s < c_\alpha + n(s - 1)) = $$
+		$$ = \prob_{1}(n\overline{X} > \tfrac{c_\alpha + n(s - 1)}{\ln s})
+		= 1 - F_{ns}(p_{s, 1-\alpha}), $$
+		где $ F_{ns} $ --- функция распределения для случайной величины с распределением $ \mathrm{Poiss}(ns) $.
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(n\overline{X}) = n $, $ \disp_0(n\overline{X}) = n $.
+		Тогда $ \sqrt{n}(\overline{X} - n) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < n + \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \theta_2) $.
+		
+		Пусть нулевая гипотеза состоит в том, что $ \theta_1 = 0 $,
+		а альтернатива заключается в том, что $ \theta_1 \neq 0 $.
+		Построим критерий на основе $ g(\theta_1, X_1, \ldots, X_n) = \tfrac{\overline{X} - \theta_1}
+		{\sqrt{\frac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}}. $
+		Тогда при фиксированном $ \theta_1 $ случайная величина $ g\sqrt{n} $ имеет распределение $ t_{n - 1} $.
+		Тогда
+		$$ \prob_{0}(q_{n - 1, \frac{\alpha}{2}} < g\sqrt{n} < q_{n - 1, 1 - \frac{\alpha}{2}}) = \alpha $$
+		и
+		$$ \prob_{0}(\tfrac{q_{n - 1, \frac{\alpha}{2}}}{\sqrt{n}} < g < \tfrac{q_{n - 1, 1 - \frac{\alpha}{2}}}{\sqrt{n}}) = \alpha. $$
+		Критерий уровня $ 1 - \alpha $ будет состоять в отклонении нулевой гипотезы при
+		$ |g(0, X_1, \ldots, X_n)| > \tfrac{t_{n - 1, 1 - \frac{\alpha}{2}}}{\sqrt{n}} $.
+		
+		Пусть теперь нулевая гипотеза состоит в том, что $ \theta_2 = 1 $,
+		а альтернатива утверждает обратное.
+		Построим критерий на основе 
+		$ h(X_1, \ldots, X_n) = \sum\limits_{i = 1}^{n} (X_i - \overline{X})^2. $
+		Тогда при фиксированном $ \theta_2 $ случайная величина $ \tfrac{h}{(n - 1)\theta_2} $
+		имеет распределение $ \chi^2_{n - 1} $.
+		В предположении $ \theta_2 = 1 $ имеем
+		$$ \prob_{0}(\tfrac{h}{n - 1} > c_{n - 1, \alpha}) = 1 - \alpha. $$
+		Критерий уровня $ \alpha $ будет состоять в отклонении нулевой гипотезы при
+		$ h(0, X_1, \ldots, X_n) > (n - 1)c_{n - 1, \alpha} $.	
+		
+	\end{problem}
+	
+\end{document}
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{nicefrac, xfrac}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	%	\tableofcontents
+	
+	%\section{Дз 2}
+	
+	\begin{problem}[Задача 1 ]{inprocessing}
+		
+		Пусть нулевая гипотеза $ H_0 $ состоит в том, что $ X_1 \sim \mathrm{R}[0, 1]$,
+		а альтернатива $ H_1 $ заключается в том, что $ X_1 $ имеем функцию распределения 
+		$ F_{X_1}(x) = \sin(\tfrac{\pi x}{2})I(0 < x < 1) + I(x \geqslant 1) $.
+		
+		Построим наиболее мощный критерий и вычислим мощность.
+		
+		Теперь $ \tfrac{L_1(x_1)}{L_0(x_1)} = \tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2}) $
+		и неравенство $ \tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2}) > c_\alpha $
+		выполнено  тогда и только тогда,
+		когда $ x_1 < \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi} $.
+		Поэтому
+		$$ \alpha = \prob_{0}(\tfrac{L_1(x_1)}{L_0(x_1)} > c_\alpha)
+		= \prob_0(x_1 < \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi})
+		= \tfrac{2\arccos(\frac{2c_\alpha}{\pi})}{\pi}. $$
+		Отсюда $ c_\alpha = \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}) $.
+		Таким образом, если $ \tfrac{L_1(x_1)}{L_0(x_1)} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}) $,
+		то нулевая гипотеза отклоняется.
+		
+		Вычислим мощность критерия.
+		$$ \prob_{1}(\tfrac{L_1(x_1)}{L_0(x_1)} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}))
+		= \prob_{1}(\tfrac{\pi}{2}\cos(\tfrac{\pi x_1}{2} > \tfrac{\pi}{2}\cos(\tfrac{\pi \alpha}{2}))
+		= \prob_{1}(\tfrac{\pi x_1}{2} < \tfrac{\pi \alpha}{2})
+		= \prob_{1}(x_1 < \alpha)
+		= \sin(\tfrac{\pi \alpha}{2}). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2 (почему возникает достаточная статистика)]{inprocessing}
+		
+		По критерию факторизации для достаточной статистики $ T $ и некоторых функций $ g(\theta, t) $ и $ h(x_1, \ldots, x_n) $ 
+		имеется равенство $ L(\theta, x_1, \ldots, x_n) = g(\theta, t)h(x_1, \ldots, x_n) $.
+		При решении задач используется критерий Неймана-Пирсона,
+		в построении которого участвует функция 
+		$$ \tfrac{L(s, X_1, \ldots, X_n)}{L(s_0, X_1, \ldots, X_n)}
+		= \tfrac{g(s, T)h(X_1, \ldots, X_n)}{g(s_0, T)h(X_1, \ldots, X_n)}
+		= \tfrac{g(s, T)}{g(s_0, T)}. $$
+		Тогда неравенство $ \tfrac{g(s, T)}{g(s_0, T)} > c_\alpha $ равносильно некоторому неравенству для $ T $.
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 2аб ($ \mathrm{Exp}(1), \mathrm{Exp}(\tfrac{1}{s}) $)]{inprocessing}
+		
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathrm{Exp}(1) $.
+		Альтернативной является гипотеза о распределении $ \mathrm{Exp}(\tfrac{1}{s}) $.
+		Если $ X_1, \ldots, X_n \sim \mathrm{Exp}(\tfrac{1}{s}) $,
+		то $ \overline{X} \sim \mathrm{\Gamma}(n, \tfrac{s}{n}) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} e^{-x_i}I(X_{(1)} > 0); $$
+		$$ L_1(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} s^{-1}e^{-s^{-1}x_i}I(X_{(1)} > 0). $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= s^{-n}e^{-(s^{-1} -1)\sum\limits_{i = 1}^{n} x_i}. $$
+		Отсюда
+		$$ \alpha = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha + n\ln s). $$
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}). $$
+		Поэтому $ \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}} = \gamma_{n, \frac{1}{n}, \alpha} $,
+		где $ \gamma_{n, \frac{1}{n}, \alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathrm{\Gamma}(n, \tfrac{1}{n}) $-распределения.
+		Тогда $ c_\alpha = s^ne^{(1-s^{-1})\gamma_{n, \frac{1}{n}, \alpha}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha - n\ln s)
+		= \prob_{1}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}) = $$
+		$$ = \prob_{1}(\overline{X} < \gamma_{n, \frac{1}{n}, \alpha})
+		= \int\limits_{0}^{\gamma_{n, \frac{1}{n}, \alpha}} \tfrac{n^nx^{n - 1}}{\Gamma(n)}e^{nx}dx. $$
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(\overline{X} > \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}). $$
+		Поэтому $ \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}} = \gamma_{n, \frac{1}{n}, 1 - \alpha} $,
+		где $ \gamma_{n, \frac{1}{n}, 1- \alpha} $ --- квантиль уровня $ 1-\alpha $
+		для $ \mathrm{\Gamma}(n, \tfrac{1}{n}) $-распределения.
+		Тогда $ c_\alpha = s^ne^{(1-s^{-1})\gamma_{n, \frac{1}{n}, 1-\alpha}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(-(s^{-1} - 1)\sum\limits_{i = 1}^{n} X_i > \ln c_\alpha - n\ln s)
+		= \prob_{1}(\overline{X} < \tfrac{\ln c_\alpha - n\ln s}{1 - s^{-1}}) = $$
+		$$ = \prob_{1}(\overline{X} > \gamma_{n, \frac{1}{n}, \alpha})
+		= 1 - \int\limits_{0}^{\gamma_{n, \frac{1}{n}, 1 - \alpha}} \tfrac{n^nx^{n - 1}}{\Gamma(n)}e^{nx}dx. $$
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(\overline{X}) = 1 $, $ \disp_0(\overline{X}) = \tfrac{1}{n} $.
+		Тогда $ \sqrt{n}(\overline{X} - 1) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < 1 + \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2аб ($ \mathcal{N}(0, 1), \mathcal{N}(s, 1) $)]{inprocessing}
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathcal{N}(0, 1) $.
+		Альтернативной является гипотеза о распределении $ \mathcal{N}(s, 1) $.
+		Если $ X_1, \ldots, X_n \sim \mathcal{N}(s, 1) $,
+		то $ \overline{X} \sim \mathcal{N}(s, \tfrac{1}{n}) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}}e^{-\tfrac{x_i^2}{2}}; $$
+		$$ L_1(x_1, \ldots, x_n) = \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{2\pi}}e^{-\tfrac{(x_i - s)^2}{2}}. $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= e^{\tfrac{2s\sum\limits_{i = 1}^{n} x_i - ns^2}{2}}. $$
+		Отсюда
+		$$ \beta = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(2s\overline{X} - s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{0}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}). $$
+		
+		Если $ s > 0 $, то
+		$$ \alpha = \prob_{0}(\overline{X} > \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn}). $$
+		Поэтому $ \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn} = \tfrac{z_{1-\alpha}}{\sqrt{n}} $,
+		где $ z_{\alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathcal{N}(0, 1) $-распределения.
+		Тогда $ c_\alpha = e^{\sqrt{n}sz_{1 - \alpha} - \frac{ns^2}{2}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta(s) = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(2s\overline{X}-s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{1}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}) = $$
+		$$ = \prob_{1}(\overline{X} > \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn})
+		= 1 - \Phi(\sqrt{n}(\tfrac{z_{1 - \alpha}}{\sqrt{n}} - s))
+		= 1 - \Phi(z_{1 - \alpha} - \sqrt{n}s). $$
+		
+		Если $ s < 0 $, то
+		$$ \alpha = \prob_{0}(\overline{X} < \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn}). $$
+		Поэтому $ \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn} = \tfrac{z_{\alpha}}{\sqrt{n}} $,
+		где $ z_{\alpha} $ --- квантиль уровня $ \alpha $
+		для $ \mathcal{N}(0, 1) $-распределения.
+		Тогда $ c_\alpha = e^{\sqrt{n}sz_{\alpha} - \frac{ns^2}{2}} $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(2s\overline{X}-s^2 > \tfrac{2\ln c_\alpha}{n})
+		= \prob_{1}(2s\overline{X} > s^2 + \tfrac{2\ln c_\alpha}{n}) = $$
+		$$ = \prob_{1}(\overline{X} < \tfrac{s}{2} + \tfrac{\ln c_\alpha}{sn})
+		= \Phi(\sqrt{n}(\tfrac{z_{\alpha}}{\sqrt{n}} - s))
+		= \Phi(z_{\alpha} - \sqrt{n}s). $$
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(\overline{X}) = 0 $, $ \disp_0(\overline{X}) = \tfrac{1}{n} $.
+		Тогда $ \sqrt{n}\overline{X} \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	
+	\begin{problem}[Задача 2аб ($ \mathrm{Poiss}(1), \mathrm{Poiss}(s) $)]{inprocessing}
+		
+		Пусть в соответствии с нулевой гипотезой случайные величины $ X_1, \ldots, X_n $
+		имеют распределение $ \mathrm{Poiss}(1) $.
+		Если $ X_1, \ldots, X_n \sim \mathrm{Poiss}(s) $,
+		то $ n\overline{X} \sim \mathrm{Poiss}(ns) $.
+		Альтернативной является гипотеза о распределении $ \mathrm{Poiss}(s) $.
+		Вычислим функции правдоподобия в предположении нулевой гипотезы и альтернативы.
+		$$ L_0(x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+		= e^{-n}\tfrac{1}{x_1!\ldots x_n!}; $$
+		$$ L_1(s, x_1, \ldots, x_n)
+		= e^{-ns}\tfrac{1}{x_1!\ldots x_n!}s^{(x_1 + x_2 + \ldots + x_n)}. $$
+		Тогда
+		$$ \tfrac{L_1(x_1, \ldots, x_n)}{L_0(x_1, \ldots, x_n)}
+		= e^{n(1 - s)}s^{x_1 + x_2 + \ldots + x_n}. $$
+		Отсюда
+		$$ \alpha = \prob_{0}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{0}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{0}(n\overline{X}\ln s < c_\alpha + n(s - 1)). $$
+		
+		Если $ s > 1 $, то
+		$$ \alpha = \prob_{0}(n\overline{X} < \tfrac{c_\alpha + n(s - 1)}{\ln s}). $$
+		Поэтому $ \tfrac{c_\alpha + n(s - 1)}{\ln s} = p_{s, \alpha} $,
+		где $ p_{n, \alpha} $ --- квантиль уровня $ \alpha $
+		для распределения $ \mathrm{Poiss}(n) $.
+		Тогда $ c_\alpha = p_{s, \alpha}\ln s - n(s - 1) $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{1}(n\overline{X}\ln s < c_\alpha + n(s - 1)) = $$
+		$$ = \prob_{1}(n\overline{X} < \tfrac{c_\alpha + n(s - 1)}{\ln s})
+		= 1 - F_{ns}(p_{s, \alpha}), $$
+		где $ F_{ns} $ --- функция распределения для случайной величины с распределением $ \mathrm{Poiss}(ns) $.
+		
+		Если $ s < 1 $, то
+		$$ \alpha = \prob_{0}(n\overline{X} > \tfrac{c_\alpha + n(s - 1)}{\ln s}). $$
+		Поэтому $ \tfrac{c_\alpha + n(s - 1)}{\ln s} = p_{n, 1-\alpha} $,
+		где $ p_{n, \alpha} $ --- квантиль уровня $ \alpha $
+		для распределения $ \mathrm{Poiss}(n) $.
+		Тогда $ c_\alpha = p_{s, 1-\alpha}\ln s - n(s - 1) $.
+		
+		Вычислим мощность критерия:
+		$$ \beta = \prob_{1}(\tfrac{L_1(X_1, \ldots, X_n)}{L_0(X_1, \ldots, X_n)} > c_\alpha)
+		= \prob_{1}(n(1 - s) + n\overline{X}\ln s < c_\alpha)
+		= \prob_{1}(n\overline{X}\ln s < c_\alpha + n(s - 1)) = $$
+		$$ = \prob_{1}(n\overline{X} > \tfrac{c_\alpha + n(s - 1)}{\ln s})
+		= 1 - F_{ns}(p_{s, 1-\alpha}), $$
+		где $ F_{ns} $ --- функция распределения для случайной величины с распределением $ \mathrm{Poiss}(ns) $.
+		
+		Вычислим асимптотические квантили.
+		Имеем $ \expect_0(n\overline{X}) = n $, $ \disp_0(n\overline{X}) = n $.
+		Тогда $ \sqrt{n}(\overline{X} - n) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $
+		Поэтому 
+		$$ \prob_0(\overline{X} < n + \tfrac{z_\alpha}{\sqrt{n}}) \to \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3аб]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \theta_2) $.
+		
+		Пусть нулевая гипотеза состоит в том, что $ \theta_1 = 0 $,
+		а альтернатива заключается в том, что $ \theta_1 \neq 0 $.
+		Построим критерий на основе $ g(\theta_1, X_1, \ldots, X_n) = \tfrac{\overline{X} - \theta_1}
+		{\sqrt{\frac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}}. $
+		Тогда при фиксированном $ \theta_1 $ случайная величина $ g\sqrt{n} $ имеет распределение $ t_{n - 1} $.
+		Тогда
+		$$ \prob_{0}(q_{n - 1, \frac{\alpha}{2}} < g\sqrt{n} < q_{n - 1, 1 - \frac{\alpha}{2}}) = \alpha $$
+		и
+		$$ \prob_{0}(\tfrac{q_{n - 1, \frac{\alpha}{2}}}{\sqrt{n}} < g < \tfrac{q_{n - 1, 1 - \frac{\alpha}{2}}}{\sqrt{n}}) = \alpha. $$
+		Критерий уровня $ 1 - \alpha $ будет состоять в отклонении нулевой гипотезы при
+		$ |g(0, X_1, \ldots, X_n)| > \tfrac{t_{n - 1, 1 - \frac{\alpha}{2}}}{\sqrt{n}} $.
+		
+		Пусть теперь нулевая гипотеза состоит в том, что $ \theta_2 = 1 $,
+		а альтернатива утверждает обратное.
+		Построим критерий на основе 
+		$ h(X_1, \ldots, X_n) = \sum\limits_{i = 1}^{n} (X_i - \overline{X})^2. $
+		Тогда при фиксированном $ \theta_2 $ случайная величина $ \tfrac{h}{(n - 1)\theta_2} $
+		имеет распределение $ \chi^2_{n - 1} $.
+		В предположении $ \theta_2 = 1 $ имеем
+		$$ \prob_{0}(\tfrac{h}{n - 1} > c_{n - 1, \alpha}) = 1 - \alpha. $$
+		Критерий уровня $ \alpha $ будет состоять в отклонении нулевой гипотезы при
+		$ h(0, X_1, \ldots, X_n) > (n - 1)c_{n - 1, \alpha} $.	
+		
+	\end{problem}
+	
+\end{document}

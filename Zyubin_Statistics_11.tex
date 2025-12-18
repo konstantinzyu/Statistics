@@ -1,0 +1,558 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{nicefrac, xfrac}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\grad}{\operatorname{grad}}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+\newcommand{\spmatrix}[4]{
+	\left( \begin{smallmatrix}
+		#1 & #2 \\
+		#3 & #4
+	\end{smallmatrix} \right)
+}
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	%	\tableofcontents
+	
+	%\section{Дз 2}
+	
+	
+	
+	\begin{problem}[Задача 1 (КООП)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_x, \theta_1^2) $ 
+		и $ Y_1, \ldots, Y_n \sim \mathcal{N}(\theta_y, \theta_2^2) $ --- независимые случайные величины.
+		Пусть нулевая гипотеза заключается в равенстве $ \theta_1 = \theta_2 $,
+		а альтернатива --- её отрицание.
+		
+		Построим критерий обобщённого отношения правдоподобий.
+		
+		Имеем в общем случае
+		$$ L(\theta_1, \theta_2, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta_1\theta_2}e^{-\frac{(X_i - \theta_x)^2}{2\theta_1^2} - \frac{(Y_i - \theta_y)^2}{2\theta_2^2}}. $$
+		Тогда 
+		$$ \ln L(\theta_1, \theta_2, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		= -n\ln(\theta_1) - n\ln(\theta_2) - n\ln (2\pi) 
+		- \tfrac{1}{2\theta_1^2}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2 - 
+		\tfrac{1}{2\theta_2^2}\sum\limits_{i = 1}^{n}(Y_i - \theta_y)^2, $$
+		$$ \tfrac{\partial}{\partial \theta_x} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta_1^2}\left( -n\theta_x + \sum\limits_{i = 1}^{n} X_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_y} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta_2^2}\left( -n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_1} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= -\tfrac{n}{\theta_1} + \tfrac{1}{\theta_1^3}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2 = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_2} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= -\tfrac{n}{\theta_2} + \tfrac{1}{\theta_2^3}\sum\limits_{i = 1}^{n} (Y_i - \theta_y)^2 = 0. $$
+		
+		Поэтому максимум достигается в точке $ \hat{\theta_x} = \overline{X} $, $ \hat{\theta_y} = \overline{Y} $,
+		$ \hat{\theta_1} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}$
+		и $ \hat{\theta_2} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2}$.
+		
+		При $ \theta_1 = \theta_2 = \theta $ имеем
+		$$ L(\theta, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		\prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\frac{(X_i - \theta_x)^2}{2\theta^2} - \frac{(Y_i - \theta_y)^2}{2\theta^2}}. $$
+		Тогда 
+		$$ \ln L(\theta, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)
+		= -2n\ln(\theta) - n\ln (2\pi) - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2 - 
+		\tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n}(y_i - \theta_y)^2, $$
+		$$ \tfrac{\partial}{\partial \theta_x} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta^2}\left( -n\theta_x + \sum\limits_{i = 1}^{n} X_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta_y} L(\theta_1, \theta_2, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= \tfrac{1}{\theta^2}\left( -n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right) = 0, $$
+		$$ \tfrac{\partial}{\partial \theta} L(\theta, X_1, \ldots, X_n, Y_1, \ldots, Y_n) 
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2
+		+ \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} (Y_i - \theta_y)^2 = 0. $$
+		Тогда максимум достигается в точек $ \hat{\theta_x} = \overline{X}, \hat{\theta_y} = \overline{Y} $
+		и $ \hat{\theta} = \sqrt{\tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)}$.
+		
+		Положим $ S_X = \sum\limits_{i = 1}^{n} (X_i - \overline{X}), S_Y = \sum\limits_{i = 1}^{n} (Y_i - \overline{Y}) $
+		и $ S = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right) $.
+		
+		Имеем 
+		$$ \lambda 
+		= \tfrac{\sup_{\theta \in \Theta} L(\theta_1, \theta_2, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)}
+		{\sup_{\theta \in \Theta_0} L(\theta, \theta_x, \theta_y, X_1, \ldots, X_n, Y_1, \ldots, Y_n)}
+		= \tfrac{\frac{1}{S_X^{\frac{n}{2}}S_Y^{\frac{n}{2}}} \cdot \frac{1}{(2\pi)^n}e^{-n}}
+		{\frac{1}{S^n} \cdot \frac{1}{(2\pi)^n}e^{-n}} = \tfrac{S^n}{\sqrt{S_X^nS_Y^n}} $$
+		и $$ \ln \lambda = n\ln S - \tfrac{n}{2}\ln S_X - \tfrac{n}{2}\ln S_Y. $$
+		
+		Так как $ \dim \Theta - \dim \Theta_0 = 4 - 3 = 1 $, то
+		$ 2\ln \lambda \overunderset{d}{\theta \in \Theta_0}{\to} \xi \sim \chi_{1}^2 $.
+		
+		Тогда $ \prob_{H_0}(2n\ln S - n\ln S_X - n\ln S_Y > q_{1 - \alpha}) \underset{n \to +\infty}{\to} \alpha $,
+		где $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $ распределения $ \chi_1^2 $.
+		Нулевая гипотеза отклоняется при $ 2n\ln S - n\ln S_X - n\ln S_Y > q_{1 - \alpha} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1 (Vald)]{inprocessing}
+	
+		Построим вальдовский критерий в рамках задачи 1а.
+		Пусть $ h(\theta_1, \theta_x, \theta_2, \theta_y) = \theta_1 - \theta_2 $.
+		Нулевая гипотеза в этом случае обретает равносильную формулировку $ h(\theta_1, \theta_2, \theta_x, \theta_y) = 0 $.
+		
+		Выше мы вычислили точку максимума на $ \Theta $ как точку с координатами $ \hat{\theta_x} = \overline{X} $, $ \hat{\theta_y} = \overline{Y} $,
+		$ \hat{\theta_1} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2} = \sqrt{S_X}$
+		и $ \hat{\theta_2} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2} = \sqrt{S_Y}$.
+		
+		Вычислим информационную матрицу для $ n = 1 $ в точке максимума:
+		$$ I_1(\theta_1, \theta_x, \theta_2, \theta_y) =
+		\left.\expect(-\tfrac{\partial^2}{\partial \theta_i \partial \theta_j}\ln L)\right|_{\theta = \hat{\theta}} = $$  $$
+		=
+		\left.\left(\begin{smallmatrix}
+			\expect\left(-\tfrac{n}{\theta_1^2} + \tfrac{3}{\theta_1^4}\sum\limits_{i = 1}^{n} (X_i - \theta_x)^2\right)
+			& \expect\left(\tfrac{2}{\theta_1^3}\left(-n\theta_x + \sum\limits_{i = 1}^{n} X_i\right)\right) & 0 & 0 \\
+			\expect\left(\tfrac{2}{\theta_1^3}\left(-n\theta_x + \sum\limits_{i = 1}^{n} X_i\right)\right) & \expect\tfrac{n}{\theta_1^2} & 0 & 0 \\
+			0 & 0 & \expect\left(-\tfrac{n}{\theta_2^2} + \tfrac{3}{\theta_2^4}\sum\limits_{i = 1}^{n} (Y_i - \theta_y)^2\right) & \expect\left(\tfrac{2}{\theta_2^3}\left(-n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right)\right) \\
+			0 & 0 & \expect\left(\tfrac{2}{\theta_2^3}\left(-n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right)\right) & \expect\tfrac{n}{\theta_2^2}
+		\end{smallmatrix}\right)\right|_{\theta = \hat{\theta}, n = 1} = $$
+		$$ 
+		= \left.\left(\begin{smallmatrix}
+			\tfrac{2n}{\theta_1^2} & 0 & 0 & 0 \\
+			0 & \tfrac{n}{\theta_1^2} & 0 & 0 \\
+			0 & 0 & \tfrac{2n}{\theta_2^2} & 0 \\
+			0 & 0 & 0 & \tfrac{n}{\theta_2^2}
+		\end{smallmatrix}\right)\right|_{\theta = \hat{\theta}, n = 1}
+		= \left(\begin{smallmatrix}
+			\tfrac{2}{S_X} & 0 & 0 & 0 \\
+			0 & \tfrac{1}{S_X} & 0 & 0 \\
+			0 & 0 & \tfrac{2}{S_Y} & 0 \\
+			0 & 0 & 0 & \tfrac{1}{S_Y}
+		\end{smallmatrix}\right). $$
+		Градиент $ h $ есть $ (1, 0, -1, 0) $, поэтому
+		$$ JI_1^{-1}(\hat{\theta})J^T = \tfrac{S_X + S_Y}{2}. $$
+		
+		Тогда для квантиля $ q_{1 - \alpha} $ получаем 
+		$$ \prob_{H_0}(\tfrac{2n(\sqrt{S_Y} - \sqrt{S_X})^2}{S_X + S_Y} > q_{1 - \alpha}) \underset{n \to +\infty}{\to} \alpha. $$
+		Нулевая гипотеза отвергается при $ \tfrac{2n(\sqrt{S_Y} - \sqrt{S_X})^2}{S_X + S_Y} > q_{1 - \alpha} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2]{inprocessing}
+		
+		Пусть фиксировано целое положительное число $ k $ и имеются $ k $ последовательностей независимых случайных величин
+		$ X_{k,1}, \ldots, X_{k,n_k} \sim \mathrm{Exp}(\tfrac{1}{\theta_k}) $.
+		Пусть нулевая гипотеза состоит в том, что $ \theta_1 = \ldots = \theta_k $.
+		
+		Построим score-test для проверки гипотезы.
+		
+		Имеем
+		$$ \ln L(\overrightarrow{\theta}, X_{ij}) = \ln \prod\limits_{i = 1}^{k} \prod\limits_{j = 1}^{n_i}
+		 \tfrac{1}{\theta_i}e^{-\tfrac{X_{ij}}{\theta_i}}I(X_{ij} > 0)
+		 = \sum\limits_{i = 1}^{k} \left(-n_i\ln \theta_i - \tfrac{1}{\theta_i}\sum\limits_{j = 1}^{n_i} X_{ij}\right). $$
+		Частная производная по $ \theta_i $ не равна нулю только для $ i $-го слагаемого в внешней сумме.
+		Поэтому
+		$$ \tfrac{\partial}{\partial \theta_i} \ln L(\overrightarrow{\theta}, X_{ij})
+		= \tfrac{\partial}{\partial \theta_i}
+		\left(-n_i\ln \theta_i - \tfrac{1}{\theta_i}\sum\limits_{j = 1}^{n_i} X_{ij}\right)
+		= 
+		\tfrac{-n_i}{\theta_i} + \tfrac{1}{\theta_i^2}\sum\limits_{j = 1}^{n_i} X_{ij}. $$
+		
+		Найдём оценку максимального правдоподобия при условии гипотезы ($ \theta = \theta_1 = \ldots = \theta_k $).
+		Имеем
+		$$ \sum\limits_{i = 1}^{k}
+		\left(\tfrac{-n_i}{\theta} + \tfrac{1}{\theta^2}\sum\limits_{j = 1}^{n_i} X_{ij}\right) = 0. $$
+		Отсюда
+		$$ \hat{\theta} = \tfrac{\sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{n_i} X_{ij}}{\sum\limits_{i = 1}^{k} n_i}. $$
+		
+		Вычислим информационную матрицу.
+		Из формул для частных производных видим, что вторые частные производные по $ \theta_i $ и $ \theta_j $ 
+		равны 0 при $ i \neq j $. Поэтому матрица диагональна. Вычислим значения элементов на диагонали.
+		Тогда
+		$$ -\tfrac{\partial^2}{\partial^2 \theta_i} \ln L(\theta, X_{ij})
+		= -\tfrac{n_i}{\theta_i^2} + \tfrac{2}{\theta_i^3}\sum\limits_{j = 1}^{n_i} X_{ij}, $$
+		$$ I_{ii}(\theta_i) = \expect \left(-\tfrac{n_i}{\theta_i^2} + \tfrac{2}{\theta_i^3}\sum\limits_{j = 1}^{n_i} X_{ij}\right)
+		= -\tfrac{n_i}{\theta_i^2} + \tfrac{2}{\theta_i^3} \cdot n_i\theta_i = \tfrac{n_i}{\theta_i^2}. $$
+		
+		Отсюда 
+		$$ \sum\limits_{i = 1}^{k} \tfrac{\hat{\theta}^2}{n_i}\left(\tfrac{-n_i}{\hat{\theta}} 
+		+ \tfrac{1}{\hat{\theta}^2}\sum\limits_{j = 1}^{n_i} X_{ij}\right)^2
+		= \tfrac{\hat{\theta}^2}{\hat{\theta}^4} \sum\limits_{i = 1}^{k}
+		\tfrac{1}{n_i}\left(\sum\limits_{j = 1}^{n_i} X_{ij} - n_i\hat{\theta}\right)^2
+		= \tfrac{\sum\limits_{i = 1}^{k}
+			\tfrac{1}{n_i}\left(\sum\limits_{j = 1}^{n_i} X_{ij} - n_i\hat{\theta}\right)^2}
+			{\left(\tfrac{\sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{n_i} X_{ij}}{\sum\limits_{i = 1}^{k} n_i}\right)^2}. $$
+			
+		Эта случайная величина сходится по распределению к $ \chi^2_{k - 1} $-случайной величине. 
+		Пусть $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $.
+		Тогда
+		$$ \prob\left(\tfrac{\sum\limits_{i = 1}^{k}
+			\tfrac{1}{n_i}\left(\sum\limits_{j = 1}^{n_i} X_{ij} - n_i\hat{\theta}\right)^2}
+		{\left(\tfrac{\sum\limits_{i = 1}^{k}\sum\limits_{j = 1}^{n_i} X_{ij}}{\sum\limits_{i = 1}^{k} n_i}\right)^2}
+		> q_{1 - \alpha} \right) \underset{n \to +\infty}{\to} \alpha. $$
+	\end{problem}
+	
+	\begin{problem}[Задача 3а]{inprocessing}
+		
+		Пусть имеются три набора независимых случайных величин
+		$ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \sigma^2) $,
+		$ Y_1, \ldots, Y_n \sim \mathcal{N}(\theta_2, \sigma^2) $ и
+		$ Z_1, \ldots, Z_n \sim \mathcal{N}(\theta_3, \sigma^2) $,
+		представляющие значения длин рёбер параллелепипеда.
+		
+		Пусть $ V $ --- фиксированное положительное число.
+		Построим критерий Вальда для проверки гипотезы о том, что объём параллелепипеда равен $ V $:
+		$$ \theta_1\theta_2\theta_3 = V. $$
+		В пространстве всех допустимых значений $ \Theta = \defineset{(\theta_1, \theta_2, \theta_3,
+			\sigma)}{\theta_1, \theta_2, \theta_3, \sigma > 0} $
+		равенство $ \theta_1\theta_2\theta_3 = V $ определяет гиперповерхность, то есть подмногообразие размерности $ 3 - 1 = 2 $.
+		
+		Для построения критерия Вальда будем рассматривать функцию $ h(x, y, z, t) = xyz - V $.
+		Тогда $ \operatorname{grad} h = (yz, zx, xy, 0) $.
+		
+		Вычислим функцию правдоподобия:
+		$$ L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{8\pi^3}\sigma^3} 
+		e^{-\tfrac{(X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2}{2\sigma^2}}; $$
+		$$ \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{3n}{2}\ln (2\pi) - 3n\ln \sigma -
+		\tfrac{1}{2\sigma^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2\right). $$
+		Для частных производных имеем:
+		$$ \tfrac{\partial}{\partial \theta_1} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-n\theta_1 + \sum\limits_{i = 1}^{n} X_i)
+		= \tfrac{n}{\sigma^2}(\overline{X} - \theta_1), $$
+		$$ \tfrac{\partial}{\partial \theta_2} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-n\theta_2 + \sum\limits_{i = 1}^{n} Y_i)
+		= \tfrac{n}{\sigma^2}(\overline{Y} - \theta_2), $$
+		$$ \tfrac{\partial}{\partial \theta_3} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-n\theta_3 + \sum\limits_{i = 1}^{n} Z_i)
+		= \tfrac{n}{\sigma^2}(\overline{Z} - \theta_3), $$
+		$$ \tfrac{\partial}{\partial\sigma} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{n}{\sigma} + \tfrac{1}{\sigma^3}\sum\limits_{i = 1}^{n} 
+		\left((X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2\right). $$
+		Тогда точка максимума есть точка с координатами
+		$ \hat \theta_1 = \overline{X}, \hat \theta_2 = \overline{Y}, \hat \theta_3 = \overline{Z} $
+		и \\ $ \hat \sigma^2 = \tfrac{1}{n} \sum\limits_{i = 1}^{n}
+		\left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2 + (Z_i - \overline{Z})^2\right). $
+		Матождиания от минус частных производных второго порядка равны
+		$$ -\expect\tfrac{\partial^2}{\partial \theta_i^2} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect\left(-\tfrac{n}{\sigma^2}\right) = -\tfrac{n}{\sigma^2}; $$
+		$$ -\expect\tfrac{\partial^2}{\partial \theta_i \partial \theta_j} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect0 = 0 \ (i \neq j); $$
+		$$ -\expect\tfrac{\partial^2}{\partial \sigma^2} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect\left(\tfrac{n}{\sigma^2} - \tfrac{3}{\sigma^4}\sum\limits_{i = 1}^{n} 
+		\left((X_i - \theta_1)^2 + (Y_i - \theta_2)^2 + (Z_i - \theta_3)^2\right)\right)
+		= -\tfrac{n}{\sigma^2} + \tfrac{9\sigma^2}{\sigma^3} = \tfrac{8n}{\sigma^2}; $$
+		$$ -\expect\tfrac{\partial^2}{\partial \sigma \partial \theta_1} \ln L(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\expect\tfrac{2}{\sigma^3} (n\theta_1 - \sum\limits_{i = 1}^{n} X_i) = 0. $$
+		
+		Тогда информационная матрица в точке максимума равна
+		$$ I_n(\hat \theta) = \begin{pmatrix}
+			\tfrac{n}{\hat \sigma^2} & 0 & 0 & 0 \\
+			0 & \tfrac{n}{\hat \sigma^2} & 0 & 0 \\
+			0 & 0 & \tfrac{n}{\hat \sigma^2} & 0 \\
+			0 & 0 & 0 & \tfrac{8n}{\hat \sigma^2}
+		\end{pmatrix}.
+		 $$
+		 
+		Имеем
+		$$ g = \grad h (\hat \theta) I_1(\hat \theta)^{-1} \grad h (\hat \theta)^{t}
+		= \hat \sigma^2(\overline{X}^2\overline{Y}^2 + \overline{Y}^2\overline{Z}^2 + \overline{Z}^2\overline{X}^2). $$
+		Тогда случайная величина 
+		$$ \tfrac{nh^2}{g} = \tfrac{n(\overline{X}\overline{Y}\overline{Z} - V)^2}{\hat \sigma^2(\overline{X}^2\overline{Y}^2 + \overline{Y}^2\overline{Z}^2 + \overline{Z}^2\overline{X}^2)} $$
+		сходится по распределению к $ \chi^2_{3 - 2} = \chi^2_1 $.
+		
+		Если $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $ соответствующего распределения,
+		то 
+		$$ \prob\left(\tfrac{n(\overline{X}\cdot\overline{Y}\cdot\overline{Z} - V)^2}{\hat \sigma^2(\overline{X}^2\overline{Y}^2 + \overline{Y}^2\overline{Z}^2 + \overline{Z}^2\overline{X}^2)} > q_{1 - \alpha} \right) 
+		\underset{n \to +\infty}{\to} \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3б]{inprocessing}
+		
+		В условиях задачи 3а построим score-test для проверки гипотезы $ \theta_1 = \theta_2 = \theta_3 $.
+		Данная система задаёт подмногообразие размерности 2 в пространстве $ \Theta = \defineset{(\theta_1, \theta_2, \theta_3,
+			\sigma)}{\theta_1, \theta_2, \theta_3, \sigma > 0} $.
+		
+		Найдём точку максимума функции правдоподобия на этом подмногообразии.
+		Имеем
+		$$ L_{H_0}(\theta, \sigma, \vect{X}, \vect{Y}, \vect{Z})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{\sqrt{8\pi^3}\sigma^3} 
+		e^{-\tfrac{(X_i - \theta)^2 + (Y_i - \theta)^2 + (Z_i - \theta)^2}{2\sigma^2}}; $$
+		$$ \ln L_{H_0}(\vect{\theta}, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{3n}{2}\ln (2\pi) - 3n\ln \sigma -
+		\tfrac{1}{2\sigma^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta)^2 + (Y_i - \theta)^2 + (Z_i - \theta)^2\right). $$
+		Вычислим частные производные:
+		$$ \tfrac{\partial}{\partial \theta} \ln L_{H_0}(\theta, \sigma, \vect{X}, \vect{Y}, \vect{Z})
+		= \tfrac{1}{\sigma^2} (-3n\theta + \sum\limits_{i = 1}^{n} (X_i + Y_i + Z_i)); $$
+		$$ \tfrac{\partial}{\partial \sigma} \ln L_{H_0}(\theta, \sigma, \vect{X}, \vect{Y}, \vect{Z})
+		= -\tfrac{3n}{\sigma} + 
+		\tfrac{1}{\sigma^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta)^2 + (Y_i - \theta)^2 + (Z_i - \theta)^2\right). $$
+		Тогда координаты точки максимума равны $ \hat \theta_{H_0} = \tfrac{1}{3}(\overline{X} + \overline{Y} + \overline{Z}) $
+		и \\ $ \hat \sigma^2_{H_0}
+		= \tfrac{1}{3n}\sum\limits_{i = 1}^{n} \left((X_i - \hat\theta)^2 + (Y_i - \hat\theta)^2 + (Z_i - \hat\theta)^2\right) $.
+		
+		Оценка
+		$$ T = \tfrac{1}{n}\grad L (\hat \theta_{H_0},\hat \theta_{H_0},\hat \theta_{H_0}, \hat \sigma_{H_0}, \vect{X}, \vect{Y}, \vect{Z}) 
+		I_1(\hat \theta_{H_0},\hat \theta_{H_0},\hat \theta_{H_0}, \hat \sigma_{H_0})^{-1} 
+		\grad L (\hat \theta_{H_0},\hat \theta_{H_0},\hat \theta_{H_0}, \hat \sigma_{H_0}, \vect{X}, \vect{Y}, \vect{Z})^{t} = $$ 
+		$$ = \tfrac{\hat\sigma^2_{H_0}}{n}\cdot \tfrac{n^2}{\hat\sigma^4_{H_0}}\left((\hat \theta_{H_0} - \overline{X})^2 + (\hat \theta_{H_0} - \overline{Y})^2 
+		+ (\hat \theta_{H_0} - \overline{Z})^2\right) + $$ 
+		$$ + \tfrac{\hat\sigma^2_{H_0}}{8n}\cdot \left(
+		-\tfrac{n}{\hat\sigma_{H_0}} + \tfrac{1}{\hat\sigma_{H_0}^3}\sum\limits_{i = 1}^{n} 
+		\left((X_i - \hat \theta_{H_0})^2 + (Y_i - \hat \theta_{H_0})^2 + (Z_i - \hat \theta_{H_0})^2\right)\right)^2 $$
+		сходится по распределению к $ \xi^2_{2} $.
+		
+		Если $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $, то имеем
+		$$ \prob(T > q_{1 - \alpha}) \underset{n \to +\infty}{\to} \alpha. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_x, \theta^2) $
+		и $ Y_1, \ldots, Y_n \sim \mathcal{N}(\theta_y, \theta^2) $
+		--- независимые случайные величины.
+		Построим критерий обобщённого отношения правдоподобий для проверки гипотезы $ \theta_x = \theta_y $.
+		
+		Вычислим функции правдоподобия в общем случае и при условии гипотезы.
+		$$ L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\tfrac{(X_i - \theta_x)^2 + (Y_i - \theta_y)^2}{2\theta^2}}; $$
+		$$ \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -n \ln 2\pi -2n \ln \theta - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_x)^2 + (Y_i - \theta_y)^2\right). $$
+		Вычислим частные производные:
+		$$ \tfrac{\partial}{\partial \theta_x} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-n\theta_x + \sum\limits_{i = 1}^{n} X_i\right); $$
+		$$ \tfrac{\partial}{\partial \theta_y} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-n\theta_y + \sum\limits_{i = 1}^{n} Y_i\right); $$
+		$$ \tfrac{\partial}{\partial \theta} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta_x)^2 + (Y_i - \theta_y)^2\right). $$
+		
+		Максимум достигается в точке с координатами $\hat \theta_x = \overline{X}, \hat \theta_y = \overline{Y} $
+		и \\ $ \hat \theta^2 = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right) $.
+		В точке максимума значение равно
+		$$ L(\hat \theta_x, \hat \theta_y, \hat \theta, \vect{X}, \vect{Y})
+		= \tfrac{ne^{-n}}{\pi}\left(\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)^{-1}. $$
+		
+		В предположении гипотезы имеем
+		$$ L_{0}(\theta_0, \theta, \vect{X}, \vect{Y})
+		= \prod\limits_{i = 1}^{n} \tfrac{1}{2\pi \theta^2}e^{-\tfrac{(X_i - \theta_0)^2 + (Y_i - \theta_0)^2}{2\theta^2}}; $$
+		$$ \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -n \ln 2\pi -2n \ln \theta - \tfrac{1}{2\theta^2}\sum\limits_{i = 1}^{n} \left((X_i - \theta_0)^2 + (Y_i - \theta_0)^2\right). $$
+		Снова вычислим частные производные:
+		$$ \tfrac{\partial}{\partial \theta_0} \ln L(\theta_0, \theta, \vect{X}, \vect{Y})
+		= \tfrac{1}{\theta^2}\left(-2n\theta_0 + \sum\limits_{i = 1}^{n} (X_i + Y_i)\right); $$
+		$$ \tfrac{\partial}{\partial \theta} \ln L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})
+		= -\tfrac{2n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{i = 1}^{n} \left((X_i - \theta_0)^2 + (Y_i - \theta_0)^2\right). $$
+		
+		Максимум достигается в точке $ \hat \theta_0 = \tfrac{\overline{X} + \overline{Y}}{2}, $
+		$ \hat \theta^2 = \tfrac{1}{2n}\sum\limits_{i = 1}^{n} \left((X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right) $. Значение в этой точке равно
+		$$ L(\hat \theta_0, \hat \theta, \vect{X}, \vect{Y})
+		= \tfrac{ne^{-n}}{\pi}\left(\sum\limits_{i = 1}^{n} (X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right)^{-1}. $$
+		
+		Тогда для
+		$$ \lambda 
+		= \tfrac{\sup_{\theta \in \Theta} L(\theta_x, \theta_y, \theta, \vect{X}, \vect{Y})}
+		{\sup_{\theta \in \Theta_0} L(\theta_0, \theta, \vect{X}, \vect{Y})} $$
+		имеем $$ 2\ln \lambda = \ln \left(\sum\limits_{i = 1}^{n} (X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right)
+		- \ln \left(\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right)
+		\overunderset{d}{n \to +\infty}{\to} \xi \sim \chi^2_{1}. $$
+		
+		Если $ q_{1 - \alpha} $ --- квантиль уровня $ 1 - \alpha $, то
+		$$ \prob\left( \ln \left(\sum\limits_{i = 1}^{n} (X_i - \tfrac{\overline{X} + \overline{Y}}{2})^2 + (Y_i - \tfrac{\overline{X} + \overline{Y}}{2})^2\right)
+		- \ln \left(\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2 + (Y_i - \overline{Y})^2\right) > q_{1 - \alpha} \right)
+		\to \alpha. $$
+		
+	\end{problem}
+	
+\end{document}

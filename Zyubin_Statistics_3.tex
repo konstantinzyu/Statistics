@@ -1,0 +1,500 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+%	\tableofcontents
+	
+%\section{Дз 2}
+
+\begin{problem}[Задача 1 (<<нулёвка>>)]{inprocessing}
+	
+	Пусть случайная величина $ X_1 $ распределена по закону 
+	$$ \prob_{\theta_1, \theta_2}(X_1 = k) 
+	= \theta_1 \cdot \tfrac{e^{-1}}{k!} + (1 - \theta_1)\cdot \tfrac{e^{-\theta_2}\theta_2^k}{k!}, $$
+	где $ \theta_1 \in (0, 1) $ и $ \theta_2 > 0 $.
+	Построим оценки методом моментов для $ (\theta_1, \theta_2) $.
+ 	
+ 	Имеем
+ 	$$ a_1(\theta) = \expect_{\theta_1, \theta_2} X_1 = \sum\limits_{k = 0}^{+\infty} k\theta_1 \tfrac{e^{-1}}{k!}
+ 	+ \sum\limits_{k = 0}^{+\infty} k(1 - \theta_1)\tfrac{e^{-\theta_2}\theta_2^k}{k!}
+ 	= \theta_1 + (1 - \theta_1)\theta_2, $$
+ 	$$ a_2(\theta) = \expect_{\theta_1, \theta_2} X_1^2 = \sum\limits_{k = 0}^{+\infty} k^2\theta_1 \tfrac{e^{-1}}{k!}
+ 	+ \sum\limits_{k = 0}^{+\infty} k^2(1 - \theta_1)\tfrac{e^{-\theta_2}\theta_2^k}{k!}
+ 	= \theta_1 \cdot(1 + 1^2) + (1 - \theta_1)\cdot(\theta_2 + \theta_2^2)
+ 	= 2\theta_1 + (1 - \theta_1)\cdot(\theta_2 + \theta_2^2). $$
+ 	
+ 	Далее для упрощения записи будем опускать обозначение аргумента у $ a_1 $ и $ a_2 $.
+ 	Выразим $ \theta_2 $ из первого равенства:
+ 	$$ \tfrac{a_1 - \theta_1}{1 - \theta_1} = \theta_2. $$
+ 	Аналогично преобразуем второе равенство и подставим в него выражение для $ \theta_2 $:
+ 	$$ \tfrac{a_2 - 2\theta_1}{1 - \theta} = \theta_2 + \theta_2^2, $$
+ 	$$ \tfrac{a_2 - 2\theta_1}{1 - \theta} = \tfrac{a_1 - \theta_1}{1 - \theta_1} 
+ 	+ \left(\tfrac{a_1 - \theta_1}{1 - \theta_1}\right)^2. $$
+ 	Умножая на $ (1 - \theta_1)^2 $ получаем
+ 	$$  (a_2 - 2\theta_1)(1 - \theta_1) = (a_1 - \theta_1)(1 - \theta_1) + (a_1 - \theta_1)^2, $$
+ 	$$  a_2 + \theta_1(-a_2-2) + 2\theta_1^2 = a_1 + a_1^2 + \theta_1(-a_1 - 1 - 2a_1) + 2\theta_1^2, $$
+ 	$$ \theta_1 = \tfrac{a_2 - a_1 - a_1^2}{1 + a_2 - 3a_1}. $$
+ 	Подставим в выражение для $ \theta_2 $:
+ 	$$ \theta_2 = \tfrac{a_1(1 + a_2 - 3a_1) - (a_2 - a_1 - a_1^2)}{(1 + a_2 - 3a_1) - (a_2 - a_1 - a_1^2)}
+ 	= \tfrac{-2a_1^2-2a_1-a_2+a_1a_2}{(a_1 - 1)^2}. $$
+ 	Тогда
+ 	$$ \widehat{\theta_1} = \tfrac{\overline{X^2} - \overline{X} - \overline{X}^2}{1 + \overline{X^2} - 3\overline{X}},
+ 	\widehat{\theta_2} = \tfrac{-2\overline{X}^2 - 2\overline{X} - \overline{X^2} + \overline{X}\overline{X^2}}
+ 	{(1 -\overline{X})^2}. $$
+ 	
+\end{problem}
+
+\begin{problem}[Задача 2 (нормальное распределение)]{inprocessing}
+	
+	Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathcal{N}(\theta, 1) $.
+	Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\sqrt{2\pi}} e^{-\tfrac{(x - \theta)^2}{2}} $.
+	Тогда
+	$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= (2\pi)^{\tfrac{-n}{2}} \cdot e^{-\tfrac{1}{2}\sum\limits_{j = 1}^{n} (x_j - \theta)^2}. $$
+	Для нахождения точки максимума достаточно исследовать 
+	точки минимума функции $ \sum\limits_{j = 1}^{n} (x_j - \theta)^2 $.
+	Дифференцируя по $ \theta $ и приравнивая производную к 0, получаем
+	$$ 0 = \sum\limits_{j = 1}^{n} 2(x_j - \theta) = \sum\limits_{j = 1}^{n} 2x_j - 2n\theta, $$
+	$$ \theta = \tfrac{1}{n}\sum\limits_{j = 1}^{n} x_j. $$
+	Таким образом, экстремум достигается в точке $ \theta = \overline{X} $.
+	Поскольку функция $ \sum\limits_{j = 1}^{n} (x_j - \theta)^2 $ является квадратичным многочленом от $ \theta $
+	с положительным старшим коэффициентом, то её экстремум является точкой минимума.
+	
+	Согласно центральной предельное теореме имеем сходимость
+	$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, 1). $$
+	Следовательно, оценка асимптотически нормальна для $ \theta $ и асимптотическая дисперсия равна 1.
+	
+\end{problem}
+	
+\begin{problem}[Задача 2 (экспоненциальное распределение)]{inprocessing}	
+	
+	Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathrm{E}(\tfrac{1}{\theta}) $,
+	где $ \theta > 0 $.
+	Имеем формулу для плотности $ f_{\theta}(x) = \tfrac{1}{\theta} e^{-\tfrac{x}{\theta}} $ при $ x \geqslant 0 $.
+	Тогда
+	$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= \tfrac{1}{\theta^n} \cdot e^{-\tfrac{\sum\limits_{j = 1}^{n} x_j}{\theta}} $$
+	при $ x_1, \ldots, x_n \geqslant 0 $,
+	и $ f_{\theta}(x_1, \ldots, x_n) = 0 $, если хотя бы одна из координат отрицательна.
+	Для нахождения точек максимума продифференцируем совместную плотность по $ \theta $ при фиксированных $ x_i $:
+	$$ \tfrac{d}{d\theta} f_{\theta}(x_1, \ldots, x_n)
+	= \tfrac{-n}{\theta^{n + 1}}e^{-\sum\limits_{j = 1}^{n} \tfrac{ x_j}{\theta}} 
+	+ \sum\limits_{j = 1}^{n} \tfrac{ x_j}{\theta^{n + 2}}e^{-\sum\limits_{j = 1}^{n} \tfrac{ x_j}{\theta}}
+	= \tfrac{\sum\limits_{j = 1}^{n} x_j - n\theta}{\theta^{n + 2}}e^{-\tfrac{nx}{\theta}}. $$
+	Равенство нулю достигается при $ \theta = \overline{X} $. 
+	Поскольку при больших значениях производная будет отрицательна, а при меньших --- положительна,
+	точка $ \theta = \overline{X} $ является точкой максимума.
+	
+	Математическое ожидание $ X_1 $ равно $ \expect_{\theta} X_1 = \theta $,
+	а дисперсия --- $ \disp_{\theta} X_1 = \theta^2 $. Согласно центральной предельное теореме имеем сходимость
+	$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, \theta^2). $$
+	Следовательно, оценка асимптотически нормальна для $ \theta $ и асимптотическая дисперсия равна $ \theta^2 $.
+	
+	
+\end{problem}
+
+\begin{problem}[Задача 2 (распределение Пуассона)]{inprocessing}	
+
+	Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathrm{Poiss}(\theta) $,
+	где $ \theta > 0 $.
+	Имеем
+	$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+	= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+	= e^{-n\theta}\tfrac{1}{x_1!\ldots x_n!}\theta^{(x_1 + x_2 + \ldots + x_n)}. $$
+	Достаточно найти точки максимума для функции $ e^{n\theta}\theta^{(x_1 + x_2 + \ldots + x_n)} $.
+	Продифференцируем:
+	$$ -ne^{-n\theta}\theta^{(x_1 + x_2 + \ldots + x_n)}
+	+ (x_1 + x_2 + \ldots + x_n)e^{-n\theta}\theta^{(x_1 + x_2 + \ldots + x_n) - 1} 
+	= (-n\theta + x_1 + x_2 + \ldots + x_n)e^{-\tfrac{n}{\theta}}\theta^{(x_1 + x_2 + \ldots + x_n)-1}. $$
+	Производная принимает значение 0 в точке $ \theta = \overline{X} $, положительнапри меньших 
+	значениях и отрицательна при больших, поэтому точка $ \theta = \overline{X} $ является точкой максимума.
+	
+	Матожидание и дисперсия $ X_1 $ равны $ \expect_\theta X_1 = \theta $ и $ \disp_\theta X_1 = \theta^2 $,
+	соответственно. Согласно центральной предельное теореме имеем сходимость
+	$$ \sqrt{n}(\overline{X} - \theta) \overunderset{d}{n \to +\infty}{\to} \eta \sim \mathcal{N}(0, \theta^2). $$
+	Следовательно, оценка асимптотически нормальна для $ \theta $ и асимптотическая дисперсия равна $ \theta^2 $.
+	
+\end{problem}
+
+
+\begin{problem}[Задача 2 (геометрическое распределение)]{inprocessing}
+	
+	Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathrm{Geom}(\theta) $,
+	где $ \theta \in (0, 1) $.
+	Имеем
+	$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+	= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+	= \theta^n(1 - \theta)^{x_1 + \ldots + x_n - n}. $$
+	Продифференцируем:
+	$$ n\theta^{n - 1}(1 - \theta)^{x_1 + \ldots + x_n - n}
+	- (x_1 + \ldots + x_n - n)\theta^n(1 - \theta)^{x_1 + \ldots + x_n - n - 1} = $$ 
+	$$ = (n(1 - \theta) - (x_1 + \ldots + x_n - n)\theta)\theta^{n - 1}(1 - \theta)^{x_1 + \ldots + x_n - n - 1} = $$
+	$$ = (n - (x_1 + \ldots + x_n)\theta)\theta^{n - 1}(1 - \theta)^{x_1 + \ldots + x_n - n - 1}. $$
+	Нуль достигается в точке $ \theta = \tfrac{1}{\overline{X}} $. Поскольку при меньших значениях производная положительна, а при больших отрицательна, то точка $ \theta = \tfrac{1}{\overline{X}} $ является точкой максимума.
+	
+	Матожидание и дисперсия $ X_1 $ равны $ \expect_\theta X_1 = \tfrac{1}{\theta} $ и $ \disp_\theta X_1 = \tfrac{1 - \theta}{\theta^2} $,
+	соответственно. Согласно центральной предельное теореме имеем сходимость
+	$$ \sqrt{n}(\overline{X} - \tfrac{1}{\theta}) \overunderset{d}{n \to +\infty}{\to} 
+	\eta \sim \mathcal{N}(0, \tfrac{1 - \theta}{\theta^2}). $$
+	Поскольку производная функции $ g(x) = \tfrac{1}{x} $ на интервале $ (0, 1) $ не обращается в 0,
+	то по лемме о асимптотической нормальности имеем
+	$$ \sqrt{n}(\tfrac{1}{\overline{X}} - \theta) \overunderset{d}{n \to +\infty}{\to} 
+	\tilde{\eta} \sim \mathcal{N}(0, \tfrac{1 - \theta}{\theta^2} \cdot \theta^4). $$
+	Таким образом, оценка $ \tfrac{1}{\overline{X}} $ асимптотически нормальна для $ \theta $
+	и имеет асимптотическую дисперсию $ (1 - \theta)\theta^2 $.
+	
+\end{problem}
+
+\begin{problem}[Задача 3]{inprocessing}
+	
+	Пусть случайные величины $ X_1, \ldots, X_n \sim \mathrm{R}[\theta_1, \theta_2] $ независимы и одинаково распределены.
+	Они имеют плотности $ f_{\theta_1, \theta_2}(x) = \tfrac{1}{\theta_2 - \theta_1}I(\theta_1 \leqslant x \leqslant \theta_2) $.
+	Найдём оценку методом моментов и оценку максимального правдоподобия.
+	
+	Имеем
+	$$ a_1(\theta) = \expect_{\theta_1, \theta_2} X_1 = \int\limits_{\theta_1}^{\theta_2} \tfrac{u}{\theta_2 - \theta_1}du = \tfrac{\theta_1 + \theta_2}{2}, $$
+	$$ a_2(\theta) = \expect_{\theta_1, \theta_2} X_1^2 = \int\limits_{\theta_1}^{\theta_2} \tfrac{u^2}{\theta_2 - \theta_1}du = \tfrac{\theta_1^2 + \theta_1\theta_2 + \theta_2^2}{3}. $$
+	Отсюда 
+	$$ (2a_1)^2 - 3a_2 = (\theta_1^2 + 2\theta_1\theta_2 + \theta_2^2) - (\theta_1^2 + \theta_1\theta_2 + \theta_2^2)
+	= \theta_1\theta_2. $$
+	Тогда $ \theta_1 $ и $ \theta_2 $ являются корнями уравнения $ \tau^2 - 2a_1\tau + (4a_1^2 - 3a_2) = 0 $.
+	Имеем $ \theta_1 = \tfrac{2a_1 - \sqrt{4a_1^2 - 4(4a_1^2 - 3a_2)}}{2}
+	= a_1 - \sqrt{3(a_2 - a_1^2)} $ и $ \theta_2 = a_1 + \sqrt{3(a_2 - a_1^2)} $
+	(можно отметить, что под знаком корня стоит утроенная дисперсия, и поэтому оба значения $ \theta_1 $ и $ \theta_2 $ будут вещественными).
+	Окончательно, $ \hat{\theta_1} = \overline{X} - \sqrt{3(\overline{X^2} - \overline{X}^2)} $
+	и $ \hat{\theta_2} = \overline{X} + \sqrt{3(\overline{X^2} - \overline{X}^2)} $.
+	
+	Теперь вычислим оценку максимального правдоподобия.
+	Из формулы для плотности имеем
+	$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= \tfrac{1}{(\theta_2 - \theta_1)^n}, $$
+	при всех $ x_i \in [\theta_1, \theta_2] $ и $ f_{\theta}(x_1, \ldots, x_n) = 0 $ иначе.
+	Наибольшее значение достигается для отрезка $ [\theta_1, \theta_2] $ наименьшей длины, 
+	содержащего все точки $ x_i $ (чтобы значение не стало равным 0). Эта ситуация достигается, когда $ \theta_1 = \min\limits_{i = 1\ldots n} X_i = X_{(1)} $
+	и $ \theta_2 = \max\limits_{i = 1\ldots n} X_i = X_{(n)} $.
+	
+\end{problem}
+
+
+\begin{problem}[Задача 4]{inprocessing}
+	
+	Пусть случайные величины $ X_1, \ldots, X_n $ распределены с плотностью $ f_\theta(x) = e^{-(x - \theta)}I(x \geqslant \theta) $.
+	
+	Найдём оценку методом моментов.
+	Имеем
+	$$ a_1(\theta) = \expect X_1 = \int\limits_{\theta}^{+\infty} ue^{-(u - \theta)}du 
+	= \int\limits_{0}^{+\infty} (s + \theta)e^{-s}ds = \left.-se^{-s}\right|_{0}^{+\infty} + \int\limits_{0}^{+\infty} e^{-s}ds
+	+ \int\limits_{0}^{+\infty} \theta e^{-s}ds = \theta + 1. $$
+	Тогда $ \theta = a_1(\theta) - 1 $ или $ \hat{\theta} = \overline{X} - 1 $.
+	
+	Вычислим оценку максимального правдоподобия.
+	Из формулы для плотности имеем
+	$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= e^{x_1 + \ldots + x_n - n\theta} \cdot \prod_{j = 1}^{n} I(x_j \geqslant \theta). $$
+	Наибольшее значение достигается при наибольшем $ \theta $ таком, что для всех $ j $ 
+	выполнены неравенства $ x_j \geqslant \theta $, то есть при $ \theta = \min\limits_{j = 1\ldots n} X_i = X_{(1)} $.
+	
+	Чтобы проверить асимптотическую нормальности вычислим функцию распределения $$ Y = \sqrt{n}(X_{(1)} - \theta): $$
+	$$ F_{{Y}, \theta}(x) = \prob_\theta(\sqrt{n}(X_{(1)} - \theta) \leqslant x)
+	= \prob_\theta(X_{(1)}\leqslant \tfrac{x}{\sqrt{n}} + \theta) = $$ 
+	$$ = 1 - \prob_\theta(X_{(1)} > \tfrac{x}{\sqrt{n}} + \theta) 
+	= 1 - \prob_\theta(X_{1} > \tfrac{x}{\sqrt{n}} + \theta, X_2 > \tfrac{x}{\sqrt{n}} + \theta, \ldots, 
+	X_n > \tfrac{x}{\sqrt{n}} + \theta) = $$ 
+	$$ = 1 - \prob(X_{1} > \tfrac{x}{\sqrt{n}} + \theta)^n 
+	= 1 - \left(\int\limits_{\tfrac{x}{\sqrt{n}} + \theta}^{+\infty} e^{-(u - \theta)}I(u \geqslant \theta)du\right)^n
+	= 1 - \left(\int\limits_{\max(\tfrac{x}{\sqrt{n}} + \theta, \theta)}^{+\infty} e^{-(u - \theta)}du\right)^n = $$
+	$$ = 1 - \left(\int\limits_{\max(\tfrac{x}{\sqrt{n}}, 0)}^{+\infty} e^{-s}ds\right)^n =
+	1 - e^{-n \cdot \max(\tfrac{x}{\sqrt{n}}, 0) }. $$
+	При $ n \to +\infty $ получаем, что
+	$$ \lim\limits_{n \to +\infty} F_{X(1), \theta}(x)
+	= \definefuntwo
+	{0}{x \leqslant 0}
+	{1}{x > 0} $$
+	Таким образом, функции распределения $ F_{Y, \theta} $ сходятся к функции распределения константы $ 0 $
+	и оценка $ X_{(1)} $ не является асимптотически нормальной.
+	
+\end{problem}
+
+\begin{problem}[Задача 5 (уравнение правдоподобия для первой <<нулёвки>>)]{inprocessing}
+	
+	Пусть случайные величины $ X_1, \ldots, X_n \sim \mathrm{Cauchy}(\theta) $ независимы и имеют распределение Коши.
+	Плотность имеет вид $ f_{\theta}(x) = \tfrac{1}{\pi((x - \theta)^2 + 1)} $.
+	Тогда
+	$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= \tfrac{1}{\pi^n} \cdot \tfrac{1}{\prod_{j = 1}^{n} ((x_j - \theta)^2 + 1)}. $$
+	Продифференцируем по $ \theta $ и приравняем к 0, чтобы получить уравнение правдоподобия:
+	$$ \tfrac{1}{\pi^n} \cdot \sum\limits_{j = 1}^{n} \left( \tfrac{2x_j - 2\theta}{((x_j - \theta)^2 + 1)^2} \cdot \prod_{k \neq j} \tfrac{1}{(x_k - \theta)^2 + 1} \right) = 0. $$
+	
+\end{problem}
+
+\begin{problem}[Задача 5 (уравнение правдоподобия для второй <<нулёвки>>)]{inprocessing}
+	
+	Имеем
+	$$ L(\theta, x_1, \ldots, x_n) = \prob_\theta(X_1 = x_1, \ldots, X_n = x_n) 
+	= \prod\limits_{j = 1}^{n} \prob(X_j = x_j)
+	= \prod\limits_{j = 1}^{n} \left(\theta_1 \cdot \tfrac{e^{-1}}{x_j!} + (1 - \theta_1)\cdot \tfrac{e^{-\theta_2}\theta_2^{x_j}}{x_j!} \right) = $$
+	$$ = \tfrac{1}{x_1!\ldots x_n!} \cdot \prod\limits_{j = 1}^{n} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_j}). $$
+	
+	Выпишем частные производные от $ g(\theta) = \prod\limits_{j = 1}^{n} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_j}) $ по $ \theta_i $ и приравняем их к 0, чтобы получить уравнения правдоподобия.
+	$$ \left.\tfrac{\partial g}{\partial \theta_1}\right|_{\theta_1, \theta_2} 
+	= \sum\limits_{j = 1}^{n} \left( (e^{-1} - e^{-\theta_2}\theta_2^{x_j}) 
+	\cdot \prod\limits_{i \neq j} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_i}) \right) = 0, $$
+	$$ \left.\tfrac{\partial g}{\partial \theta_2}\right|_{\theta_1, \theta_2} 
+	= (1 - \theta_1)\sum\limits_{j = 1}^{n} \left( e^{-\theta_2}(-\theta_2^{x_j} + x_j\theta_2^{x_j - 1}) 
+	\cdot \prod\limits_{i \neq j} (\theta_1e^{-1} + (1 - \theta_1)e^{-\theta_2}\theta_2^{x_i}) \right) = 0. $$
+	
+\end{problem}
+
+\begin{problem}[Задачи к семинару 25.09]{inprocessing}
+	
+	Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathcal{N}(a, \sigma^2) $.
+	Имеем формулу для плотности $ f_{a, \sigma}(x) = \tfrac{1}{\sqrt{2\pi}\sigma} e^{-\tfrac{(x - a)^2}{2\sigma^2}} $.
+	Тогда
+	$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+	= (2\pi)^{\tfrac{-n}{2}} \cdot \tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}. $$
+	
+	Далее будем исследовать точки максимума логарифма 
+	$$ M(a, \sigma) = \ln 
+	\left(\tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}\right )
+	= -n\ln \sigma - \tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+	
+	Вычислим частные производные по $ a $ и $ \sigma $. Тогда
+	производную функции $ g(\theta) = M(a_0(\theta), \sigma_0(\theta)) $ можно будет вычислить
+	по формуле 
+	$$ \left.\tfrac{dg}{d\theta}\right|_{\theta}
+	= \left.\tfrac{\partial M}{\partial a}\right|_{a_0(\theta)}\left.\tfrac{da_0}{d\theta}\right|_{\theta}
+	+ \left.\tfrac{\partial M}{\partial\sigma}\right|_{\sigma_0(\theta)}\left.\tfrac{d\sigma_0}{d\theta}\right|_{\theta}. $$
+	Имеем
+	$$ \left.\tfrac{\partial M}{\partial a}\right|_{a}
+	= -\tfrac{1}{\sigma^2}\left(na - \sum\limits_{j = 1}^{n} x_j\right), $$
+	$$ \left.\tfrac{\partial M}{\partial\sigma}\right|_{\sigma}
+	= -\tfrac{n}{\sigma} + \tfrac{1}{\sigma^3}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+	
+	Пусть $ a_0(\theta) = \theta, \sigma_0(\theta)^2 = \theta^2, \theta \neq 0 $.
+	Тогда производная приобретает вид 
+	$$ \left.\tfrac{dg}{d\theta}\right|_{(\theta)} = 
+	-\tfrac{1}{\theta^2}\left(n\theta - \sum\limits_{j = 1}^{n} x_j\right)
+	-\tfrac{n}{\theta} + \tfrac{1}{\theta^3}\sum\limits_{j = 1}^{n} (x_j - \theta)^2 = $$
+	$$ = -\tfrac{n}{\theta} - \tfrac{x_1 + \ldots + x_n}{\theta^2} + \tfrac{x_1^2 + \ldots + x_n^2}{\theta^3}
+	= -\tfrac{n\theta^2 + \theta(x_1 + \ldots + x_n) - (x_1^2 + \ldots + x_n^2)}{\theta^3}. $$
+	Значение 0 достигается в корнях квадратного многочлена: $ \theta = \tfrac{-\overline{X} \pm \sqrt{\overline{X}^2 + 4\overline{X^2}}}{2} $. Одно из значений отрицательно, а другое положительно, 
+	поэтому при переходе через каждый корень производная меняет знак с положительного на отрицательный и, следовательно,
+	обе точки являются точками максимума.
+	
+	Пусть $ a_0(\theta) = 0, \sigma_0(\theta) = \sqrt{\theta}, \theta > 0 $.
+	Тогда производная приобретает вид 
+	$$ \left.\tfrac{dg}{d\theta}\right|_{(\theta)} = 
+	\tfrac{1}{2\sqrt{\theta}}\left(-\tfrac{n}{\sqrt{\theta}} + \tfrac{1}{\theta\sqrt{\theta}}
+	\sum\limits_{j = 1}^{n} x_j^2\right) = $$
+	$$ = \tfrac{-n\theta + x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+	Значение 0 достигается в точке $ \theta = \overline{X^2} $. При меньших $ \theta $ производная положительна, 
+	а при больших --- отрицательна. Следовательно, $ \theta = \overline{X^2} $ --- точка максимума.
+	
+	Пусть $ a_0(\theta) = \theta, \sigma_0(\theta) = \sqrt{\theta}, \theta > 0 $.
+	Тогда производная приобретает вид 
+	$$ \left.\tfrac{dg}{d\theta}\right|_{(\theta)} = 
+	-\tfrac{1}{\theta}\left(n\theta - \sum\limits_{j = 1}^{n} x_j\right) +
+	\tfrac{1}{2\sqrt{\theta}}\left(-\tfrac{n}{\sqrt{\theta}} + \tfrac{1}{\theta\sqrt{\theta}}\sum\limits_{j = 1}^{n} (x_j - \theta)^2\right) = $$
+	$$ = \tfrac{-n\theta^2 - n\theta + x_1^2 + \ldots + x_n^2}{2\theta^2}. $$
+	Значение 0 достигается в корнях квадратного многочлена: $ \theta = \tfrac{-1 \pm \sqrt{1 + 4\overline{X^2}}}{2} $.
+	Поскольку между корнями производная принимает положительные значения, то точкой максимума является 
+	только больший корень: $ \theta = \tfrac{-1 + \sqrt{1 + 4\overline{X^2}}}{2} $.
+	
+\end{problem}
+
+\end{document}

@@ -1,0 +1,450 @@
+% \documentclass[12pt]{article}
+\documentclass[12pt]{amsart}
+
+\pagestyle{plain}
+\usepackage[margin=2cm]{geometry} 
+
+\usepackage{amsmath,amssymb,amsfonts,enumerate,latexsym,amsthm,textcomp,wasysym}
+\usepackage{nicefrac, xfrac}
+\usepackage{hyperref}
+\usepackage{subfiles}
+%\usepackage{tocloft}
+
+%\usepackage{indentfirst}
+\usepackage{cancel}
+\usepackage{graphicx}
+% \graphicspath{{pictures/}}
+% \DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{russian}
+
+% Colors
+\usepackage[dvipsnames]{xcolor}
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{0000FF} % цвет ссылки на статью
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
+% Пробелы, отступы и выделения
+\definecolor{todocolor}{HTML}{FF4500} % цвет todo
+\definecolor{defcolor}{HTML}{EE5D0F} % цвет определений
+\newcommand{\TODO}[1]{\textcolor{todocolor}{НУЖНО #1}}
+\renewcommand\labelenumi{\rm (\arabic{enumi})}
+\renewcommand\theenumi{\rm (\arabic{enumi})}
+\definecolor{completed}{HTML}{32CD32}
+\definecolor{inprocessing}{HTML}{D19A0F}
+
+% Pictures and diagrams
+\usepackage[matrix, arrow, curve]{xy} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{makecell}
+
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{verbatim}
+\makeatletter
+\def\@settitle{\begin{center}%
+		\baselineskip14\p@\relax
+		\bfseries
+		\large \@title
+	\end{center}%
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % commands for making comments
+%\usepackage[dvipsnames]{xcolor}
+\newcommand{\YP}[1]{\footnote{\textcolor{red}{YP: #1}}}
+\newcommand{\yp}[1]{\leavevmode{\color{red}{#1}}}
+% {\textcolor{orange}{#1}} 
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \textheight=270mm
+% \textwidth=190mm
+% \voffset=-40mm
+% \hoffset=-35mm
+% \pagestyle{empty}
+% 
+% \\SLoppy
+
+\emergencystretch=5pt
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+% Theorems
+
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem*{remark*}{Замечание}
+
+
+\theoremstyle{definition}
+
+% Environments
+
+\newenvironment{problem}[2][Problem name]{\indent \textcolor{#2}{\textbf{#1}} \indent}{\indent}
+\newenvironment{squarestatement}[1][Statement]{\indent \textbf{[#1]} \indent}
+{$ \hfill \lhd $ \indent}
+
+% New Commands
+
+% Set definition
+\newcommand{\defineset}[2]{\left\{
+	\left.
+	#1 \
+	\right\vert
+	#2
+	\right\}}
+
+\newcommand{\Alt}{\mathfrak{A}}
+\newcommand{\Sym}{\mathfrak{S}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Q}{\mathrm{Q}}
+\newcommand{\rC}{\mathrm{C}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\rO}{\mathrm{O}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calP}{\mathcal{P}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\SU}{\operatorname{SU}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\characteristic}{\operatorname{char}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Gal}{\mathrm{Gal}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\projective}[1]{\mathrm{P^1}(#1)}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Image}{\mathrm{Im} \,}
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}
+\newcommand{\pr}[1]{\mathrm{pr}_{#1}}
+\newcommand{\Rad}[1]{\mathrm{Rad}\left(#1\right)}
+\newcommand{\Ann}[1]{\mathrm{Ann}\left(#1\right)}
+\newcommand{\op}[1]{#1^{\mathrm{op}}}
+\newcommand{\End}[2]{\mathrm{End}_{#2}\left(#1\right)}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\qq}{\mathfrak{q}}
+
+
+
+% Кусочное определение функции
+\newcommand{\definefuntwo}[4]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4.
+	\end{cases}
+}
+
+\newcommand{\definefunthree}[6]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6.
+	\end{cases}
+}
+
+\newcommand{\definefunfour}[8]{
+	\begin{cases}
+		#1, & #2; \\
+		#3, & #4; \\
+		#5, & #6; \\
+		#7, & #8.
+	\end{cases}
+}
+
+\newcommand{\prob}{\operatorname{P}}
+\newcommand{\events}{\mathfrak{F}}
+\newcommand{\expect}{\operatorname{E}}
+\newcommand{\disp}{\operatorname{D}}
+\newcommand{\cov}{\operatorname{Cov}}
+
+\newcommand{\params}{\Theta}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\title{Решения задач по математической статистике}
+\author{Константин Зюбин}
+
+%\pagenumbering{arabic}
+
+\begin{document}
+	
+	\maketitle
+	
+	%	\tableofcontents
+	
+	%\section{Дз 2}
+	
+	\begin{problem}[Задача 1а (о плотности распределения Стьюдента)]{inprocessing}
+		
+		Пусть $ X \sim \mathcal{N}(0, 1) $ и $ Y \sim \chi^2_n $.
+		Положим $ \xi = \tfrac{X}{\sqrt{\frac{Y}{n}}} $.
+		Вычислим условную плотности $ \xi $ при условии $ Y $.
+		При фиксированном $ Y = y_0 $ плотность $ \xi $
+		равна плотности случайной величины $ \tfrac{X}{\sqrt{\frac{y_0}{n}}} $,
+		то есть равна $ \sqrt{\tfrac{y_0}{2\pi n}}e^{-\tfrac{y_0z^2}{2n}} $.
+		Тогда $ f_{\xi \mid Y}(z \mid y) = \sqrt{\tfrac{y}{2\pi n}}e^{-\tfrac{yz^2}{2n}} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1б (о плотности распределения Стьюдента)]{inprocessing}
+		
+		Вычислим условные матожидания $ \expect(\xi \mid Y) $ и $ \expect(\xi^2 \mid Y) $.
+		
+		Имеем
+		$$ \expect(\xi \mid Y) = \int\limits_{-\infty}^{+\infty} z\sqrt{\tfrac{Y}{2\pi n}}e^{-\tfrac{Yz^2}{2n}}dz = 0, $$
+		так как подынтегральная функция нечётна по $ z $.
+		
+		Далее,
+		$$ \expect(\xi^2 \mid Y) = \int\limits_{-\infty}^{+\infty} z^2\sqrt{\tfrac{Y}{2\pi n}}e^{-\tfrac{Yz^2}{2n}}dz = 0 + \tfrac{Y}{n} = \tfrac{Y}{n}, $$
+		как дисперсия нормально распределённой случайной величины с параметрами $ 0 $ и $ \tfrac{Y}{n} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 1а (о плотности распределения Стьюдента)]{inprocessing}
+		
+		Вычислим плотность величины $ \xi $.
+		Имеем
+		$$ f_\xi(z) = \int\limits_{-\infty}^{+\infty} f_{\xi \mid Y}(z \mid y)f_{Y}(y)dy
+		= \int\limits_{-\infty}^{+\infty} \sqrt{\tfrac{y}{2\pi n}}e^{-\tfrac{yz^2}{2n}} 
+		\cdot \tfrac{y^{\frac{n}{2} - 1}}{\Gamma(\frac{n}{2})2^{\frac{n}{2}}}e^{-\tfrac{y}{2}}dy = $$
+		$$ = \int\limits_{-\infty}^{+\infty} \tfrac{y^{\frac{n - 1}{2}}}{\Gamma(\frac{n}{2})2^{\frac{n}{2}}} \cdot
+		 \sqrt{\tfrac{1}{2\pi n}}e^{-\tfrac{y}{2}(1 + \tfrac{z^2}{n})}dy =
+		$$  $$ = \tfrac{\Gamma(\frac{n + 1}{2})}{\Gamma(\frac{n}{2})2^{\frac{n}{2}}}
+		 \cdot 2^{\frac{n + 1}{2}}\left(1 + \tfrac{z^2}{n}\right)^{-\frac{n + 1}{2}}
+		 \cdot \tfrac{1}{\sqrt{2\pi n}} \cdot I, $$
+		где $ I $ --- интеграл по всему $ \mathbb{R} $ от плотности случайной величины с распределением $ \mathrm{\Gamma}(\tfrac{n + 1}{2}, \tfrac{1}{2} + \tfrac{z^2}{2n}) $. Тогда $ I = 1 $ и
+		$$ f_\xi(z) = \tfrac{\Gamma(\frac{n + 1}{2})}{\Gamma(\frac{n}{2})\sqrt{\pi n}}
+		\left(1 + \tfrac{z^2}{n}\right)^{-\frac{n + 1}{2}}. $$
+			
+	\end{problem}
+	
+	\begin{problem}[Задача 2а (распределение Фишера-Снедекора)]{inprocessing}
+		
+		Пусть $ X \sim \xi_n^2 = \mathrm{\Gamma}(\tfrac{n}{2}, 2) $
+		и $ Y \sim \xi_n^2 = \mathrm{\Gamma}(\tfrac{m}{2}, 2) $ независимы.
+		Положим $ \xi = \tfrac{\sfrac{X}{n}}{\sfrac{Y}{m}} $.
+		
+		Найдём условную плотность $ \xi $ при условии $ Y $.
+		При $ Y = y $ величина $ \xi = \tfrac{X}{\sfrac{yn}{m}} $ имеет распределение 
+		$ \mathrm{\Gamma}(\tfrac{n}{2}, \tfrac{2m}{yn}) $
+		и плотность $ \tfrac{z^{\frac{n}{2} - 1}(yn)^{\frac{n}{2}}}{\Gamma(\frac{n}{2})(2m)^{\frac{n}{2}}}e^{-\tfrac{zyn}{2m}}I(z > 0) $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2б (распределение Фишера-Снедекора)]{inprocessing}
+		
+		Найдём плотность $ \xi $.
+		Имеем
+		$$ f_{\xi}(z) = \int\limits_{-\infty}^{+\infty} f_{\xi \mid Y}(z \mid y)f_{Y}(y)dy
+		= \int\limits_{-\infty}^{+\infty} \tfrac{z^{\frac{n}{2} - 1}(yn)^{\frac{n}{2}}}{\Gamma(\frac{n}{2})(2m)^{\frac{n}{2}}}e^{-\tfrac{zyn}{2m}}
+		\cdot \tfrac{y^{\frac{m}{2} - 1}}{\Gamma(\frac{m}{2})2^{\frac{m}{2}}}e^{-\tfrac{y}{2}}I(z > 0)I(y > 0)dy = $$
+		$$ \tfrac{z^{\frac{n}{2} - 1}n^{\frac{n}{2}}}{B(\frac{n}{2},\frac{m}{2})(2m)^{\frac{n}{2}}}
+		\cdot 2^{\frac{n + m}{2}} \cdot \left(1 + \tfrac{zn}{m}\right)^{-\frac{n + m}{2}}I(z > 0)
+		\cdot \int\limits_{-\infty}^{+\infty} \tfrac{y^{\frac{(n + m)}{2} - 1}}
+		{\Gamma(\frac{n + m}{2})2^{\frac{n + m}{2}} \cdot \left(1 + \tfrac{zn}{m}\right)^{-\frac{n + m}{2}}}
+		e^{-\tfrac{y}{2}(1 + \tfrac{zn}{m})}I(y > 0)dy = $$
+		$$ = 2^{\frac{m}{2}}z^{\tfrac{n}{2} - 1} \cdot \tfrac{n^{\frac{n}{2}}m^{\frac{m}{2}}}{B(\frac{n}{2}, \frac{m}{2})} 
+		\cdot (m + zn)^{-\frac{n + m}{2}}I(z > 0). $$
+		Интеграл в предпоследней строчке равен 1, как интеграл от плотности случайной величины по $ \mathbb{R} $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 2в (распределение Фишера-Снедекора)]{inprocessing}
+		
+		Найдём $ \expect \xi $ и $ \expect \xi^2 $.
+		Предварительно для случайной величины $ T $ с распределением $ \mathrm{\Gamma}(\alpha, \beta) $
+		вычислим $ \expect T^s $.
+		Имеем
+		$$ \expect T^s = \int\limits_{-\infty}^{+\infty} \tfrac{t^{s + \alpha - 1}}{\Gamma(\alpha)\beta^{\alpha}}e^{-\tfrac{x}{\beta}}
+		= \tfrac{\Gamma(s + \alpha)}{\Gamma(\alpha)} \cdot \beta^{s} \int\limits_{-\infty}^{+\infty} \tfrac{t^{s + \alpha - 1}}{\Gamma(s + \alpha)\beta^{s + \alpha}}e^{-\tfrac{x}{\beta}} = \tfrac{\Gamma(s + \alpha)}{\Gamma(\alpha)} \cdot \beta^{s}. $$
+		
+		Теперь
+		$$ \expect \xi = \expect \tfrac{mX}{nY} = \tfrac{m}{n} \expect X \cdot \expect \tfrac{1}{Y}
+		= \tfrac{m}{n} \cdot \tfrac{\Gamma(\frac{n}{2} + 1)}{\Gamma(\frac{n}{2})} \cdot \tfrac{\Gamma(\frac{m}{2} - 1)}{\Gamma(\frac{m}{2})} = \tfrac{mn}{n(m -2)} = \tfrac{m}{m - 2}. $$
+		и матожидание будет конечным при $ m > 2 $.
+		
+		Далее,
+		$$ \expect \xi^2 = \expect \tfrac{m^2X^2}{n^2Y^2} = \tfrac{m^2}{n^2} \expect X^2 \cdot \expect \tfrac{1}{Y^2}
+		= \tfrac{m^2}{n^2} \cdot \tfrac{\Gamma(\frac{n}{2} + 2)}{\Gamma(\frac{n}{2})} \cdot \tfrac{\Gamma(\frac{m}{2} - 2)}{\Gamma(\frac{m}{2})} = \tfrac{m^2n(n + 2)}{n^2(m - 4)(m - 2)} = \tfrac{m^2(n + 2)}{n(m - 4)(m - 2)}. $$
+		и матожидание будет конечным при $ m > 4 $.
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 3 ]{inprocessing}
+		
+		Пусть $ X_n \sim \mathcal{N}(0, 1) $ и $ Y_m \sim \mathcal{N}(0, 1) $ --- последовательности попарно независимых
+ 		(между последовательностями тоже) случайных величин.
+ 		Положим $ \tilde{X}_n = \tfrac{1}{n}\sum\limits_{i = 1}^{n} X_i^2 $, 
+ 		$ \tilde{Y}_m = \tfrac{1}{m}\sum\limits_{i = 1}^{m} Y_i^2 $
+ 		и $ \xi_{m}^{(n)} = \tfrac{\tilde{X}_n}{\tilde{Y}_n} \sim F_{n, m} $.
+ 		Тогда $ \expect Y_i^2 = 1 $ и по закону больших чисел $ \tilde{Y}_m \overunderset{\prob}{m \to +\infty}{\to} 1 $.
+		По лемме Слуцкого
+		$ \xi_{m}^{(n)} = \tilde{X}_n \cdot \tfrac{1}{\tilde{Y}_m} \overunderset{d}{m \to +\infty}{\to} \tilde{X}_n $.
+		
+		Пусть $ Z \sim \mathcal{N}(0, 1) $ --- ещё одна случайная величина, независимая с $ Y_m $.
+		Положим $ \eta_m = \tfrac{Z}{\sqrt{\tilde{Y}_m}} \sim t_m $.
+		Выше было показано, что $ \tilde{Y} \overunderset{\prob}{m \to +\infty}{\to} 1 $.
+		Тогда $ \sqrt{\tilde{Y}_m} \overunderset{\prob}{m \to +\infty}{\to} 1 $
+		и снова по лемме Слуцкого
+		$$ \eta_m = Z \cdot \tfrac{1}{\sqrt{\tilde{Y}_m}} \overunderset{d}{m \to +\infty}{\to} Z. $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 4]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_x, \sigma^2) $
+		и $ Y_1, \ldots, Y_m \sim \mathcal{N}(\theta_y, \sigma^2) $.
+		Построим точный доверительный интервал для $ \theta_x - \theta_y $ на основе
+		оценки
+		$$ \tfrac{\overline{X} - \overline{Y}}{\sqrt{\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2
+		+ \sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2}}. $$
+		Положим $ S^2 = \tfrac{\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2
+		+ \sum\limits_{i = 1}^{n} (-Y_i + \overline{Y})^2}{n + m - 2} $.
+		Случайная величина $ (\overline{X} - \overline{Y}) - (\theta_x - \theta_y) $
+		имеет распределение $ \mathcal{N}(0, \sigma^2(\tfrac{1}{n} + \tfrac{1}{m})) $.
+		Тогда случайная величина
+		$ \tfrac{(\overline{X} - \overline{Y}) - (\theta_x - \theta_y)}{S\sqrt{\frac{1}{n} + \frac{1}{m}}} $
+		имеет распределение Стьюдента $ t_{n + m - 2} $.
+		Имеем 
+		$$ \prob\left(t_{\frac{\alpha}{2}} < \tfrac{(\overline{X} - \overline{Y}) - (\theta_x - \theta_y)}{S\sqrt{\frac{1}{n} + \frac{1}{m}}} < t_{1 - \frac{\alpha}{2}} \right) = 1 - \alpha. $$
+		Тогда
+		$$ \prob\left( (\overline{X} - \overline{Y}) - t_{1 - \frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}} < (\theta_x - \theta_y) < (\overline{X} - \overline{Y}) - t_{\frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}} \right) = 1 - \alpha $$
+		и доверительный интервал есть
+		$$ \left((\overline{X} - \overline{Y}) - t_{1 - \frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}},
+		(\overline{X} - \overline{Y}) - t_{\frac{\alpha}{2}}S\sqrt{\tfrac{1}{n} + \tfrac{1}{m}} \right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5а ($ \mathcal{N}(0, \theta) $)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(0, \theta) $.
+		Построим точный доверительный интервал на основе оценки максимального правдоподобия
+		$ T = \overline{X^2} $ (см. домашнюю работу 3).
+		Поскольку случайные величины $ \tfrac{X_i}{\sqrt{\theta}} $ имеют стандартное нормальное распределение,
+		то случайная величина $ \tfrac{nT}{\theta} $ имеет $ \chi^2_n $-распределение.
+		Обозначим через $ c_{\alpha, n} $ --- квантиль уровня $ \alpha $ 
+		для функции распределения случайной величины с распределением $ \chi^2_n $.
+		Тогда
+		$$ \prob\left(c_{1- \frac{\alpha}{2}, n} < \tfrac{nT}{\theta} < c_{\frac{\alpha}{2}, n} \right) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob\left(\tfrac{nT}{c_{\frac{\alpha}{2}, n}} < \theta < \tfrac{nT}{c_{1 - \frac{\alpha}{2}, n}} \right) = 1 - \alpha $$
+		и точный доверительный интервал есть 
+		$$ \left(\tfrac{nT}{c_{\frac{\alpha}{2}, n}}, \tfrac{nT}{c_{1- \frac{\alpha}{2}, n}}\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5б ($ \mathcal{N}(\theta_1, \theta) $)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n \sim \mathcal{N}(\theta_1, \theta) $.
+		Построим точный доверительный интервал на основе оценки максимального правдоподобия (для $ \theta $):
+		$ T = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X}) $ (см. вычисление после решений задач,
+		где $ a = \theta_1 $ и $ \theta = \sigma^2 $).
+		Поскольку случайные величины $ Y_i = \tfrac{X_i - \theta_1}{\sqrt{\theta}} $ имеют стандартное нормальное распределение,
+		то случайная величина 
+		$$ \sum\limits_{i = 1}^{n} (Y_i - \overline{Y})^2
+		= \sum\limits_{i = 1}^{n} \left(\tfrac{X_i - \theta_i}{\sqrt{\theta}} - 
+		\tfrac{\overline{X} - \theta_i}{\sqrt{\theta}}\right)^2
+		= \tfrac{\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}{\theta} = \tfrac{nT}{\theta} $$ 
+		имеет $ \chi^2_{n - 1} $-распределение.
+		Обозначим через $ c_{\alpha, n} $ --- квантиль уровня $ \alpha $ 
+		для функции распределения случайной величины с распределением $ \chi^2_n $.
+		Тогда
+		$$ \prob\left(c_{1- \frac{\alpha}{2}, n - 1} < \tfrac{nT}{\theta} < c_{\frac{\alpha}{2}, n - 1} \right) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob\left(\tfrac{nT}{c_{\frac{\alpha}{2}, n - 1}} < \theta < \tfrac{nT}{c_{\frac{1 - \alpha}{2}, n - 1}} \right) = 1 - \alpha $$
+		и точный доверительный интервал есть 
+		$$ \left(\tfrac{nT}{c_{\frac{\alpha}{2}, n - 1}}, \tfrac{nT}{c_{1- \frac{\alpha}{2}, n - 1}}\right). $$
+		
+	\end{problem}
+	
+	\begin{problem}[Задача 5в ($ \mathcal{N}(\theta_1, \theta) $)]{inprocessing}
+		
+		Пусть $ X_1, \ldots, X_n, Y \sim \mathcal{N}(\theta_1, \theta) $.
+		Построим аналог точного доверительного интервала для $ Y $.
+		Случайная величина $ \overline{X} - Y $ имеет распределение $ \mathcal{N}(0, \tfrac{n + 1}{n}\theta) $,
+		а случайные величины $ X_i - \overline{X} = (X_i - Y) - (\overline{X} - Y) $ --- распределение $ \mathcal{N}(0, \tfrac{n - 1}{n}\theta) $.
+		Тогда следующая случайная величина имеет распределение Стьюдента $ t_{n - 1} $:
+		$$ \tfrac{\sqrt{\frac{n}{(n + 1)\theta}}(\overline{X} - Y)}
+		{\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} \frac{n}{(n - 1)\theta}(X_i - \overline{X})^2}}
+		= \tfrac{\sqrt{n - 1}}{\sqrt{n + 1}}T, $$
+		где $ T = \tfrac{\overline{X} - Y}
+		{\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}} $.
+		Теперь
+		$$ \prob\left(c_{1- \frac{\alpha}{2}, n - 1} < \tfrac{\sqrt{n - 1}}{\sqrt{n + 1}} \cdot \tfrac{\overline{X} - Y}
+		{\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}} < c_{\frac{\alpha}{2}, n - 1} \right) = 1 - \alpha. $$
+		Отсюда
+		$$ \prob
+		\left(
+		\overline{X} - c_{\frac{\alpha}{2}, n - 1} \tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}
+		< Y < 
+		\overline{X} - c_{1 - \frac{\alpha}{2}, n - 1} \tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}
+		\right) 
+		= 1 - \alpha $$
+		и точный доверительный интервал есть 
+		$$ \left(
+		\overline{X} - c_{\frac{\alpha}{2}, n - 1}\tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}, 
+		\overline{X} - c_{1 - \frac{\alpha}{2}, n - 1}\tfrac{\sqrt{n + 1}}{\sqrt{n - 1}} \cdot 
+		\sqrt{\tfrac{1}{n - 1}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2}
+		\right) . $$
+		
+	\end{problem}
+	
+	\begin{problem}[Вычисление ОМП для $ \mathcal{N}(a, \sigma^2) $]{inprocessing}
+		
+		Найдём оценку максимального правдоподобия для случайных величин с распределением $ \mathcal{N}(a, \sigma^2) $.
+		Имеем формулу для плотности $ f_{a, \sigma}(x) = \tfrac{1}{\sqrt{2\pi}\sigma} e^{-\tfrac{(x - a)^2}{2\sigma^2}} $.
+		Тогда
+		$$ f_{\theta}(x_1, \ldots, x_n) = \prod_{j = 1}^{n} f_{\theta}(x_j)
+		= (2\pi)^{\tfrac{-n}{2}} \cdot \tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}. $$
+		
+		Далее будем исследовать точки максимума логарифма 
+		$$ M(a, \sigma) = \ln 
+		\left(\tfrac{1}{\sigma^n} \cdot e^{-\tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2}\right )
+		= -n\ln \sigma - \tfrac{1}{2\sigma^2}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+		
+		Вычислим частные производные по $ a $ и $ \sigma $:
+		$$ \left.\tfrac{\partial M}{\partial a}\right|_{a}
+		= -\tfrac{1}{\sigma^2}\left(na - \sum\limits_{j = 1}^{n} x_j\right), $$
+		$$ \left.\tfrac{\partial M}{\partial\sigma}\right|_{\sigma}
+		= -\tfrac{n}{\sigma} + \tfrac{1}{\sigma^3}\sum\limits_{j = 1}^{n} (x_j - a)^2. $$
+		Тогда приравнивая их к 0, получаем $ a = \tfrac{1}{n}\sum\limits_{i = 1}^{n} x_i $ и $ \hat{a} = \overline{X} $,
+		а также $ \sigma^2 = \tfrac{1}{n}\sum\limits_{i = 1}^{n} (x_i - a)^2 $, 
+		откуда $ \hat{\sigma} = \sqrt{\tfrac{1}{n}\sum\limits_{i = 1}^{n} (X_i - \overline{X})^2} $.
+		
+	\end{problem}
+	
+\end{document}
